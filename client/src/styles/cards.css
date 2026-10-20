@@ -1,0 +1,149 @@
+/* Card interaction system
+   -----------------------------------------------------------------------------
+   Add `card-fx` to any card. One set of timings, one easing, one behaviour:
+
+     enter     fades up (24px, 0.985 scale) when scrolled into view, staggered
+     hover     lifts 4px, border darkens, soft shadow, orange rule draws across the top
+     press     settles back down
+     focus     border darkens when anything inside is focused (the focus ring stays)
+
+   Optional modifiers
+     card-fx--dark    dark card: bright-orange rule and border, no shadow
+     card-fx--plain   no top rule (the card already has its own top edge)
+   Optional children (animate when the card is hovered)
+     fx-icon          icon or number badge: grows and tilts slightly
+     fx-nudge         title or label: slides 4px right
+     fx-zoom          wrapper around an image or placeholder: the contents zoom gently
+
+   Only transform, opacity and (on hover) box-shadow animate. Hover effects apply to
+   mouse and trackpad only; links and buttons inside a card keep working because the
+   pseudo-element rule ignores pointer events. Reduced motion keeps the colour changes
+   and drops all movement. */
+
+.card-fx.card-fx {
+  position: relative;
+  transition:
+    transform var(--card-dur) var(--ease),
+    box-shadow var(--card-dur) var(--ease),
+    border-color var(--t-med) var(--ease),
+    outline-color var(--t-med) var(--ease),
+    background-color var(--t-med) var(--ease),
+    opacity 700ms var(--ease);
+  /* the stagger delay only applies while the entrance plays (see Reveal) */
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Entrance: slightly deeper than the generic reveal so cards feel placed, not just faded */
+.reveal.card-fx:not(.is-visible) {
+  transform: translate3d(0, 24px, 0) scale(0.985);
+}
+
+/* Orange rule that draws across the top edge */
+.card-fx::after {
+  content: '';
+  position: absolute;
+  inset: -1px -1px auto -1px;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 550ms var(--ease);
+  pointer-events: none;
+}
+
+.card-fx--plain::after {
+  display: none;
+}
+
+.card-fx--dark::after {
+  background: var(--orange-bright);
+}
+
+/* Children */
+.card-fx .fx-icon {
+  transition:
+    transform var(--card-dur) var(--ease),
+    background-color var(--t-med) var(--ease),
+    color var(--t-med) var(--ease);
+}
+
+.card-fx .fx-nudge {
+  transition: transform var(--card-dur) var(--ease);
+}
+
+.card-fx .fx-zoom {
+  overflow: hidden;
+}
+
+.card-fx .fx-zoom > * {
+  transition: transform 800ms var(--ease);
+}
+
+.card-fx .icon-arrow {
+  transition: transform var(--t-med) var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-fx:hover {
+    z-index: 2;
+    transform: translate3d(0, var(--card-lift), 0);
+    border-color: var(--ink);
+    outline-color: var(--ink);
+    box-shadow: var(--card-shadow);
+  }
+
+  .card-fx:hover::after {
+    transform: scaleX(1);
+  }
+
+  .card-fx--dark:hover {
+    border-color: var(--orange-bright);
+    outline-color: var(--orange-bright);
+    box-shadow: none;
+  }
+
+  .card-fx:hover .fx-icon {
+    transform: scale(1.1) rotate(-6deg);
+  }
+
+  .card-fx:hover .fx-nudge {
+    transform: translate3d(4px, 0, 0);
+  }
+
+  .card-fx:hover .fx-zoom > * {
+    transform: scale(1.05);
+  }
+
+  .card-fx:hover .icon-arrow {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.card-fx:focus-within {
+  border-color: var(--ink);
+  outline-color: var(--ink);
+}
+
+.card-fx:active {
+  transform: translate3d(0, -1px, 0) scale(0.992);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-fx:hover,
+  .card-fx:active,
+  .reveal.card-fx:not(.is-visible) {
+    transform: none;
+  }
+  .card-fx:hover {
+    box-shadow: none;
+  }
+  .card-fx::after {
+    display: none;
+  }
+  .card-fx:hover .fx-icon,
+  .card-fx:hover .fx-nudge,
+  .card-fx:hover .fx-zoom > *,
+  .card-fx:hover .icon-arrow {
+    transform: none;
+  }
+}

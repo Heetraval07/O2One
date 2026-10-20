@@ -1,0 +1,117 @@
+.frame {
+  position: relative;
+  aspect-ratio: var(--ratio);
+  width: 100%;
+  margin: 0;
+}
+
+.media {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  clip-path: inset(0 100% 0 0);
+}
+
+.revealed {
+  animation: wipe 1000ms var(--ease) forwards;
+}
+
+@keyframes wipe {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.zoom {
+  width: 100%;
+  height: 100%;
+  transition: transform 900ms var(--ease);
+}
+
+.frame:hover .zoom {
+  transform: scale(1.04);
+}
+
+.img,
+.placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Slow drift against the scroll; the oversize keeps edges covered */
+.img {
+  transform: scale(1.1) translate3d(0, calc(var(--p, 0) * -4%), 0);
+  will-change: transform;
+}
+
+.placeholder {
+  display: flex;
+  align-items: flex-end;
+  background: var(--grey-50);
+}
+
+.caption {
+  margin: 16px;
+  padding: 4px 10px;
+  background: var(--white);
+  color: var(--grey);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Decorative blocks allowed in the hero and the About photo panel */
+.accent-hero::before,
+.accent-about::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  background: var(--orange-bright);
+}
+
+.accent-hero::before {
+  right: -24px;
+  bottom: -24px;
+  width: 46%;
+  height: 58%;
+  transform: translate3d(0, calc(var(--p, 0) * -28px), 0);
+}
+
+.accent-hero::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  left: -24px;
+  top: 32px;
+  width: 64px;
+  height: 64px;
+  background: var(--ink);
+  transform: translate3d(0, calc(var(--p, 0) * 20px), 0);
+}
+
+.accent-about::before {
+  left: -24px;
+  top: -24px;
+  width: 40%;
+  height: 50%;
+  transform: translate3d(0, calc(var(--p, 0) * -24px), 0);
+}
+
+@media (max-width: 819px) {
+  .accent-hero::before {
+    right: -12px;
+    bottom: -12px;
+  }
+  .accent-hero::after {
+    left: -12px;
+    width: 40px;
+    height: 40px;
+  }
+  .accent-about::before {
+    left: -12px;
+    top: -12px;
+  }
+}

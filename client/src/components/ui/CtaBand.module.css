@@ -1,0 +1,27 @@
+.band {
+  background: var(--orange-soft);
+  padding-block: var(--s7);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.text {
+  font-size: var(--fs-lead);
+  color: var(--ink);
+}
+
+.tags {
+  justify-content: center;
+}
+
+@media (max-width: 819px) {
+  .band {
+    padding-block: var(--s6);
+  }
+}

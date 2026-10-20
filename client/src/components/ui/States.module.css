@@ -1,0 +1,36 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: var(--s4);
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-block: 8px;
+}
+
+.line {
+  height: 14px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--grey);
+  font-size: var(--fs-small);
+  padding-block: var(--s3);
+}

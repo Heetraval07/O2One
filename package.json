@@ -1,0 +1,20 @@
+{
+  "name": "o2one-website",
+  "private": true,
+  "description": "O2One Consultants website: React (Vite) frontend, Express API, MariaDB.",
+  "scripts": {
+    "setup": "npm --prefix server install && npm --prefix client install",
+    "db:init": "npm --prefix server run db:init",
+    "db:seed": "npm --prefix server run db:seed",
+    "admin:create": "npm --prefix server run admin:create --",
+    "admin:reset": "npm --prefix server run admin:reset --",
+    "dev:api": "npm --prefix server run dev",
+    "dev:web": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "test": "npm --prefix server test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

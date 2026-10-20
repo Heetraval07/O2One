@@ -1,0 +1,157 @@
+.stage {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  background: var(--grey-50);
+  overflow: hidden;
+}
+
+.card {
+  position: absolute;
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 14px 16px;
+  font-size: 13px;
+  transition: transform 700ms var(--ease);
+}
+
+.stage:hover .wa {
+  transform: rotate(-1deg) translate(-4px, 4px);
+}
+
+.stage:hover .xl {
+  transform: rotate(4deg) translate(6px, -4px);
+}
+
+.stage:hover .tally {
+  transform: rotate(-5deg) translate(-4px, 6px);
+}
+
+.app {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.wa {
+  left: 7%;
+  top: 9%;
+  width: 46%;
+  transform: rotate(-3deg);
+}
+
+.bubble {
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  background: var(--grey-50);
+  line-height: 1.35;
+}
+
+.me {
+  margin-left: auto;
+  background: var(--orange-soft);
+}
+
+.xl {
+  right: 6%;
+  top: 16%;
+  width: 40%;
+  transform: rotate(2deg);
+}
+
+.sheet {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheet td {
+  border: 1px solid var(--line);
+  padding: 4px 6px;
+}
+
+.sheet tr:first-child td {
+  background: var(--grey-50);
+  font-weight: 600;
+}
+
+.tally {
+  left: 24%;
+  bottom: 8%;
+  width: 50%;
+  transform: rotate(-2deg);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-ink);
+}
+
+.tally .app {
+  color: var(--on-ink-muted);
+}
+
+.ledger {
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.ledger div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--line-on-ink);
+  padding-bottom: 6px;
+}
+
+.ledger dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.flag {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.tally .flag {
+  color: var(--orange-bright);
+}
+
+.q {
+  position: absolute;
+  right: 9%;
+  bottom: 10%;
+  font-family: var(--font-num);
+  font-size: 88px;
+  line-height: 1;
+  color: var(--orange-bright);
+}
+
+@media (max-width: 819px) {
+  .card {
+    font-size: 11px;
+    padding: 10px 12px;
+  }
+  .app {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+  .wa {
+    width: 54%;
+  }
+  .xl {
+    width: 44%;
+  }
+  .tally {
+    width: 60%;
+    left: 14%;
+  }
+  .q {
+    font-size: 56px;
+  }
+}

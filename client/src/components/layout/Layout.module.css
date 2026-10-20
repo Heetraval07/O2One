@@ -1,0 +1,133 @@
+.main {
+  display: block;
+  min-height: 60vh;
+}
+
+.main:focus {
+  outline: none;
+}
+
+.topBar {
+  background: var(--ink);
+  color: var(--on-ink);
+  font-size: var(--fs-small);
+}
+
+.topBar :global(.container) {
+  padding-block: 10px;
+}
+
+/* Message left, link right; on phones the link drops to its own line */
+.topBar p {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 24px;
+  line-height: 1.5;
+}
+
+@media (max-width: 819px) {
+  .topBar p {
+    flex-direction: column;
+  }
+}
+
+.topBar a {
+  color: var(--orange-bright);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.topBar a:hover {
+  color: var(--white);
+}
+
+.short {
+  display: none;
+}
+
+@media (max-width: 819px) {
+  .long {
+    display: none;
+  }
+  .short {
+    display: inline;
+  }
+}
+
+.waFloat {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 45;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366; /* WhatsApp's own green, so people recognise it at a glance */
+  color: var(--white);
+  transition:
+    background-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.waFloat:hover {
+  background: #1ebe5a;
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 819px) {
+  .waFloat {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* Page transition: the new page fades up. Fill mode "backwards" leaves no transform behind,
+   so sticky and fixed children keep working once it has finished. */
+.page {
+  animation: pageIn 480ms var(--ease) backwards;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+}
+
+/* WhatsApp button: pops in after the page settles, then one soft ring */
+.waFloat {
+  animation: waIn 600ms var(--ease) 1200ms backwards;
+}
+
+.waFloat::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #25d366;
+  opacity: 0;
+  animation: waRing 1600ms var(--ease) 2000ms 2;
+  pointer-events: none;
+}
+
+@keyframes waIn {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes waRing {
+  from {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}

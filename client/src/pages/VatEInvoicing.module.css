@@ -1,0 +1,1000 @@
+/* ---- Hero --------------------------------------------------------------- */
+.hero {
+  padding-block: var(--s7) var(--s8);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--s6);
+  align-items: start;
+}
+
+/* Long copy for desktop and tablet, short copy for phones (see the media query at the end) */
+.narrow {
+  display: none;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.heroText :global(.eyebrow) {
+  margin-bottom: -8px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  margin: 16px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.stats div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  text-align: center;
+}
+
+.stats dd {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1;
+  color: var(--orange);
+}
+
+.stats dt {
+  font-size: var(--fs-small);
+  color: var(--grey);
+}
+
+/* Sample invoice, built in HTML so it stays sharp and editable */
+.invoice {
+  margin: 0;
+  padding: var(--s4);
+  background: var(--white);
+  border: 1px solid var(--line);
+  font-size: 15px;
+}
+
+.invHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.invNo {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.invStatus {
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--orange-soft);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+}
+
+.invRows {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.invRows div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.invRows dt {
+  color: var(--grey);
+}
+
+.invRows dd {
+  margin: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.invTotals {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.invTotal {
+  font-family: var(--font-serif);
+  font-size: 22px;
+}
+
+.invTotal dt {
+  color: var(--ink);
+}
+
+.tracker {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 24px 0 0;
+  padding: 20px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-xs);
+}
+
+.tracker li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: trackIn 600ms var(--ease) both;
+  animation-delay: calc(400ms + var(--i) * 260ms);
+}
+
+.tracker strong {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.tracker span:last-child {
+  color: var(--grey);
+}
+
+.trackDot {
+  width: 10px;
+  height: 10px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: var(--orange-bright);
+}
+
+@keyframes trackIn {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---- Flow --------------------------------------------------------------- */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flowItem {
+  display: flex;
+  align-items: center;
+}
+
+.flowBox {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.flowNum {
+  font-size: 24px;
+  line-height: 1;
+  color: var(--orange);
+}
+
+.flowTitle {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.flowText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.flowArrow {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  flex: none;
+  color: var(--ink);
+}
+
+.arrowDown {
+  display: none;
+}
+
+.note {
+  margin-top: 20px;
+  font-size: var(--fs-small);
+  color: var(--grey);
+}
+
+/* ---- Deadlines ---------------------------------------------------------- */
+.deadlines {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.deadline {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px;
+  border: 1px solid var(--line);
+}
+
+.deadlineHl {
+  border: 2px solid var(--orange-bright);
+}
+
+.timelineDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--input-border);
+  margin-bottom: 8px;
+}
+
+.deadlineHl .timelineDot {
+  background: var(--orange-bright);
+}
+
+.who {
+  font-weight: 500;
+}
+
+.headline {
+  font-family: var(--font-num);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.deadlineHl .headline {
+  color: var(--orange);
+}
+
+.dates {
+  margin: 8px 0 0;
+  display: grid;
+  gap: 4px;
+  font-size: 15px;
+}
+
+.dates div {
+  display: flex;
+  gap: 6px;
+}
+
+.dates dt {
+  color: var(--grey);
+}
+
+.dates dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.tags {
+  margin-top: var(--s3);
+}
+
+.smallPrint {
+  margin-top: 16px;
+  font-size: var(--fs-xs);
+  color: var(--grey);
+}
+
+/* ---- Self-check --------------------------------------------------------- */
+.check {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s6);
+  align-items: start;
+}
+
+.check .lead {
+  margin-top: 20px;
+}
+
+.checkCard {
+  padding: var(--s4);
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.checkRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 14px;
+  align-items: center;
+  min-height: 44px;
+  padding-block: 8px;
+  cursor: pointer;
+}
+
+.checkRow input {
+  position: absolute;
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.box {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-btn);
+  background: var(--white);
+  color: var(--white);
+  transition:
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.checkRow input:focus-visible + .box {
+  outline: 2px solid var(--orange-bright);
+  outline-offset: 2px;
+}
+
+.checkOn .box {
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+.counterRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.counter {
+  font-family: var(--font-num);
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.meter {
+  height: 4px;
+  margin-top: 20px;
+  background: var(--line);
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  background: var(--orange-bright);
+  transition: width 500ms var(--ease);
+}
+
+/* ---- What we do --------------------------------------------------------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--s4);
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.card p {
+  color: var(--grey);
+}
+
+.cardDark {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.cardDark :global(.h3) {
+  color: var(--white);
+}
+
+.cardDark p {
+  color: var(--on-ink-muted);
+}
+
+.cardDark :global(.eyebrow) {
+  color: var(--orange-bright);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s3);
+  margin: var(--s5) 0 0;
+  padding: var(--s4) 0 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.steps li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stepNum {
+  font-size: 28px;
+  line-height: 1;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+
+/* ---- Honesty band ------------------------------------------------------- */
+.honesty {
+  background: var(--ink);
+  color: var(--on-ink);
+  padding-block: var(--s7);
+}
+
+.honesty :global(.h2) {
+  color: var(--white);
+}
+
+.honesty p {
+  margin-top: 20px;
+  max-width: 60ch;
+  font-size: var(--fs-lead);
+  color: var(--on-ink-muted);
+}
+
+/* ---- FAQ ---------------------------------------------------------------- */
+
+/* Heading column narrower than the answers */
+@media (min-width: 820px) {
+  .faq {
+    grid-template-columns: 2fr 3fr;
+  }
+}
+
+/* ---- Responsive (copy doc: stack under 900px) --------------------------- */
+@media (max-width: 1079px) {
+  .heroGrid,
+  .check {
+    grid-template-columns: 1fr;
+    gap: var(--s5);
+  }
+}
+
+@media (max-width: 899px) {
+  .flow,
+  .deadlines,
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .flowItem {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .flowArrow {
+    width: 100%;
+    height: 32px;
+  }
+  .arrowRight {
+    display: none;
+  }
+  .arrowDown {
+    display: block;
+  }
+  .steps {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---- Phones: the compact layout from the mobile design ------------------- */
+@media (max-width: 819px) {
+  .wide {
+    display: none !important;
+  }
+  .narrow {
+    display: inline;
+  }
+
+  /* Hero */
+  .hero {
+    padding-block: var(--s5) var(--s6);
+  }
+  .heroText {
+    align-items: stretch;
+  }
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .heroActions :global(.text-link) {
+    align-self: center;
+    min-height: 44px;
+  }
+  .stats {
+    margin-top: 0;
+  }
+  .stats dd {
+    font-size: 28px;
+  }
+
+  /* Invoice: number, customer, total and a one-line tracker */
+  .invoice {
+    padding: var(--s3);
+    font-size: 14px;
+  }
+  .invHead {
+    margin-bottom: 12px;
+  }
+  .invNo {
+    font-size: 20px;
+  }
+  .invParty dt {
+    display: none;
+  }
+  .invParty dd {
+    text-align: left;
+    font-weight: 600;
+  }
+  .invTotals {
+    margin-top: 8px;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .invTotal {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .tracker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+  .tracker li {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+  }
+  .tracker strong {
+    font-weight: 500;
+  }
+  .trackDot {
+    width: 6px;
+    height: 6px;
+    margin: 0;
+  }
+  .trackSub {
+    display: none;
+  }
+
+  /* Flow: number beside the text, arrows pointing down */
+  .flowBox {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+  }
+  .flowText {
+    gap: 2px;
+    font-size: 14px;
+  }
+  .flowTitle {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .flowArrow {
+    height: 28px;
+  }
+
+  /* Deadlines */
+  .deadlines {
+    gap: 12px;
+  }
+  .deadline {
+    gap: 4px;
+    padding: 16px;
+  }
+  .timelineDot {
+    display: none;
+  }
+  .who {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .headline {
+    font-size: 26px;
+  }
+  .dates {
+    margin-top: 0;
+    font-size: 14px;
+  }
+  .dates dt {
+    color: var(--ink);
+  }
+  .dates dd {
+    font-weight: 400;
+  }
+
+  /* Self-check: no card, short labels, counter above a full-width button */
+  .check {
+    gap: var(--s2);
+  }
+  .checkCard {
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+  .counterRow {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 8px;
+    padding-top: 16px;
+  }
+  .counter {
+    font-size: 20px;
+  }
+  .meter {
+    margin-top: 16px;
+  }
+
+  /* What we do: three title-only cards */
+  .cards {
+    gap: 12px;
+  }
+  .card {
+    padding: 16px;
+  }
+  .card :global(.eyebrow) {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .cardDark :global(.eyebrow) {
+    color: var(--white);
+  }
+  .card :global(.h3),
+  .card p {
+    display: none;
+  }
+
+
+  .honesty {
+    padding-block: var(--s5);
+  }
+
+  /* Closing band: heading and button only */
+  .cta :global(.eyebrow),
+  .cta :global(.tag-list) {
+    display: none;
+  }
+  .cta :global(.btn) {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Motion: hover, entrance and emphasis effects for this page only.
+   Cards use the shared card-fx system (styles/cards.css); this section adds
+   the page-specific details. Hover rules apply to mouse and trackpad only.
+   ========================================================================== */
+
+/* ---- Hero invoice ---------------------------------------------------------- */
+.invStatus {
+  transition:
+    transform var(--t-med) var(--ease),
+    background-color var(--t-med) var(--ease);
+}
+
+.invRows dd,
+.invRows dt,
+.invTotal dd,
+.invTotal dt {
+  transition:
+    color var(--t-fast) var(--ease),
+    transform var(--t-med) var(--ease);
+}
+
+.trackDot {
+  transition: transform var(--t-med) var(--ease);
+}
+
+.trackText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tracker strong {
+  transition: color var(--t-fast) var(--ease);
+}
+
+/* ---- Process steps ("What changes") ----------------------------------------- */
+.flowNum {
+  display: inline-block;
+  transform-origin: left center;
+  transition:
+    transform var(--card-dur) var(--ease),
+    color var(--t-med) var(--ease);
+}
+
+.flowArrow svg {
+  animation: arrowNudgeX 2.6s ease-in-out infinite;
+}
+
+.flowItem:nth-child(2) .flowArrow svg {
+  animation-delay: 0.3s;
+}
+
+.flowItem:nth-child(3) .flowArrow svg {
+  animation-delay: 0.6s;
+}
+
+@keyframes arrowNudgeX {
+  0%,
+  60%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+@keyframes arrowNudgeY {
+  0%,
+  60%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    transform: translate3d(0, 4px, 0);
+  }
+}
+
+/* ---- Deadlines ---------------------------------------------------------------- */
+.timelineDot {
+  transition: transform var(--t-med) var(--ease);
+}
+
+.deadlineHl .timelineDot {
+  animation: dotPulse 2.4s ease-out infinite;
+}
+
+@keyframes dotPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 122, 61, 0.5);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 122, 61, 0);
+  }
+}
+
+.headline {
+  transition: transform var(--card-dur) var(--ease);
+  transform-origin: left center;
+}
+
+/* ---- Self-check ----------------------------------------------------------------- */
+.checkRow {
+  transition: background-color var(--t-fast) var(--ease);
+}
+
+.box {
+  transition:
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-med) var(--ease);
+}
+
+.checkOn .box {
+  animation: tickPop 300ms var(--ease);
+}
+
+@keyframes tickPop {
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* ---- What we do: four steps ------------------------------------------------------ */
+.stepNum {
+  display: inline-block;
+  transform-origin: left center;
+  transition: transform var(--card-dur) var(--ease);
+}
+
+.steps strong {
+  transition: color var(--t-med) var(--ease);
+}
+
+/* ---- Buttons: global lift, plus a soft orange glow on this page ------------------- */
+.heroActions :global(.btn),
+.counterRow :global(.btn),
+.cta :global(.btn) {
+  transition-property: background-color, border-color, color, transform, box-shadow;
+}
+
+/* ---- FAQ accordion (the shared Accordion, styled for this page) --------------------- */
+.faqAccordion {
+  display: block;
+}
+
+.faqAccordion button {
+  margin-inline: -12px;
+  width: calc(100% + 24px);
+  padding-inline: 12px;
+  transition:
+    color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+
+.faqAccordion button[aria-expanded='true'] {
+  color: var(--orange);
+}
+
+/* Plus and minus are different icons, so each swap replays this small turn */
+.faqAccordion button svg {
+  animation: faqIcon 320ms var(--ease);
+}
+
+@keyframes faqIcon {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .invoice:hover .invStatus {
+    transform: scale(1.06);
+    background: var(--orange-bright);
+  }
+  .invRows div:hover dd,
+  .invRows div:hover dt,
+  .invTotal:hover dd,
+  .invTotal:hover dt {
+    color: var(--orange);
+  }
+  .invRows div:hover dd {
+    transform: translate3d(-3px, 0, 0);
+  }
+  .tracker li:hover .trackDot {
+    transform: scale(1.5);
+  }
+  .tracker li:hover strong {
+    color: var(--orange-hover);
+  }
+
+  .flowBox:hover {
+    transform: translate3d(0, -6px, 0) scale(1.03);
+    box-shadow: 0 18px 32px -16px rgba(26, 26, 26, 0.28), 0 2px 6px -2px rgba(26, 26, 26, 0.08);
+  }
+  .flowBox:hover::after {
+    height: 3px;
+  }
+  .flowBox:hover .flowNum {
+    transform: scale(1.3);
+    color: var(--orange-hover);
+  }
+  .flowItem:hover .flowArrow svg {
+    animation-duration: 1.2s;
+  }
+
+  .deadline:hover .timelineDot {
+    transform: scale(1.4);
+  }
+  .deadline:hover .headline {
+    transform: translate3d(0, -2px, 0) scale(1.04);
+  }
+  .deadlineHl:hover {
+    border-color: var(--orange-bright);
+    outline-color: var(--orange-bright);
+  }
+
+  .checkRow:hover {
+    background: var(--grey-50);
+  }
+  .checkRow:hover .box {
+    border-color: var(--orange);
+    transform: scale(1.08);
+  }
+
+  .steps li:hover .stepNum {
+    transform: scale(1.25);
+  }
+  .steps li:hover strong {
+    color: var(--orange);
+  }
+
+  .heroActions :global(.btn):hover,
+  .counterRow :global(.btn):hover,
+  .cta :global(.btn):hover {
+    box-shadow: 0 12px 22px -12px rgba(196, 80, 31, 0.65);
+  }
+
+  .faqAccordion button:hover {
+    background: var(--grey-50);
+  }
+
+  .stats > div {
+    transition: transform var(--card-dur) var(--ease);
+  }
+  .stats > div:hover {
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+@media (max-width: 899px) {
+  .flowArrow svg {
+    animation-name: arrowNudgeY;
+  }
+  .flowBox:hover {
+    transform: translate3d(0, -4px, 0) scale(1.015);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flowArrow svg,
+  .deadlineHl .timelineDot,
+  .checkOn .box,
+  .faqAccordion button svg {
+    animation: none;
+  }
+}

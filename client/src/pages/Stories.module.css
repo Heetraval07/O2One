@@ -1,0 +1,132 @@
+.featured {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  border: 1px solid var(--line);
+  margin-bottom: var(--s6);
+}
+
+.featuredMedia {
+  display: flex;
+  align-items: flex-end;
+  min-height: 360px;
+  padding: 16px;
+  background: var(--grey-50);
+}
+
+.featuredMedia span {
+  padding: 3px 9px;
+  background: var(--white);
+  color: var(--grey);
+  font-size: 12px;
+}
+
+.featuredBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  padding: var(--s5);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: var(--s4);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--ink);
+}
+
+.chipOn,
+.chipOn:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+
+.select {
+  min-width: 220px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid > li {
+  display: flex;
+}
+
+@media (max-width: 1079px) {
+  .featured {
+    grid-template-columns: 1fr;
+  }
+  .featuredMedia {
+    min-height: 220px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 819px) {
+  .featuredBody {
+    padding: var(--s3);
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .select {
+    width: 100%;
+  }
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc(-1 * var(--page-x));
+    padding-inline: var(--page-x);
+    scrollbar-width: none;
+  }
+  .chip {
+    white-space: nowrap;
+  }
+}

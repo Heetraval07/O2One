@@ -1,0 +1,232 @@
+.trust {
+  background: var(--ink);
+  padding-block: 40px;
+}
+
+.trustGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--s3);
+  margin: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse; /* number visually above its label, label first for screen readers */
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.value {
+  margin: 0;
+  font-size: var(--fs-stat);
+  line-height: 1;
+  color: var(--orange-bright);
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--line);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s4) var(--s6);
+  margin: 0;
+}
+
+.row .stat {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* On white, bright orange fails for small text but is fine at stat size (≥24px), per the guide's 3:1 rule */
+.valueLight {
+  color: var(--orange);
+}
+
+.labelLight {
+  color: var(--grey);
+}
+
+@media (max-width: 819px) {
+  .trustGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--s4);
+  }
+  .trustGrid > :last-child {
+    grid-column: 1 / -1;
+  }
+  .row {
+    gap: var(--s3) var(--s4);
+  }
+}
+
+/* Stats rise one after another as the count starts */
+.stat {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity 700ms var(--ease),
+    transform 700ms var(--ease);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+.stat[data-in='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Stat panel ---------------------------------------------------------- */
+.panel {
+  display: grid;
+  grid-template-columns: 3fr minmax(0, 1fr);
+  background: var(--white);
+  border: 1px solid var(--line);
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity 800ms var(--ease),
+    transform 800ms var(--ease);
+}
+
+.panel[data-in='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+.panelStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.panelStat {
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  gap: 12px;
+  padding: var(--s5) var(--s4);
+  border-right: 1px solid var(--line);
+  transition:
+    opacity 700ms var(--ease),
+    transform 700ms var(--ease),
+    background-color var(--t-med) var(--ease);
+  transition-delay: calc(var(--i, 0) * 120ms), calc(var(--i, 0) * 120ms), 0ms;
+}
+
+.panelStat .value {
+  position: relative;
+  padding-bottom: 20px;
+  transition: transform 450ms var(--ease);
+}
+
+/* The rule draws in once the number starts counting */
+.panelStat .value::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 32px;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 700ms var(--ease) 500ms, width 450ms var(--ease);
+}
+
+.panelStat[data-in='true'] .value::after {
+  transform: scaleX(1);
+}
+
+.panelStat .label {
+  font-size: 15px;
+  color: var(--grey);
+}
+
+.panelAside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s4);
+}
+
+@media (hover: hover) {
+  .panelStat:hover {
+    background: var(--grey-50);
+  }
+  .panelStat:hover .value {
+    transform: translate3d(0, -4px, 0);
+  }
+  .panelStat:hover .value::after {
+    width: 72px;
+    transition-delay: 0ms;
+  }
+}
+
+@media (max-width: 1079px) {
+  .panel {
+    grid-template-columns: 1fr;
+  }
+  .panelStat:last-child {
+    border-right: 0;
+  }
+  .panelAside {
+    justify-content: flex-start;
+    padding: var(--s3) var(--s4);
+    border-top: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 819px) {
+  .panelStats {
+    grid-template-columns: 1fr;
+  }
+  .panelStat {
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: var(--s3);
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .panelStat:last-child {
+    border-bottom: 0;
+  }
+  .panelStat .value {
+    padding-bottom: 0;
+  }
+  .panelStat .value::after {
+    display: none;
+  }
+  .panelAside {
+    padding: var(--s3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    opacity: 1;
+    transform: none;
+  }
+  .panelStat:hover .value {
+    transform: none;
+  }
+  .panelStat .value::after {
+    transform: scaleX(1);
+    transition: none;
+  }
+}

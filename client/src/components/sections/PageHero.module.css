@@ -1,0 +1,78 @@
+.hero {
+  background: var(--grey-50);
+  padding-block: var(--s7) var(--s6);
+}
+
+.white {
+  background: var(--white);
+}
+
+.withAside {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--s6);
+  align-items: center;
+}
+
+.text {
+  max-width: 820px;
+}
+
+.withAside :global(.h1) {
+  font-size: clamp(40px, 4.4vw, 60px);
+  line-height: 1.05;
+}
+
+.lead {
+  margin-top: 24px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin-top: 32px;
+}
+
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-xs);
+  color: var(--grey);
+}
+
+.crumbs li + li::before {
+  content: '/';
+  margin-right: 6px;
+  color: var(--input-border);
+}
+
+.crumbs a {
+  display: inline-block;
+  padding-block: 12px; /* 40px+ tap area without changing the layout */
+  margin-block: -12px;
+  color: var(--grey);
+  text-decoration: none;
+}
+
+.crumbs a:hover {
+  color: var(--orange);
+  text-decoration: underline;
+}
+
+@media (max-width: 1079px) {
+  .withAside {
+    grid-template-columns: 1fr;
+    gap: var(--s5);
+  }
+}
+
+@media (max-width: 819px) {
+  .hero {
+    padding-block: var(--s5);
+  }
+}

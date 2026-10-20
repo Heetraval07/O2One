@@ -1,0 +1,286 @@
+/* ---- Numbered grid ------------------------------------------------------ */
+.numbered {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.numCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: var(--s4);
+}
+
+.num {
+  font-size: 24px;
+  line-height: 1;
+  color: var(--orange);
+}
+
+/* ---- Values ------------------------------------------------------------- */
+.values {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.value {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: var(--s4);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--orange);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Soft orange rises from the bottom edge behind the text */
+.value::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--orange-soft);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 550ms var(--ease);
+}
+
+.valueTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--s3);
+}
+
+.valueNum {
+  font-size: 24px;
+  line-height: 1;
+  color: var(--orange);
+}
+
+.valueIcon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--white);
+  transition:
+    transform var(--card-dur) var(--ease),
+    background-color var(--t-med) var(--ease),
+    border-color var(--t-med) var(--ease),
+    color var(--t-med) var(--ease);
+}
+
+.value :global(.muted) {
+  color: var(--grey);
+  transition: color var(--t-med) var(--ease);
+}
+
+@media (hover: hover) {
+  .value:hover {
+    border-top-color: var(--orange);
+  }
+  .value:hover::before {
+    transform: scaleY(1);
+  }
+  .value:hover .valueIcon {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--white);
+  }
+  .value:hover :global(.muted) {
+    color: var(--ink);
+  }
+}
+
+@media (max-width: 1079px) {
+  .values {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 819px) {
+  .values {
+    grid-template-columns: 1fr;
+    gap: var(--s2);
+  }
+  .value {
+    padding: var(--s3);
+  }
+  .valueTop {
+    margin-bottom: var(--s2);
+  }
+}
+
+/* ---- Shared ------------------------------------------------------------- */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.sample {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--grey-50);
+  border: 1px solid var(--line);
+  color: var(--grey);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+/* The whole card is clickable through the heading link */
+.stretched {
+  color: inherit;
+  text-decoration: none;
+}
+
+.stretched::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.stretched:hover {
+  color: var(--orange);
+}
+
+.more {
+  margin-top: auto;
+  pointer-events: none;
+}
+
+/* ---- Story card --------------------------------------------------------- */
+.storyCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.storyMedia {
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 16 / 9;
+  padding: 16px;
+  background: var(--grey-50);
+}
+
+.storyMedia span {
+  padding: 3px 9px;
+  background: var(--white);
+  color: var(--grey);
+  font-size: 12px;
+}
+
+.storyBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  padding: var(--s3) var(--s3) 28px;
+}
+
+.storyTitle,
+.postTitle {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* ---- Post row (blog listing) -------------------------------------------- */
+.postRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  gap: var(--s3);
+  align-items: start;
+  padding-block: var(--s3);
+  border-bottom: 1px solid var(--line);
+}
+
+.postRow:focus-within {
+  outline: 2px solid var(--orange-bright);
+  outline-offset: 4px;
+}
+
+.postText {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thumb {
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 4 / 3;
+  padding: 10px;
+  background: var(--grey-50);
+  transition: background-color var(--t-med) var(--ease);
+}
+
+.thumb span {
+  padding: 2px 8px;
+  background: var(--white);
+  font-size: 11px;
+  color: var(--grey);
+}
+
+.postRow:hover .postTitle {
+  color: var(--orange);
+}
+
+@media (max-width: 819px) {
+  .postRow {
+    grid-template-columns: 1fr 96px;
+    gap: var(--s2);
+  }
+  .postRow .postTitle {
+    font-size: 22px;
+  }
+  .postRow :global(.small) {
+    display: none;
+  }
+}
+
+/* ---- Post card (related posts) ------------------------------------------ */
+.postCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: var(--s3);
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.postCard .postTitle {
+  font-size: 22px;
+}
+
+/* ---- Card details (the hover, lift and entrance come from styles/cards.css) ---- */
+.storyMedia span {
+  display: inline-block;
+}

@@ -1,0 +1,676 @@
+/* Global base + shared primitives. Component layouts live in CSS modules next to each component. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  overflow-x: clip;
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  padding: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--orange);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--t-fast) var(--ease);
+}
+
+a:hover {
+  color: var(--orange-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--orange-bright);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--orange-soft);
+  color: var(--ink);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--white);
+  padding: 12px 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 16px;
+  color: var(--white);
+}
+
+/* ---- Layout ------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--page-x));
+  margin-inline: auto;
+  padding-inline: var(--page-x);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.section--grey {
+  background: var(--grey-50);
+}
+
+.section--tight {
+  padding-block: calc(var(--section-y) * 0.6);
+}
+
+.stack > * + * {
+  margin-top: 20px;
+}
+
+/* Two equal columns: heading left, paragraphs right */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s5);
+  align-items: start;
+}
+
+@media (max-width: 819px) {
+  .split {
+    grid-template-columns: 1fr;
+    gap: var(--s3);
+  }
+}
+
+/* ---- Type --------------------------------------------------------------- */
+
+.h1,
+.h2,
+.h3,
+.phase-title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.h1 {
+  font-size: var(--fs-h1);
+  line-height: 1.02;
+}
+
+.h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+}
+
+.phase-title {
+  font-size: var(--fs-phase);
+  line-height: 1.08;
+}
+
+.h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.65;
+  color: var(--grey);
+  max-width: 62ch;
+}
+
+.muted {
+  color: var(--grey);
+}
+
+.small {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+
+.num {
+  font-family: var(--font-num);
+  font-weight: 400;
+}
+
+.section-head {
+  margin-bottom: var(--s5);
+  max-width: 760px;
+}
+
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head .lead {
+  margin-top: 20px;
+}
+
+.section-head--center .lead {
+  margin-inline: auto;
+}
+
+/* ---- Buttons & links ---------------------------------------------------- */
+
+.btn {
+  --btn-bg: var(--orange);
+  --btn-fg: var(--white);
+  --btn-border: var(--orange);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 14px 26px;
+  border: 1px solid var(--btn-border);
+  border-radius: var(--radius-btn);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.btn:hover {
+  --btn-bg: var(--orange-hover);
+  --btn-border: var(--orange-hover);
+  color: var(--btn-fg);
+}
+
+.btn .icon-arrow {
+  transition: transform var(--t-fast) var(--ease);
+}
+
+.btn:hover .icon-arrow,
+.text-link:hover .icon-arrow {
+  transform: translateX(3px);
+}
+
+.btn--secondary {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink);
+  --btn-border: var(--ink);
+}
+
+.btn--secondary:hover {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--white);
+  --btn-border: var(--ink);
+}
+
+.btn--on-ink.btn--secondary {
+  --btn-fg: var(--on-ink);
+  --btn-border: var(--on-ink);
+}
+
+.btn--on-ink.btn--secondary:hover {
+  --btn-bg: var(--on-ink);
+  --btn-fg: var(--ink);
+}
+
+.btn--sm {
+  min-height: 44px;
+  padding: 10px 18px;
+  font-size: 14px;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--orange);
+  font-weight: 600;
+  text-decoration: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.text-link:hover {
+  color: var(--orange-hover);
+  text-decoration: underline;
+}
+
+/* ---- Badges, tags ------------------------------------------------------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--orange-soft);
+  color: var(--ink);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.badge--line {
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---- Cards -------------------------------------------------------------- */
+
+/* Grid of white cards separated by 1px lines. Each card's outline falls into the 1px gap,
+   so neighbours share one line and an incomplete last row leaves no grey hole. */
+.line-grid {
+  display: grid;
+  gap: 1px;
+  padding: 1px !important; /* room for the outer outlines; wins over list resets */
+}
+
+.line-grid > * {
+  background: var(--white);
+  outline: 1px solid var(--line);
+}
+
+.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1199px) {
+  .cols-3,
+  .cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 819px) {
+  .cols-3,
+  .cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Forms -------------------------------------------------------------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field label,
+.field .label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.field .optional {
+  color: var(--grey);
+  font-weight: 400;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-btn);
+  background: var(--white);
+  font-size: 15px;
+  line-height: 1.4;
+  transition: border-color var(--t-fast) var(--ease);
+}
+
+.input::placeholder {
+  color: var(--grey);
+}
+
+.input:focus {
+  outline: 2px solid var(--orange-bright);
+  outline-offset: 0;
+  border-color: var(--orange-bright);
+}
+
+.input[aria-invalid='true'] {
+  border-color: var(--error);
+}
+
+textarea.input {
+  min-height: 112px;
+  resize: vertical;
+}
+
+select.input {
+  appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231A1A1A' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+.field-error {
+  color: var(--error);
+  font-size: var(--fs-xs);
+}
+
+.field-hint {
+  color: var(--grey);
+  font-size: var(--fs-xs);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 16px;
+}
+
+.form-grid .span-2 {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 819px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Honeypot: hidden from people and assistive tech, visible to naive bots */
+.hp {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.alert {
+  padding: 14px 16px;
+  border-left: 3px solid var(--error);
+  background: var(--orange-soft);
+  font-size: var(--fs-small);
+}
+
+.alert--ok {
+  border-left-color: var(--orange);
+  background: var(--orange-soft);
+}
+
+/* ---- Motion: reveal on scroll ------------------------------------------ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 700ms var(--ease),
+    transform 700ms var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Loading skeleton --------------------------------------------------- */
+
+.skeleton {
+  background: var(--line);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ---- Motion language ----------------------------------------------------
+   One easing, three speeds. Only transform and opacity move; colour and
+   border changes use the same --t-* timings. Reduced motion switches all of
+   it off (see the media query above and the overrides below). */
+
+/* Reveal variants (default "up" is defined above) */
+.reveal--fade {
+  transform: none;
+}
+
+.reveal--left {
+  transform: translateX(-32px);
+}
+
+.reveal--right {
+  transform: translateX(32px);
+}
+
+.reveal--zoom {
+  transform: scale(0.97);
+}
+
+/* Masked headline: each word rises out of its own clip */
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* room for descenders, cancelled out so line height stays put */
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.split-inner {
+  display: inline-block;
+  animation: split-rise 900ms var(--ease) backwards;
+  animation-delay: calc(var(--base, 0ms) + var(--i, 0) * 55ms);
+}
+
+@keyframes split-rise {
+  from {
+    transform: translate3d(0, 108%, 0);
+  }
+}
+
+/* Button feedback: a small lift on hover, a press on click */
+.btn {
+  transition:
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btn:hover {
+  transform: translate3d(0, -2px, 0);
+}
+
+.btn:active {
+  transform: translate3d(0, 0, 0) scale(0.98);
+}
+
+/* Text links: the underline draws in from the left */
+.text-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  background-position: 0 100%;
+  transition:
+    color var(--t-fast) var(--ease),
+    background-size var(--t-med) var(--ease);
+}
+
+.text-link:hover {
+  text-decoration: none;
+  background-size: 100% 1px;
+}
+
+/* Inputs: border warms up before the focus outline arrives */
+.input:hover:not(:focus) {
+  border-color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover,
+  .btn:active {
+    transform: none;
+  }
+  .split-inner {
+    animation: none;
+  }
+  .img {
+    transform: none !important;
+  }
+}
+
+/* Sideways reveals would push the page wider than the screen on phones: rise instead */
+@media (max-width: 819px) {
+  .reveal--left,
+  .reveal--right {
+    transform: translateY(18px);
+  }
+}

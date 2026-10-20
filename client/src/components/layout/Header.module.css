@@ -1,0 +1,568 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding-block: 18px;
+  transition: padding var(--t-med) var(--ease);
+}
+
+.scrolled .bar {
+  padding-block: 12px;
+}
+
+/* ---- Desktop nav -------------------------------------------------------- */
+.nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 6px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-med) var(--ease);
+}
+
+.navLink:hover,
+.active {
+  color: var(--orange);
+}
+
+.navLink:hover::after,
+.navLink.active::after {
+  transform: scaleX(1);
+}
+
+.chev,
+.chevOpen {
+  transition: transform var(--t-fast) var(--ease);
+}
+
+.chevOpen {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 220px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  background: var(--white);
+  border: 1px solid var(--line);
+  animation: drop var(--t-med) var(--ease);
+}
+
+.dropdown::before {
+  /* hover bridge */
+  content: '';
+  position: absolute;
+  inset: -12px 0 auto;
+  height: 12px;
+}
+
+.dropdown a {
+  display: block;
+  padding: 12px 20px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.dropdown a:hover,
+.dropdown a.active {
+  color: var(--orange);
+  background: var(--grey-50);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ctaMobile,
+.burger {
+  display: none;
+}
+
+.burger {
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+/* ---- Mega menu ---------------------------------------------------------- */
+.megaWrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 2;
+}
+
+.scrim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 100vh;
+  z-index: 1;
+  background: rgba(26, 26, 26, 0.28);
+  animation: fade var(--t-med) var(--ease);
+}
+
+.mega {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  animation: drop var(--t-med) var(--ease);
+}
+
+.megaInner {
+  display: grid;
+  grid-template-columns: 300px 1fr 280px;
+  gap: 0;
+}
+
+.megaList {
+  margin: 0;
+  padding: var(--s3) var(--s3) var(--s3) 0;
+  list-style: none;
+  border-right: 1px solid var(--line);
+}
+
+.megaItem {
+  display: grid;
+  grid-template-columns: 32px 1fr 16px;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 12px;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition:
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.megaItem svg {
+  color: var(--grey);
+}
+
+.megaItemActive,
+.megaItem:hover {
+  background: var(--orange-soft);
+  border-left-color: var(--orange);
+  color: var(--ink);
+}
+
+.megaNum {
+  color: var(--orange);
+  font-size: 18px;
+}
+
+.megaAll {
+  padding: 16px 12px 0;
+}
+
+.megaPanel {
+  padding: var(--s4);
+  animation: fade var(--t-med) var(--ease);
+}
+
+.megaTitle {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+.megaSubs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  margin: var(--s3) 0 0;
+  padding: 0;
+  list-style: none;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.megaSubs a {
+  display: block;
+  height: 100%;
+  padding: 12px 14px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.megaSubs a:hover {
+  color: var(--orange);
+  background: var(--grey-50);
+}
+
+.megaAside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin: var(--s3) 0 var(--s3) 0;
+  padding: var(--s3);
+  background: var(--grey-50);
+}
+
+.megaAside p {
+  color: var(--grey);
+}
+
+.megaStrip {
+  border-top: 1px solid var(--line);
+  background: var(--grey-50);
+}
+
+.megaStrip :global(.container) {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-block: 14px;
+  font-size: 15px;
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---- Mobile drawer ------------------------------------------------------ */
+.drawer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: calc(100vh - var(--header-h));
+  height: calc(100dvh - var(--header-h));
+  border-top: 1px solid var(--line);
+  z-index: 40;
+  background: var(--white);
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity var(--t-med) var(--ease),
+    transform var(--t-med) var(--ease),
+    visibility 0s linear var(--t-med);
+}
+
+.drawer[data-open='true'] {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--t-med) var(--ease),
+    transform var(--t-med) var(--ease);
+}
+
+.drawerTrack {
+  display: grid;
+  grid-template-columns: 100% 100%;
+  height: 100%;
+  transition: transform var(--t-med) var(--ease);
+}
+
+.drawerTrack[data-panel='true'] {
+  transform: translateX(-100%);
+}
+
+.drawerPane {
+  overflow-y: auto;
+  padding: var(--s2) var(--page-x) var(--s5);
+}
+
+.mList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mList > li {
+  border-bottom: 1px solid var(--line);
+}
+
+.mTop {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mTop svg {
+  color: var(--orange);
+}
+
+.mSub {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.mHint {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+  padding-bottom: 6px;
+}
+
+.mSubBtn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 0 0 0 12px;
+  border: 0;
+  border-left: 2px solid var(--line);
+  background: none;
+  color: var(--ink);
+  font-size: 16px;
+  text-decoration: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mSubBtn:hover {
+  border-left-color: var(--orange);
+  color: var(--orange);
+}
+
+.mActions {
+  display: grid;
+  gap: 12px;
+  margin-top: var(--s4);
+}
+
+.mPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mBack {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--orange);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.mChips {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  margin: 8px 0;
+  padding: 0;
+  list-style: none;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.mChips a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  height: 100%;
+  padding: 8px 12px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* ---- Breakpoints -------------------------------------------------------- */
+@media (max-width: 1179px) {
+  .navLink {
+    padding-inline: 9px;
+    font-size: 14.5px;
+  }
+  .megaInner {
+    grid-template-columns: 260px 1fr;
+  }
+  .megaAside {
+    display: none;
+  }
+}
+
+/* The full menu needs ~1080px; below that it collapses to the drawer. */
+@media (max-width: 1079px) {
+  .nav,
+  .cta,
+  .megaWrap,
+  .scrim {
+    display: none;
+  }
+  .burger,
+  .ctaMobile {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 1080px) {
+  .drawer {
+    display: none;
+  }
+}
+
+@media (max-width: 819px) {
+  .bar,
+  .scrolled .bar {
+    padding-block: 10px;
+  }
+  .ctaMobile {
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 359px) {
+  .ctaMobile {
+    display: none;
+  }
+}
+
+/* Reading progress: a 2px line along the header's bottom edge */
+.header {
+  transition: border-color var(--t-med) var(--ease);
+}
+
+.scrolled {
+  border-bottom-color: var(--line);
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--orange-bright);
+  transform: scaleX(var(--sp, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* Dropdown items nudge right on hover */
+.dropdown a {
+  transition:
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.dropdown a:hover {
+  transform: translate3d(4px, 0, 0);
+}
+
+.megaItem {
+  transition: transform var(--t-fast) var(--ease);
+}
+
+.megaItem:hover {
+  transform: translate3d(4px, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropdown a:hover,
+  .megaItem:hover {
+    transform: none;
+  }
+}

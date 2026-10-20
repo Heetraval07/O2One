@@ -1,0 +1,26 @@
+.wrap {
+  padding-block: var(--s8);
+}
+
+.wrap :global(.container) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.code {
+  font-size: 96px;
+  line-height: 1;
+  color: var(--orange-bright);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+  font-weight: 600;
+}
