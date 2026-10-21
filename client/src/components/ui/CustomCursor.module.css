@@ -1,0 +1,60 @@
+/* Hide the system arrow once the custom cursor is live (and give it back over fields, the map and drawers). */
+:global(html.o2-cursor:not(.o2-native)),
+:global(html.o2-cursor:not(.o2-native) *) {
+  cursor: none !important;
+}
+
+.dot,
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 160ms var(--ease);
+}
+
+.dot[data-hidden='true'],
+.ring[data-hidden='true'] {
+  opacity: 0;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: var(--orange-bright);
+}
+
+.ring {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 122, 61, 0.45);
+  transition:
+    opacity 160ms var(--ease),
+    width 220ms var(--ease),
+    height 220ms var(--ease),
+    background-color 220ms var(--ease),
+    border-color 220ms var(--ease);
+}
+
+/* Over links and buttons the ring opens up and fills softly */
+.ring[data-hover='true'] {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(255, 122, 61, 0.7);
+  background: rgba(255, 122, 61, 0.12);
+}
+
+.ring[data-down='true'] {
+  width: 30px;
+  height: 30px;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .dot,
+  .ring {
+    display: none;
+  }
+}

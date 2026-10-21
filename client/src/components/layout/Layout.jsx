@@ -4,6 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { WhatsApp } from '../ui/Icons';
 import { Loading } from '../ui/States';
+import CustomCursor from '../ui/CustomCursor';
 import { site, vatTopBar } from '../../content/site';
 import styles from './Layout.module.css';
 
@@ -49,6 +50,7 @@ export default function Layout() {
         Skip to content
       </a>
       <ScrollManager />
+      <CustomCursor />
       {isVat && <TopBar />}
       <Header />
       <main id="main" tabIndex={-1} className={styles.main}>
