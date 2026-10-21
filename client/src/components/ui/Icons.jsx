@@ -104,6 +104,34 @@ export const Instagram = make(
 export const Facebook = make(<path d="M14 21v-8h2.7l.5-3.2H14V7.8c0-.9.4-1.6 1.7-1.6h1.6V3.4C16.9 3.3 16 3.2 15 3.2c-2.4 0-4 1.5-4 4.1v2.5H8.3V13H11v8z" />);
 export const Twitter = make(<path d="M4 4l6.8 9.2L4.2 20h1.9l5.6-5.9 4.3 5.9H20l-7.2-9.8L19.1 4h-1.9l-5.2 5.5L8 4z" />);
 
+// Service icons
+export const Compass = make(
+  <>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M15.6 8.4l-2 5.2-5.2 2 2-5.2z" />
+  </>,
+);
+export const Layers = make(
+  <>
+    <path d="M12 3l9 5-9 5-9-5z" />
+    <path d="M3 13l9 5 9-5" />
+  </>,
+);
+export const Blocks = make(
+  <>
+    <rect x="4" y="4" width="7" height="7" rx="1" />
+    <rect x="13" y="4" width="7" height="7" rx="1" />
+    <rect x="4" y="13" width="7" height="7" rx="1" />
+    <path d="M16.5 13v7M13 16.5h7" />
+  </>,
+);
+export const Sparkles = make(
+  <>
+    <path d="M10.5 4l1.7 4.8 4.8 1.7-4.8 1.7-1.7 4.8-1.7-4.8L4 10.5l4.8-1.7z" />
+    <path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z" />
+  </>,
+);
+
 // Value icons
 export const Award = make(
   <>

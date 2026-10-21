@@ -1,0 +1,135 @@
+/* Four services: four across on wide screens (so there is no lone card on a second row), two on tablets, one on phones. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: var(--s4) var(--s3) var(--s3);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  background: var(--orange-soft);
+  color: var(--orange);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.text {
+  margin: 0;
+  color: var(--grey);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Image (when there is one) and link sit together at the bottom, so the links line up across cards */
+.foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto; /* keeps the file's own 577:433 proportions */
+  aspect-ratio: 577 / 433;
+  object-fit: contain;
+}
+
+/* Learn more: the whole card is clickable */
+.cta {
+  font-size: 15px;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.cta:focus-visible {
+  outline: 2px solid var(--orange-bright);
+  outline-offset: 4px;
+}
+
+/* Featured: the core Odoo service on dark charcoal */
+.featured {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.featured .icon {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--orange-bright);
+}
+
+.featured .title {
+  color: var(--white);
+}
+
+.featured .text {
+  color: var(--on-ink-muted);
+}
+
+.featured .cta {
+  color: var(--white);
+}
+
+.badge {
+  position: absolute;
+  top: var(--s3);
+  right: var(--s3);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 1199px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    padding: var(--s3);
+  }
+  .title {
+    font-size: 24px;
+  }
+}
