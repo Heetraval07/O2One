@@ -31,6 +31,7 @@ export const ArrowRight = make(<path d="M4 12h15M13 6l6 6-6 6" />, { className: 
 export const ArrowDown = make(<path d="M12 4v15M6 13l6 6 6-6" />);
 export const ArrowLeft = make(<path d="M20 12H5M11 6l-6 6 6 6" />);
 export const ChevronDown = make(<path d="M6 9l6 6 6-6" />);
+export const ChevronUp = make(<path d="M6 15l6-6 6 6" />);
 export const ChevronRight = make(<path d="M9 6l6 6-6 6" />);
 export const ChevronLeft = make(<path d="M15 6l-6 6 6 6" />);
 export const Check = make(<path d="M5 12.5l4.5 4.5L19 7.5" />);

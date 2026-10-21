@@ -94,7 +94,45 @@
     z-index: 45; /* under the header, so the open menu covers it */
     display: flex;
     flex-direction: column;
+    align-items: flex-end; /* every button shares the right edge */
     gap: 10px;
+  }
+  .dockList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  /* Back to top: a plain white button, separate from (and above) the three contact buttons */
+  .toTop {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid #d9d9d9;
+    border-radius: 50%;
+    background: var(--white);
+    color: #444;
+    box-shadow: 0 4px 12px rgba(26, 26, 26, 0.12);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition:
+      opacity var(--t-med) var(--ease),
+      transform var(--t-med) var(--ease),
+      visibility 0s linear var(--t-med);
+  }
+  .toTop[data-shown='true'] {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity var(--t-med) var(--ease),
+      transform var(--t-med) var(--ease);
+  }
+  .toTop:active {
+    transform: scale(0.94);
   }
   .dockBtn {
     display: grid;
@@ -103,8 +141,8 @@
     height: 48px;
     border-radius: 50%;
     color: var(--white);
-    /* the thin white ring keeps the dark phone button visible over the dark footer */
-    box-shadow: 0 0 0 2px var(--white), 0 6px 16px rgba(26, 26, 26, 0.24);
+    position: relative;
+    box-shadow: 0 4px 12px rgba(26, 26, 26, 0.22), 0 1px 3px rgba(26, 26, 26, 0.16);
     transition: transform var(--t-fast) var(--ease), filter var(--t-fast) var(--ease);
   }
   .dockBtn:hover,
@@ -123,6 +161,36 @@
   }
   .dockWa {
     background: #25d366; /* WhatsApp's own green */
+  }
+  /* Pulse: a translucent green ring that grows and fades behind the button. It is a separate layer (z-index -1
+     inside the dock), so the button itself never changes size or position. */
+  .dockWa::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 50%;
+    background: rgba(37, 211, 102, 0.5);
+    pointer-events: none;
+    animation: dockPulse 2s ease-out infinite;
+  }
+}
+
+@keyframes dockPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.85);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dockWa::before {
+    animation: none;
+    display: none;
   }
 }
 

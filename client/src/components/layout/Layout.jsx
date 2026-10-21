@@ -1,8 +1,8 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
-import { Mail, Phone, WhatsApp } from '../ui/Icons';
+import { ChevronUp, Mail, Phone, WhatsApp } from '../ui/Icons';
 import { Loading } from '../ui/States';
 import CustomCursor from '../ui/CustomCursor';
 import { site, telHref, vatTopBar } from '../../content/site';
@@ -26,26 +26,49 @@ function ScrollManager() {
   return null;
 }
 
-/** Phones only: call, email and WhatsApp stacked down the right edge (the single WhatsApp button covers larger screens). */
+/** Appears once the page has been scrolled a little; returns to the top. */
+function BackToTop() {
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShown(window.scrollY > 320);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  const toTop = () => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, left: 0, behavior: reduced ? 'auto' : 'smooth' });
+  };
+  return (
+    <button type="button" className={styles.toTop} data-shown={shown} onClick={toTop} aria-label="Back to top" tabIndex={shown ? 0 : -1}>
+      <ChevronUp size={22} />
+    </button>
+  );
+}
+
+/** Phones only: back-to-top above call, email and WhatsApp, stacked down the right edge (the single WhatsApp button covers larger screens). */
 function ContactDock() {
   return (
-    <nav className={styles.dock} aria-label="Contact us">
-      <a href={telHref} className={`${styles.dockBtn} ${styles.dockPhone}`} aria-label={`Call us on ${site.phone}`}>
-        <Phone size={22} />
-      </a>
-      <a href={`mailto:${site.email}`} className={`${styles.dockBtn} ${styles.dockMail}`} aria-label={`Email ${site.email}`}>
-        <Mail size={22} />
-      </a>
-      <a
-        href={site.whatsappUrl}
-        className={`${styles.dockBtn} ${styles.dockWa}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat with O2One on WhatsApp (opens WhatsApp)"
-      >
-        <WhatsApp size={24} />
-      </a>
-    </nav>
+    <div className={styles.dock}>
+      <BackToTop />
+      <nav className={styles.dockList} aria-label="Contact us">
+        <a href={telHref} className={`${styles.dockBtn} ${styles.dockPhone}`} aria-label={`Call us on ${site.phone}`}>
+          <Phone size={22} />
+        </a>
+        <a href={`mailto:${site.email}`} className={`${styles.dockBtn} ${styles.dockMail}`} aria-label={`Email ${site.email}`}>
+          <Mail size={22} />
+        </a>
+        <a
+          href={site.whatsappUrl}
+          className={`${styles.dockBtn} ${styles.dockWa}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat with O2One on WhatsApp (opens WhatsApp)"
+        >
+          <WhatsApp size={24} />
+        </a>
+      </nav>
+    </div>
   );
 }
 
