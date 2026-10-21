@@ -11,7 +11,7 @@ import { ArrowRight } from '../components/ui/Icons';
 import CtaBand from '../components/ui/CtaBand';
 import { NumberedGrid, ValueGrid } from '../components/sections/Cards';
 import ApproachTabs from '../components/sections/ApproachTabs';
-import ServicesExplorer from '../components/sections/ServicesExplorer';
+import ServiceCards from '../components/sections/ServiceCards';
 import FlowVisual from '../components/sections/FlowVisual';
 import DarkBand from '../components/sections/DarkBand';
 import HeroBackdrop from '../components/sections/HeroBackdrop';
@@ -94,7 +94,7 @@ export default function Home() {
           <Reveal className={styles.headRow}>
             <div>
               <span className="eyebrow">Our approach</span>
-              <h2 id="approach-title" className="h2">
+              <h2 id="approach-title" className={`h2 ${styles.oneLine}`}>
                 One partner, from first conversation to long after go-live.
               </h2>
             </div>
@@ -120,7 +120,7 @@ export default function Home() {
             </Link>
           </Reveal>
           <Reveal>
-            <ServicesExplorer />
+            <ServiceCards />
           </Reveal>
         </div>
       </section>

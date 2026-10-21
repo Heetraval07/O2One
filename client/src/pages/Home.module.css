@@ -92,6 +92,17 @@
   max-width: 26ch;
 }
 
+/* The Approach heading has no button beside it, so it is not held to the 26ch column: on desktop it runs on one
+   line, with the size scaled to the screen so the whole sentence fits the content width. */
+@media (min-width: 900px) {
+  .headRow .oneLine {
+    max-width: none;
+    white-space: nowrap;
+    text-wrap: nowrap;
+    font-size: clamp(30px, 3.4vw, 48px);
+  }
+}
+
 .valuesHead {
   max-width: 560px;
 }
