@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="Bed with a pillow" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="400" fill="#f6f6f6"></rect>
+<rect x="210" y="150" width="22" height="135" rx="5" fill="#7a7a7a"></rect>
+<rect x="210" y="215" width="220" height="42" rx="6" fill="#9e9e9e"></rect>
+<rect x="240" y="192" width="56" height="26" rx="9" fill="#ff7a3d"></rect>
+<rect x="306" y="200" width="124" height="57" rx="6" fill="#7a7a7a"></rect>
+<rect x="414" y="255" width="12" height="30" rx="3" fill="#7a7a7a"></rect>
+</svg>

@@ -1,26 +1,51 @@
 .band {
+  position: relative;
   background: var(--ink);
   color: var(--on-ink);
   overflow: hidden;
+  padding-block: var(--section-y);
+}
+
+/* A soft orange glow in the corner gives the dark band some depth */
+.band::before {
+  content: '';
+  position: absolute;
+  top: -35%;
+  right: -10%;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 122, 61, 0.22), transparent 68%);
+  pointer-events: none;
 }
 
 .grid {
+  position: relative;
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: var(--s7);
 }
 
-/* Text lines up with the page container; the orange panel bleeds to the right edge */
 .text {
-  padding: var(--s8) var(--s6) var(--s8) max(var(--page-x), calc((100vw - var(--container)) / 2));
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
 }
 
+.eyebrow,
+.panelLabel {
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange-bright);
+}
+
 .title {
   font-family: var(--font-serif);
-  font-size: clamp(36px, 3.8vw, 50px);
+  font-size: clamp(36px, 3.8vw, 52px);
   font-weight: 500;
   line-height: 1.08;
   color: var(--white);
@@ -37,53 +62,72 @@
   margin-top: 12px;
 }
 
-.deco {
-  position: relative;
-  background: var(--orange-bright);
-  min-height: 320px;
+/* ---- Phases panel ------------------------------------------------------- */
+.panelLabel {
+  margin: 0 0 var(--s2);
 }
 
-.deco span {
-  position: absolute;
-  background: var(--ink);
-  transition: transform 1.2s var(--ease);
+.phases {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-on-ink);
 }
 
-.deco span:nth-child(1) {
-  left: 0;
-  top: 0;
-  width: 38%;
-  height: 34%;
+.phase {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: baseline;
+  gap: var(--s2);
+  padding: var(--s3) 0;
+  border-bottom: 1px solid var(--line-on-ink);
+  transition: transform var(--t-med) var(--ease);
 }
 
-.deco span:nth-child(2) {
-  right: 14%;
-  bottom: 18%;
-  width: 22%;
-  height: 22%;
-  background: var(--orange);
+.phase:hover {
+  transform: translate3d(6px, 0, 0);
 }
 
-.deco span:nth-child(3) {
-  left: 38%;
-  top: 34%;
-  width: 12%;
-  height: 12%;
-  background: var(--white);
+.phaseNum {
+  font-size: 44px;
+  line-height: 1;
+  color: var(--orange-bright);
 }
 
-.band:hover .deco span:nth-child(2) {
-  transform: translate(-12px, -12px);
+.phaseName {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--white);
+}
+
+.phaseText {
+  margin-top: 4px;
+  color: var(--on-ink-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phase:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 959px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--s5);
+  }
 }
 
 @media (max-width: 819px) {
-  .grid {
-    grid-template-columns: 1fr;
+  .phaseNum {
+    font-size: 36px;
   }
-  .text {
-    padding: var(--s6) var(--page-x);
+  .phaseName {
+    font-size: 24px;
   }
-  .deco {
-    min-height: 96px;
+  .phase {
+    grid-template-columns: 48px 1fr;
   }
 }

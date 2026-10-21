@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Markdown from '../../components/ui/Markdown';
 import { admin } from '../api';
 import { DeleteButton, ErrorNote, Field, Loading, PageHead, fromLocalInput, slugify, toLocalInput, useLoad, useToast } from '../ui';
+import ImageUpload from '../ImageUpload';
 
 const SERVICES = [
   ['business-consultation', 'Business Consultation'],
@@ -214,9 +215,7 @@ export default function PostEditor() {
             <Field label="Reading time (minutes)" hint="Leave empty to work it out from the length.">
               {(p) => <input {...p} className="adm-input" type="number" min="1" max="60" value={form.readMinutes} onChange={(e) => set({ readMinutes: e.target.value })} />}
             </Field>
-            <Field label="Cover image address (optional)" error={f.coverImage}>
-              {(p) => <input {...p} className="adm-input" value={form.coverImage} maxLength={255} placeholder="https://…" onChange={(e) => set({ coverImage: e.target.value })} />}
-            </Field>
+            <ImageUpload label="Cover image (optional)" value={form.coverImage} error={f.coverImage} onChange={(url) => set({ coverImage: url })} />
           </section>
 
           <section className="adm-card">

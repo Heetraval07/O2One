@@ -56,7 +56,12 @@ export function StatRow({ stats, children }) {
 export function StatPanel({ stats, children }) {
   const [ref, inView] = useInView({ threshold: 0.35 });
   return (
-    <div ref={ref} className={styles.panel} data-in={inView ? 'true' : 'false'}>
+    <div
+      ref={ref}
+      className={styles.panel}
+      data-in={inView ? 'true' : 'false'}
+      style={stats.length !== 3 ? { '--panel-cols': `${stats.length}fr`, '--stat-cols': stats.length } : undefined}
+    >
       <dl className={styles.panelStats}>
         {stats.map((s, i) => (
           <Stat key={s.label} index={i} {...s} start={inView} tone="light" panel />

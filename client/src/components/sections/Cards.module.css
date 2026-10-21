@@ -284,3 +284,31 @@
 .storyMedia span {
   display: inline-block;
 }
+
+/* An uploaded cover fills the frame; without one the grey placeholder label shows as before. */
+.storyMedia {
+  position: relative;
+  overflow: hidden;
+}
+
+.storyMedia img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* An uploaded cover fills the frame; without one the grey placeholder label shows as before. */
+.thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

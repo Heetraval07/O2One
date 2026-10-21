@@ -210,3 +210,17 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* An uploaded cover fills the frame; without one the grey placeholder label shows as before. */
+.heroMedia {
+  position: relative;
+  overflow: hidden;
+}
+
+.heroMedia img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

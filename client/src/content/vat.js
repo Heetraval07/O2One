@@ -18,7 +18,7 @@ export const vatHero = {
   stats: [
     { value: '10+', label: 'years in Odoo' },
     { value: '5+', label: 'certified experts' },
-    { value: 'Dubai', label: 'and Mumbai' },
+    { value: 'Dubai', label: 'based team' },
   ],
   invoice: {
     number: 'INV/2027/00184',

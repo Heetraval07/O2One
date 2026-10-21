@@ -156,3 +156,16 @@ CREATE TABLE IF NOT EXISTS admin_tokens (
   KEY idx_admin_tokens_admin (admin_id),
   CONSTRAINT fk_admin_tokens_admin FOREIGN KEY (admin_id) REFERENCES admin_users (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ---------------------------------------------------------------------------
+-- Uploaded images (blog and story covers). Kept in the database so they persist wherever the app is
+-- hosted (including serverless hosts with no permanent disk) and are included in the usual DB backups.
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS media (
+  id          CHAR(32)     NOT NULL,                    -- random, so one address cannot be guessed from another
+  mime        VARCHAR(30)  NOT NULL,                    -- image/jpeg | image/png | image/webp
+  size_bytes  INT UNSIGNED NOT NULL,
+  data        MEDIUMBLOB   NOT NULL,
+  created_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

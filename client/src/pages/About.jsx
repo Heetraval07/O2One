@@ -1,21 +1,22 @@
-import { stagger } from '../lib/motion';
 import { useMeta } from '../lib/hooks';
-import { site } from '../content/site';
+import { site, telHref } from '../content/site';
 import { aboutIntro, originStory, originQuote, values, teamStats } from '../content/company';
 import { phases } from '../content/approach';
 import Reveal from '../components/ui/Reveal';
 import PhotoSlot from '../components/ui/PhotoSlot';
-import { StatRow } from '../components/ui/Stats';
+import { StatPanel } from '../components/ui/Stats';
 import { TextLink } from '../components/ui/Buttons';
-import { Pin } from '../components/ui/Icons';
+import { ArrowRight, Mail, Phone, Pin } from '../components/ui/Icons';
 import CtaBand from '../components/ui/CtaBand';
 import { ValueGrid } from '../components/sections/Cards';
 import styles from './About.module.css';
 
 export default function About() {
+  const office = site.offices[0]; // Dubai, UAE
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.address)}`;
   useMeta(
-    'About O2One | Odoo Partner in Dubai & Mumbai',
-    'O2One is a digital transformation company in Dubai and Mumbai, serving the GCC and MENA. Built by people who watched the problem up close.',
+    'About O2One | Odoo Partner in Dubai, UAE',
+    'O2One is a digital transformation company in Dubai, serving the GCC and MENA. Built by people who watched the problem up close.',
   );
 
   return (
@@ -27,7 +28,6 @@ export default function About() {
             <h1 className="h1">Built by people who watched the problem up close.</h1>
             <ul className={styles.facts} role="list">
               <li>Dubai</li>
-              <li>Mumbai</li>
               <li>GCC &amp; MENA</li>
               <li>Official Odoo partner</li>
             </ul>
@@ -83,43 +83,63 @@ export default function About() {
       </section>
 
       <section className="section section--grey" aria-labelledby="team-title">
-        <div className={`container ${styles.team}`}>
-          <Reveal>
-            <span className="eyebrow">Our team</span>
-            <h2 id="team-title" className="h2">
-              Led by the founder. Delivered by certified experts.
-            </h2>
+        <div className="container">
+          <Reveal className={styles.teamHead}>
+            <div>
+              <span className="eyebrow">Our team</span>
+              <h2 id="team-title" className="h2">
+                Led by the founder. Delivered by certified experts.
+              </h2>
+            </div>
             <p className="lead">
-              A network of 20+ consultants and developers, including Odoo-certified experts, working from two offices.
+              A network of 20+ consultants and developers, including Odoo-certified experts, working together as one team.
             </p>
           </Reveal>
-          <Reveal delay={100} className={styles.teamRight}>
-            <StatRow stats={teamStats} />
-            <span className="badge badge--line">{site.partnerLabel}</span>
+          <Reveal delay={100} className={styles.teamStats}>
+            <StatPanel stats={teamStats}>
+              <span className="badge badge--line">{site.partnerLabel}</span>
+            </StatPanel>
           </Reveal>
-        </div>
 
-        <div className={`container ${styles.offices}`}>
-          {site.offices.map((o, i) => (
-            <Reveal key={o.city} delay={stagger(i, 2)} className={`card-fx ${styles.office}`}>
-              <PhotoSlot label={`${o.city} office`} alt={`O2One office in ${o.city}`} ratio="16 / 9" />
-              <div className={styles.officeBody}>
-                <h3 className="h3">
-                  {o.city}, {o.country}
-                </h3>
-                <p className={styles.address}>
-                  <Pin size={18} /> {o.address}
-                </p>
+          <Reveal as="section" delay={150} className={styles.location} aria-labelledby="location-title">
+            <div className={styles.locationMain}>
+              <span className="eyebrow">Our location</span>
+              <h3 id="location-title" className="h2">
+                {office.city}, {office.country}
+              </h3>
+              <p className={styles.address}>
+                <Pin size={18} /> {office.address}
+              </p>
+              <a href={mapsUrl} className="text-link" target="_blank" rel="noopener noreferrer">
+                Open in Google Maps <ArrowRight size={16} />
+              </a>
+            </div>
+            <dl className={styles.contact}>
+              <div>
+                <dt>
+                  <Phone size={16} /> Call us
+                </dt>
+                <dd>
+                  <a href={telHref}>{site.phone}</a>
+                </dd>
               </div>
-            </Reveal>
-          ))}
+              <div>
+                <dt>
+                  <Mail size={16} /> Email us
+                </dt>
+                <dd>
+                  <a href={`mailto:${site.email}`}>{site.email}</a>
+                </dd>
+              </div>
+            </dl>
+          </Reveal>
         </div>
       </section>
 
       <section className="section" aria-labelledby="how-title">
         <div className={`container ${styles.how}`}>
           <Reveal>
-            <span className="eyebrow">How we work</span>
+            <span className="eyebrow">Our approach</span>
             <h2 id="how-title" className="h2">
               Plan → Build → Launch.
             </h2>
@@ -137,7 +157,7 @@ export default function About() {
                 </li>
               ))}
             </ol>
-            <TextLink to="/our-approach">See our approach</TextLink>
+            <TextLink to="/#approach">See our approach</TextLink>
           </Reveal>
         </div>
       </section>

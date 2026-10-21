@@ -75,14 +75,10 @@ export default function ApproachTabs() {
         </ol>
         <div className={styles.foot}>
           <p className={styles.callout}>&ldquo;{phase.callout}&rdquo;</p>
-          {next ? (
+          {next && (
             <button type="button" className="btn btn--secondary btn--sm" onClick={() => select(active + 1)}>
               Next: {next.name} <ArrowRight size={16} />
             </button>
-          ) : (
-            <Link to="/our-approach" className="btn btn--secondary btn--sm">
-              See the full approach <ArrowRight size={16} />
-            </Link>
           )}
         </div>
       </div>

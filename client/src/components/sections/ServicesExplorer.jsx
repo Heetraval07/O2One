@@ -5,6 +5,7 @@ import { solutions, solutionShort } from '../../content/industries';
 import { api } from '../../lib/api';
 import { useApi } from '../../lib/hooks';
 import { ArrowRight, Minus, Plus } from '../ui/Icons';
+import ServiceArt from './ServiceArt';
 import styles from './ServicesExplorer.module.css';
 
 const included = (s) => (s.useSolutions ? solutions.slice(0, 8).map(solutionShort) : s.items.map((i) => i.name));
@@ -45,9 +46,8 @@ function Panel({ svc, stories, inline = false }) {
       </div>
       {!inline && (
         <div className={styles.panelSide}>
-          <div className={styles.visual} aria-hidden="true">
-            <span className={`num ${styles.visualNum}`}>{svc.number}</span>
-            <span className={styles.visualName}>{svc.name}</span>
+          <div className={styles.art}>
+            <ServiceArt service={svc} />
           </div>
           <StoryTeaser stories={stories} slug={svc.slug} />
         </div>

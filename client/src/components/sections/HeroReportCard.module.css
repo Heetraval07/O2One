@@ -1,0 +1,19 @@
+.card {
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.card > svg {
+  display: block;
+  width: 100%;
+  height: auto; /* keeps the 4:3 shape from the viewBox */
+}
+
+.card :global(.sans) {
+  font-family: var(--font-sans);
+}
+
+.card :global(.serif) {
+  font-family: var(--font-serif);
+}

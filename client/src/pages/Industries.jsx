@@ -1,46 +1,36 @@
 import { stagger } from '../lib/motion';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMeta } from '../lib/hooks';
-import { industries, solutions, solutionShort } from '../content/industries';
+import { industries, industryImages, solutions, solutionShort } from '../content/industries';
 import Reveal from '../components/ui/Reveal';
 import PageHero from '../components/sections/PageHero';
 import CtaBand from '../components/ui/CtaBand';
 import { CheckupButton } from '../components/ui/Buttons';
-import { ArrowRight, Close, Plus } from '../components/ui/Icons';
+import { ArrowRight, Plus } from '../components/ui/Icons';
+import DetailDrawer, { DrawerBlock, DrawerCta, DrawerLinks, DrawerList, DrawerText } from '../components/sections/DetailDrawer';
 import styles from './Industries.module.css';
 
-/** Side drawer built on <dialog>, so focus trapping and Escape come for free. */
-function IndustryDrawer({ industry, onClose }) {
-  const ref = useRef(null);
-  useEffect(() => {
-    const d = ref.current;
-    if (industry && d && !d.open) d.showModal();
-    if (!industry && d?.open) d.close();
-  }, [industry]);
+// Only the first six industries are shown; the rest stay in the content file but are not listed here.
+const SHOWN = 6;
 
+function IndustryDrawer({ industry, onClose }) {
   return (
-    <dialog
-      ref={ref}
-      className={styles.drawer}
-      aria-labelledby="industry-title"
-      onClose={onClose}
-      onClick={(e) => e.target === ref.current && onClose()}
-    >
+    <DetailDrawer open={Boolean(industry)} onClose={onClose} eyebrow="Industry" title={industry?.name}>
       {industry && (
-        <div className={styles.drawerInner}>
-          <button type="button" className={styles.close} onClick={onClose} aria-label="Close">
-            <Close size={22} />
-          </button>
-          <span className="eyebrow">Industry</span>
-          <h2 id="industry-title" className="phase-title">
-            {industry.name}
-          </h2>
-          <p className="lead">{industry.text}</p>
+        <>
+          <DrawerBlock title="Industry description">
+            <DrawerText>{industry.text}</DrawerText>
+          </DrawerBlock>
+
+          {industry.challenges?.length > 0 && (
+            <DrawerBlock title="Common challenges">
+              <DrawerList items={industry.challenges} />
+            </DrawerBlock>
+          )}
 
           {industry.solutions.length > 0 && (
-            <div className={styles.block}>
-              <h3 className={styles.blockTitle}>Ready-made solutions</h3>
+            <DrawerBlock title="Ready-made solutions">
               <ul className="tag-list" role="list">
                 {industry.solutions.map((s) => (
                   <li key={s} className="badge">
@@ -48,25 +38,24 @@ function IndustryDrawer({ industry, onClose }) {
                   </li>
                 ))}
               </ul>
-            </div>
+            </DrawerBlock>
           )}
 
-          <div className={styles.block}>
-            <h3 className={styles.blockTitle}>Typical services</h3>
-            <ul className={styles.links} role="list">
+          <DrawerBlock title="Typical services">
+            <DrawerLinks>
               <li><Link to="/services/odoo-services" onClick={onClose}>Odoo implementation <ArrowRight size={16} /></Link></li>
               <li><Link to="/services/business-consultation" onClick={onClose}>Business consultation <ArrowRight size={16} /></Link></li>
               <li><Link to="/services/ai-automation" onClick={onClose}>Workflow automation <ArrowRight size={16} /></Link></li>
-            </ul>
-          </div>
+            </DrawerLinks>
+          </DrawerBlock>
 
-          <div className={styles.drawerCta}>
+          <DrawerCta>
             <p>See what your business is missing.</p>
             <CheckupButton className="btn--block" />
-          </div>
-        </div>
+          </DrawerCta>
+        </>
       )}
-    </dialog>
+    </DetailDrawer>
   );
 }
 
@@ -83,17 +72,17 @@ export default function Industries() {
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Industries' }]}
         eyebrow="Industries"
         title="Built for how your industry actually works."
-        lead="Twelve industries we know well, and ready-made solutions for the businesses that need something more specific."
+        lead="Six industries we know well, and ready-made solutions for the businesses that need something more specific."
       />
 
       <section className="section" aria-label="Industries">
         <div className="container">
           <ul className={styles.grid} role="list">
-            {industries.map((ind, i) => (
+            {industries.slice(0, SHOWN).map((ind, i) => (
               <Reveal as="li" key={ind.name} delay={stagger(i, 4)}>
                 <button type="button" className={`card-fx ${styles.card}`} onClick={() => setOpen(ind)} aria-haspopup="dialog">
                   <span className={`fx-zoom ${styles.photo}`} aria-hidden="true">
-                    <span>Photo · {ind.name}</span>
+                    <img src={industryImages[ind.name]} alt="" width="640" height="400" loading="lazy" decoding="async" />
                   </span>
                   <span className={styles.body}>
                     <span className={styles.name}>{ind.name}</span>
@@ -124,7 +113,9 @@ export default function Industries() {
           <Reveal delay={100}>
             <ul className={styles.chips} role="list">
               {solutions.map((s) => (
-                <li key={s}>{solutionShort(s)}</li>
+                <li key={s}>
+                  <Link to="/custom-industry-solutions">{solutionShort(s)}</Link>
+                </li>
               ))}
             </ul>
           </Reveal>

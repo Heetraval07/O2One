@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640" height="480" viewBox="0 0 640 480" role="img" aria-label="Business Health Checkup report card for Qamar Bay General Trading LLC: health score 62 of 100, with stock and accounts flagged, and a finding that each order is typed three times" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Inter:wght@400;600&amp;display=swap');
+.sans{font-family:Inter,'Helvetica Neue',Arial,sans-serif}
+.serif{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+</style>
+<filter id="shadow" x="-30%" y="-30%" width="160%" height="190%">
+<feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#1a1a1a" flood-opacity="0.12"/>
+</filter>
+</defs>
+<rect width="640" height="480" fill="#f6f6f6"/>
+<rect x="46" y="26" width="40" height="40" fill="#1a1a1a"/>
+<rect x="400" y="250" width="200" height="200" fill="#ff7a3d"/>
+
+<rect x="70.5" y="50.5" width="399" height="296" fill="#ffffff" stroke="#e6e6e6"/>
+<text x="92" y="83" class="sans" font-size="11" font-weight="600" letter-spacing="0.88" fill="#c4501f">BUSINESS HEALTH CHECKUP</text>
+<text x="92" y="112" class="serif" font-size="24" font-weight="500" fill="#1a1a1a">Qamar Bay General Trading LLC</text>
+
+<rect x="92" y="133" width="356" height="84" fill="#f6f6f6"/>
+<g transform="translate(106 143) scale(0.8421)">
+<circle cx="38" cy="38" r="31" fill="none" stroke="#e6e6e6" stroke-width="7"/>
+<circle cx="38" cy="38" r="31" fill="none" stroke="#ff7a3d" stroke-width="7" stroke-linecap="round" stroke-dasharray="120.8 194.8" transform="rotate(-90 38 38)"/>
+</g>
+<text x="138" y="177" text-anchor="middle" class="serif" font-size="24" font-weight="600" fill="#1a1a1a">62</text>
+<text x="138" y="190" text-anchor="middle" class="sans" font-size="9" fill="#5f5f5f">of 100</text>
+<text x="186" y="166" class="sans" font-size="12" fill="#5f5f5f">Overall health</text>
+<text x="186" y="190" class="serif" font-size="20" font-weight="500" fill="#1a1a1a">Two areas are slipping</text>
+
+<g class="sans" font-size="13" fill="#1a1a1a">
+<text x="92" y="243.5">Sales &amp; invoicing</text>
+<text x="92" y="269.5">Stock &amp; purchasing</text>
+<text x="92" y="295.5">Accounts &amp; VAT</text>
+<text x="92" y="321.5">HR &amp; payroll</text>
+</g>
+<g>
+<rect x="226" y="236" width="86" height="6" rx="3" fill="#e6e6e6"/>
+<rect x="226" y="236" width="70.5" height="6" rx="3" fill="#9e9e9e"/>
+<rect x="226" y="262" width="86" height="6" rx="3" fill="#e6e6e6"/>
+<rect x="226" y="262" width="38.7" height="6" rx="3" fill="#ff7a3d"/>
+<rect x="226" y="288" width="86" height="6" rx="3" fill="#e6e6e6"/>
+<rect x="226" y="288" width="32.7" height="6" rx="3" fill="#ff7a3d"/>
+<rect x="226" y="314" width="86" height="6" rx="3" fill="#e6e6e6"/>
+<rect x="226" y="314" width="65.4" height="6" rx="3" fill="#9e9e9e"/>
+</g>
+<g class="sans" font-size="12">
+<text x="322" y="243.5" fill="#5f5f5f">On track</text>
+<text x="322" y="269.5" fill="#c4501f" font-weight="600">Typed in 3 places</text>
+<text x="322" y="295.5" fill="#c4501f" font-weight="600">Month-end by hand</text>
+<text x="322" y="321.5" fill="#5f5f5f">On track</text>
+</g>
+
+<rect x="300.5" y="330.5" width="279" height="108" fill="#ffffff" stroke="#e6e6e6" filter="url(#shadow)"/>
+<circle cx="322" cy="354" r="4" fill="#ff7a3d"/>
+<text x="334" y="357.5" class="sans" font-size="10" font-weight="600" letter-spacing="0.8" fill="#c4501f">FINDING</text>
+<text x="318" y="384.5" class="serif" font-size="19" font-weight="500" fill="#1a1a1a">Each order is typed three times</text>
+<rect x="318" y="400" width="68" height="21" fill="#f6f6f6"/>
+<rect x="408" y="400" width="44" height="21" fill="#f6f6f6"/>
+<rect x="474" y="400" width="42" height="21" fill="#f6f6f6"/>
+<g class="sans" font-size="11">
+<text x="326" y="414.5" fill="#1a1a1a">WhatsApp</text>
+<text x="392" y="414.5" fill="#9e9e9e">→</text>
+<text x="416" y="414.5" fill="#1a1a1a">Excel</text>
+<text x="458" y="414.5" fill="#9e9e9e">→</text>
+<text x="482" y="414.5" fill="#1a1a1a">Tally</text>
+</g>
+</svg>

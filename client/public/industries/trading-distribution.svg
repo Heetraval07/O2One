@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="Delivery truck" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="400" fill="#f6f6f6"></rect>
+<rect x="210" y="145" width="140" height="100" rx="6" fill="#9e9e9e"></rect>
+<rect x="278" y="157" width="4" height="76" rx="2" fill="#f6f6f6"></rect>
+<path d="M356 175 H392 Q402 175 408 183 L428 210 Q432 216 432 222 V245 H356 Z" fill="#ff7a3d"></path>
+<path d="M368 187 H390 L405 208 H368 Z" fill="#f6f6f6"></path>
+<circle cx="255" cy="250" r="18" fill="#7a7a7a" stroke="#f6f6f6" stroke-width="6"></circle>
+<circle cx="255" cy="250" r="6" fill="#f6f6f6"></circle>
+<circle cx="395" cy="250" r="18" fill="#7a7a7a" stroke="#f6f6f6" stroke-width="6"></circle>
+<circle cx="395" cy="250" r="6" fill="#f6f6f6"></circle>
+</svg>

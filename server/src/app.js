@@ -12,6 +12,7 @@ import { newsletterRouter } from './routes/newsletter.js';
 import { blogRouter } from './routes/blog.js';
 import { storiesRouter } from './routes/stories.js';
 import { adminRouter } from './routes/admin/index.js';
+import { mediaRouter } from './routes/media.js';
 
 export function createApp() {
   const app = express();
@@ -23,6 +24,7 @@ export function createApp() {
       useDefaults: true,
       directives: {
         'img-src': ["'self'", 'data:', 'https:'],
+        'frame-src': ["'self'", 'https://www.google.com'], // the Google Map on the Contact page
         'style-src': ["'self'", "'unsafe-inline'"],
         'connect-src': ["'self'"],
         'upgrade-insecure-requests': null, // let the proxy/TLS layer handle HTTPS redirects
@@ -37,6 +39,9 @@ export function createApp() {
 
   // Admin area first: it takes larger bodies (blog articles) than the public forms, and has its own sign-in.
   api.use('/admin', express.json({ limit: '400kb' }), adminRouter);
+
+  // Uploaded images: public, immutable and cacheable, so they sit outside the per-minute read limit.
+  api.use('/media', mediaRouter);
 
   api.use(express.json({ limit: '20kb' }));
 

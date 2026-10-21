@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="Office building" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="400" fill="#f6f6f6"></rect>
+<rect x="381" y="180" width="60" height="110" rx="4" fill="#7a7a7a"></rect>
+<rect x="395" y="198" width="14" height="14" rx="2" fill="#f6f6f6"></rect>
+<rect x="419" y="198" width="14" height="14" rx="2" fill="#f6f6f6"></rect>
+<rect x="395" y="224" width="14" height="14" rx="2" fill="#f6f6f6"></rect>
+<rect x="419" y="224" width="14" height="14" rx="2" fill="#f6f6f6"></rect>
+<rect x="395" y="250" width="14" height="14" rx="2" fill="#f6f6f6"></rect>
+<rect x="419" y="250" width="14" height="14" rx="2" fill="#f6f6f6"></rect>
+<rect x="265" y="115" width="110" height="175" rx="4" fill="#9e9e9e"></rect>
+<rect x="265" y="115" width="110" height="10" fill="#ff7a3d"></rect>
+<rect x="282" y="140" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="310" y="140" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="338" y="140" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="282" y="170" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="310" y="170" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="338" y="170" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="282" y="200" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="310" y="200" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="338" y="200" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="282" y="230" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="338" y="230" width="20" height="18" rx="2" fill="#f6f6f6"></rect>
+<rect x="303" y="252" width="34" height="38" rx="3" fill="#ff7a3d"></rect>
+</svg>

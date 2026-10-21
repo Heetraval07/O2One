@@ -48,7 +48,7 @@ export default function StoryDetail() {
                   </p>
                 )}
                 <div className={styles.media} aria-hidden="true">
-                  <span>Photo · {story.clientName}</span>
+                  {story.coverImage ? <img src={story.coverImage} alt="" loading="lazy" decoding="async" /> : <span>Photo · {story.clientName}</span>}
                 </div>
 
                 <Reveal as="section" className={styles.block} aria-labelledby="challenge">
@@ -66,7 +66,7 @@ export default function StoryDetail() {
                       </li>
                     ))}
                   </ol>
-                  <Link to="/our-approach" className="text-link">How our 9 steps work →</Link>
+                  <Link to="/#approach" className="text-link">How our 9 steps work →</Link>
                 </Reveal>
 
                 {story.results.length > 0 && (

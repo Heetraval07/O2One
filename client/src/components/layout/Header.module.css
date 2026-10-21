@@ -6,6 +6,57 @@
   border-bottom: 1px solid var(--line);
 }
 
+/* ---- Contact strip ------------------------------------------------------ */
+.strip {
+  height: 36px;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-size: 13px;
+}
+
+.stripInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: var(--s2);
+}
+
+.stripEnd {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.stripList {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.strip a,
+.stripLoc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--on-ink);
+  text-decoration: none;
+  transition: color var(--t-fast) var(--ease);
+}
+
+.stripLoc {
+  padding-right: var(--s2);
+  border-right: 1px solid var(--line-on-ink);
+  color: var(--on-ink-muted);
+}
+
+.strip a:hover {
+  color: var(--orange-bright);
+}
+
 .bar {
   display: flex;
   align-items: center;
@@ -17,6 +68,14 @@
 
 .scrolled .bar {
   padding-block: 12px;
+}
+
+/* The bar shrinks 12px once the page scrolls. The header sits in the page flow, so that would pull
+   the whole page up by 12px, and the browser's scroll anchoring then scrolls back by 12px, which
+   un-shrinks the bar and starts the cycle again (the flicker near the top). The bottom margin grows
+   by exactly what the bar loses, so the header's footprint, and the page under it, never moves. */
+.scrolled {
+  margin-bottom: 12px;
 }
 
 /* ---- Desktop nav -------------------------------------------------------- */
@@ -505,9 +564,16 @@
 }
 
 @media (max-width: 819px) {
+  .stripMail,
+  .stripLoc {
+    display: none;
+  }
   .bar,
   .scrolled .bar {
     padding-block: 10px;
+  }
+  .scrolled {
+    margin-bottom: 0; /* the bar does not shrink here, so nothing to make up */
   }
   .ctaMobile {
     padding-inline: 14px;
@@ -522,7 +588,9 @@
 
 /* Reading progress: a 2px line along the header's bottom edge */
 .header {
-  transition: border-color var(--t-med) var(--ease);
+  transition:
+    border-color var(--t-med) var(--ease),
+    margin-bottom var(--t-med) var(--ease);
 }
 
 .scrolled {

@@ -63,7 +63,7 @@ export default function Services() {
                 Every service follows the same three phases.
               </h2>
             </div>
-            <Link to="/our-approach" className="btn btn--secondary btn--sm">
+            <Link to="/#approach" className="btn btn--secondary btn--sm">
               Our approach <ArrowRight size={16} />
             </Link>
           </Reveal>

@@ -51,7 +51,7 @@ export default function Stories() {
           {featured && !filtering && (
             <Reveal className={styles.featured}>
               <div className={styles.featuredMedia} aria-hidden="true">
-                <span>Photo · {featured.clientName}</span>
+                {featured.coverImage ? <img src={featured.coverImage} alt="" loading="lazy" decoding="async" /> : <span>Photo · {featured.clientName}</span>}
               </div>
               <div className={styles.featuredBody}>
                 <p className={styles.meta}>

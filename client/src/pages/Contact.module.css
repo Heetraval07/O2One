@@ -56,7 +56,7 @@
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.7fr 1fr;
   gap: var(--s3);
   margin: 0;
   padding: 0;
@@ -72,32 +72,144 @@
   border: 1px solid var(--line);
 }
 
+/* The map card: the map fills the top, the address sits underneath */
+.mapCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.map {
+  flex: 1;
+  min-height: 340px;
+  background: var(--grey-50);
+}
+
+.map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border: 0;
+}
+
+.mapCaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2) var(--s3);
+  padding: var(--s3) var(--s4);
+  border-top: 1px solid var(--line);
+}
+
+.mapCaption > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.address {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 48ch;
+  color: var(--grey);
+}
+
+.address svg {
+  margin-top: 3px;
+  flex: none;
+  color: var(--orange);
+}
+
 .card > svg {
   color: var(--orange);
 }
 
-.channels {
-  display: grid;
+/* The "reach us" card: a short heading, then three full-width rows that share the card's height with the map */
+.reach {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.reachHead {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
+  padding: var(--s4) var(--s4) var(--s3);
+}
+
+.reachHead > svg {
+  color: var(--orange);
+}
+
+.reachList {
+  flex: 1;
+  display: grid;
+  grid-auto-rows: 1fr;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.channels li {
+.reachList li {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  overflow-wrap: anywhere;
+  border-top: 1px solid var(--line);
 }
 
-.channels svg {
-  flex: none;
+.reachList a {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 20px 1fr 16px;
+  align-items: center;
+  gap: 14px;
+  padding: var(--s3) var(--s4);
+  color: var(--ink);
+  text-decoration: none;
+  transition: background-color var(--t-fast) var(--ease);
+}
+
+.reachList a > svg {
+  color: var(--orange);
+}
+
+.reachList a > svg:last-child {
+  color: var(--grey);
+  transition: transform var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.reachList a:hover {
+  background: var(--orange-soft);
+}
+
+.reachList a:hover > svg:last-child {
+  color: var(--orange);
+  transform: translateX(3px);
+}
+
+.reachList span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.reachList small {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--grey);
 }
 
-.channels a {
+.reachList strong {
+  font-size: 17px;
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 1079px) {
@@ -109,7 +221,7 @@
     position: static;
   }
   .cards {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -117,7 +229,11 @@
   .hero {
     padding-block: var(--s5) var(--s6);
   }
-  .cards {
-    grid-template-columns: 1fr;
+  .map,
+  .map iframe {
+    min-height: 280px;
+  }
+  .mapCaption {
+    padding: var(--s3);
   }
 }

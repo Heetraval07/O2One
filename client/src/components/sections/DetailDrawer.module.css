@@ -1,0 +1,169 @@
+/* Shared detail drawer: Industries and Custom Industry Solutions. */
+.drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(520px, 100vw);
+  max-width: 100vw;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--white);
+  color: var(--ink);
+  overflow-y: auto;
+}
+
+.drawer[open] {
+  animation: slideIn 380ms var(--ease);
+}
+
+.drawer::backdrop {
+  background: rgba(26, 26, 26, 0.45);
+  animation: fade 300ms var(--ease);
+}
+
+.drawerInner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: var(--s6) var(--s5) var(--s5);
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.block {
+  margin-top: 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.blockTitle {
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.description {
+  margin: 0;
+  color: var(--grey);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.challenges {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.challenges li {
+  position: relative;
+  padding-left: 22px;
+  line-height: 1.5;
+}
+
+.challenges li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--orange-bright);
+}
+
+.links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+
+.links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.drawerCta {
+  margin-top: 24px;
+  padding: var(--s3);
+  background: var(--orange-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chipsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--grey-50);
+  font-size: var(--fs-small);
+  line-height: 1.3;
+}
+
+.lede {
+  margin: 0;
+  color: var(--grey);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 819px) {
+  .drawerInner {
+    padding: var(--s6) var(--s3) var(--s4);
+  }
+}

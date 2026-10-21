@@ -40,21 +40,28 @@
 
 .chaos {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: var(--s6);
-  align-items: center;
+  justify-items: center;
+}
+
+.chaos > :first-child {
+  width: 100%;
+  max-width: 960px;
 }
 
 .chaosText {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 24px;
+  max-width: 760px;
+  text-align: center;
 }
 
 .pull {
   margin: 8px 0 0;
-  padding-left: 20px;
-  border-left: 2px solid var(--orange);
+  padding-top: 20px;
+  border-top: 2px solid var(--orange);
   font-family: var(--font-serif);
   font-size: 26px;
   font-style: italic;
@@ -81,24 +88,6 @@
   max-width: 26ch;
 }
 
-.about {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: var(--s6);
-  align-items: center;
-}
-
-.about > :first-child {
-  padding: 24px 0 0 24px;
-}
-
-.aboutText {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}
-
 .valuesHead {
   max-width: 560px;
 }
@@ -120,10 +109,6 @@
   transform: scaleX(1);
 }
 
-.teamRow {
-  margin-top: var(--s5);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .valuesHead::after {
     transform: scaleX(1);
@@ -132,14 +117,9 @@
 }
 
 @media (max-width: 1079px) {
-  .heroGrid,
-  .chaos,
-  .about {
+  .heroGrid {
     grid-template-columns: 1fr;
     gap: var(--s5);
-  }
-  .about > :first-child {
-    max-width: 520px;
   }
 }
 
@@ -157,8 +137,5 @@
   }
   .pull {
     font-size: 22px;
-  }
-  .about > :first-child {
-    padding: 12px 0 0 12px;
   }
 }

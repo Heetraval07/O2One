@@ -6,7 +6,7 @@ export const setSignedOutHandler = (fn) => {
   onSignedOut = fn;
 };
 
-async function request(path, { method = 'GET', body, signal, raw } = {}) {
+async function request(path, { method = 'GET', body, blob, signal, raw } = {}) {
   let res;
   try {
     res = await fetch(`/api/admin${path}`, {
@@ -17,8 +17,9 @@ async function request(path, { method = 'GET', body, signal, raw } = {}) {
         Accept: raw ? '*/*' : 'application/json',
         'X-Requested-With': 'o2one-admin', // required by the API for every change (CSRF guard)
         ...(body ? { 'Content-Type': 'application/json' } : {}),
+        ...(blob ? { 'Content-Type': blob.type } : {}),
       },
-      body: body ? JSON.stringify(body) : undefined,
+      body: blob || (body ? JSON.stringify(body) : undefined),
     });
   } catch (err) {
     if (err.name === 'AbortError') throw err;
@@ -69,6 +70,8 @@ export const admin = {
   confirmEmail: (token) => request('/auth/confirm-email', { method: 'POST', body: { token } }),
   changePassword: (currentPassword, newPassword) => request('/auth/account/password', { method: 'POST', body: { currentPassword, newPassword } }),
   changeEmail: (newEmail, currentPassword) => request('/auth/account/email', { method: 'POST', body: { newEmail, currentPassword } }),
+  // images: the file itself is the request body; the reply is { url }
+  uploadImage: (file) => request('/media', { method: 'POST', blob: file }),
   // data
   dashboard: (o) => request('/dashboard', o),
   bookings: (params, o) => request(`/bookings${qs(params)}`, o),

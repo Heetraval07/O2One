@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="Business health dashboard of floating cards with a pulse line, gauges, KPIs and a checklist" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="400" fill="#f6f6f6"/>
+<rect x="128" y="96" width="66" height="36" rx="8" fill="#ffffff" stroke="#d6d6d6" stroke-width="2"></rect><rect x="138" y="105" width="28" height="5" rx="2.5" fill="#b5b5b5"></rect><rect x="138" y="116" width="40" height="7" rx="3" fill="#d6d6d6"></rect><path d="M180 110 L185 104 L190 110" fill="none" stroke="#5f5f5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path><rect x="128" y="140" width="66" height="36" rx="8" fill="#ffffff" stroke="#d6d6d6" stroke-width="2"></rect><rect x="138" y="149" width="28" height="5" rx="2.5" fill="#b5b5b5"></rect><rect x="138" y="160" width="40" height="7" rx="3" fill="#d6d6d6"></rect><path d="M180 149 L185 155 L190 149" fill="none" stroke="#9e9e9e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path><rect x="128" y="184" width="66" height="36" rx="8" fill="#ffffff" stroke="#d6d6d6" stroke-width="2"></rect><rect x="138" y="193" width="28" height="5" rx="2.5" fill="#b5b5b5"></rect><rect x="138" y="204" width="40" height="7" rx="3" fill="#d6d6d6"></rect><path d="M180 198 L185 192 L190 198" fill="none" stroke="#5f5f5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+<rect x="210" y="96" width="220" height="120" rx="8" fill="#ffffff" stroke="#d6d6d6" stroke-width="2"></rect>
+<rect x="222" y="108" width="70" height="7" rx="3.5" fill="#b5b5b5"></rect><rect x="298" y="108" width="34" height="7" rx="3.5" fill="#d6d6d6"></rect>
+<circle cx="404" cy="111.5" r="4" fill="#d6d6d6"></circle><circle cx="416" cy="111.5" r="4" fill="#d6d6d6"></circle>
+<path d="M222 140 H418" stroke="#e6e6e6" stroke-width="1.5"></path><path d="M222 164 H418" stroke="#e6e6e6" stroke-width="1.5"></path><path d="M222 188 H418" stroke="#e6e6e6" stroke-width="1.5"></path>
+<path d="M222 200 V128 M222 200 H418" stroke="#d6d6d6" stroke-width="2"></path>
+<path d="M226 168 H262 L274 140 L290 196 L304 152 L314 168 H356 L364 156 L372 168 H414" fill="none" stroke="#ff7a3d" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path>
+<circle cx="274" cy="140" r="5" fill="#ffffff" stroke="#ff7a3d" stroke-width="3"></circle>
+<rect x="452" y="104" width="72" height="112" rx="6" fill="#9e9e9e"></rect>
+<rect x="460" y="116" width="56" height="92" rx="2" fill="#ffffff"></rect>
+<rect x="474" y="96" width="28" height="12" rx="3" fill="#5f5f5f"></rect>
+<rect x="470" y="128" width="12" height="12" rx="2" fill="none" stroke="#9e9e9e" stroke-width="2"></rect><rect x="488" y="132" width="22" height="4" rx="2" fill="#d6d6d6"></rect><rect x="470" y="154" width="12" height="12" rx="2" fill="none" stroke="#9e9e9e" stroke-width="2"></rect><rect x="488" y="158" width="22" height="4" rx="2" fill="#d6d6d6"></rect><rect x="470" y="180" width="12" height="12" rx="2" fill="none" stroke="#9e9e9e" stroke-width="2"></rect><rect x="488" y="184" width="22" height="4" rx="2" fill="#d6d6d6"></rect><path d="M472 134 L475 137 L480 131 M472 160 L475 163 L480 157" fill="none" stroke="#5f5f5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+<rect x="470" y="196" width="40" height="4" rx="2" fill="#d6d6d6"></rect>
+<rect x="150" y="232" width="100" height="78" rx="8" fill="#ffffff" stroke="#d6d6d6" stroke-width="2"></rect>
+<rect x="162" y="242" width="40" height="5" rx="2.5" fill="#b5b5b5"></rect>
+<path d="M176.0 288.0 A24 24 0 0 1 187.6 267.4" fill="none" stroke="#d6d6d6" stroke-width="9"></path><path d="M188.4 267.0 A24 24 0 0 1 211.6 267.0" fill="none" stroke="#b5b5b5" stroke-width="9"></path><path d="M212.4 267.4 A24 24 0 0 1 224.0 288.0" fill="none" stroke="#9e9e9e" stroke-width="9"></path>
+<path d="M200 288 L213.8 268.3" stroke="#5f5f5f" stroke-width="3" stroke-linecap="round"></path><circle cx="200" cy="288" r="4" fill="#5f5f5f"></circle>
+<rect x="270" y="232" width="100" height="78" rx="8" fill="#ffffff" stroke="#d6d6d6" stroke-width="2"></rect>
+<rect x="282" y="242" width="40" height="5" rx="2.5" fill="#b5b5b5"></rect>
+<circle cx="320" cy="280" r="22" fill="none" stroke="#d6d6d6" stroke-width="7"></circle>
+<circle cx="320" cy="280" r="22" fill="none" stroke="#9e9e9e" stroke-width="7" stroke-linecap="round" stroke-dasharray="103.7 138.2" transform="rotate(-90 320 280)"></circle>
+<rect x="311" y="277" width="18" height="6" rx="3" fill="#b5b5b5"></rect>
+<rect x="390" y="232" width="100" height="78" rx="8" fill="#ffffff" stroke="#d6d6d6" stroke-width="2"></rect>
+<rect x="402" y="242" width="40" height="5" rx="2.5" fill="#b5b5b5"></rect>
+<rect x="406" y="282" width="12" height="16" rx="2" fill="#d6d6d6"></rect><rect x="424" y="274" width="12" height="24" rx="2" fill="#b5b5b5"></rect><rect x="442" y="266" width="12" height="32" rx="2" fill="#9e9e9e"></rect><rect x="460" y="258" width="12" height="40" rx="2" fill="#7a7a7a"></rect>
+</svg>

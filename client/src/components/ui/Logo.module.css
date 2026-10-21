@@ -1,55 +1,18 @@
 .logo {
   display: inline-flex;
-  flex-direction: column;
-  gap: 0;
-  color: var(--ink);
+  align-items: center;
   text-decoration: none;
-  line-height: 1;
+  line-height: 0;
 }
 
-.logo:hover {
-  color: var(--ink);
+.img {
+  display: block;
+  height: 46px;
+  width: auto;
 }
-
-.word {
-  font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 0.9;
-}
-
-.two {
-  /* Cormorant's old-style figure gives the 2 a natural, slightly lowered look */
-  font-variant-numeric: oldstyle-nums;
-}
-
-.sub {
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--grey);
-  margin-top: 5px;
-  padding-left: 2px;
-}
-
-.onInk,
-.onInk:hover {
-  color: var(--on-ink);
-}
-
-.onInk .sub {
-  color: var(--on-ink-muted);
-}
-
 
 @media (max-width: 819px) {
-  .word {
-    font-size: 28px;
-  }
-  .sub {
-    font-size: 9px;
+  .img {
+    height: 38px;
   }
 }

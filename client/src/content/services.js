@@ -13,10 +13,41 @@ export const services = [
     description:
       'We study how your business runs, find where time and money are slipping away, and recommend the right systems and changes, with effort and risks clear from the start.',
     items: [
-      { name: 'Business Health Checkup', text: 'Where you stand today.' },
-      { name: 'As-Is Process Mapping', text: 'How your teams actually work.' },
-      { name: 'Solution Blueprint', text: 'The right fit, with gaps, effort, and risks.' },
-      { name: 'Change Management', text: 'Getting your people ready.' },
+      {
+        name: 'Business Health Checkup',
+        text: 'Where you stand today.',
+        detail:
+          'We review your finance, operations, systems and team to show what’s working, what’s holding you back, and where the quick wins are.',
+        image: '/consultation/01-business-health-checkup.svg',
+      },
+      {
+        name: 'As-Is Process Mapping',
+        text: 'How your teams actually work.',
+        detail:
+          'We sit with your teams and map how work really flows, from order to cash and purchase to payment. That includes the spreadsheets, workarounds and handoffs nobody has written down.',
+        image: '/consultation/02-as-is-process-mapping.svg',
+      },
+      {
+        name: 'Solution Blueprint',
+        text: 'The right fit, with gaps, effort, and risks.',
+        detail:
+          'We design how your business should run and match it to the right system setup. We clearly flag the gaps, the effort to close them, and the risks, so you decide with facts, not guesses.',
+        image: '/consultation/03-solution-blueprint.svg',
+      },
+      {
+        name: 'Change Management',
+        text: 'Getting your people ready.',
+        detail:
+          'We prepare your team for the new way of working with clear communication, role-based training and go-live support, so the change sticks.',
+        image: '/consultation/04-change-management.svg',
+      },
+    ],
+    deliverables: [
+      'Health report with prioritised quick wins',
+      'Process maps of your key workflows',
+      'Solution blueprint document',
+      'Change and training plan',
+      'Findings session with your leadership team',
     ],
     showProblems: true,
     faqs: [
@@ -42,7 +73,6 @@ export const services = [
       { name: 'Customization', text: 'Modules and workflows built around your processes.' },
       { name: 'Migration', text: 'Moving your data from Tally, Excel, or your old system.' },
       { name: 'Training', text: 'Hands-on sessions so your team is confident from day one.' },
-      { name: 'Hosting', text: 'Secure, reliable hosting for your Odoo system.' },
       { name: 'Support & Maintenance', text: 'Ongoing help after go-live.' },
       {
         name: 'UAE VAT & E-invoicing',

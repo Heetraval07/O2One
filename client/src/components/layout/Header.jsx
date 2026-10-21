@@ -1,9 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import Logo from '../ui/Logo';
-import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Close, Menu, Minus, Plus } from '../ui/Icons';
+import {
+  ArrowRight,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Close,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  Menu,
+  Minus,
+  Phone,
+  Pin,
+  Plus,
+  Twitter,
+} from '../ui/Icons';
 import { CheckupButton } from '../ui/Buttons';
-import { CHECKUP_SHORT, nav, site } from '../../content/site';
+import { CHECKUP_SHORT, nav, site, telHref } from '../../content/site';
 import { services } from '../../content/services';
 import { solutions, solutionShort } from '../../content/industries';
 import { useScrollLock, useScrollProgress } from '../../lib/hooks';
@@ -208,6 +224,49 @@ function MobileNav({ open, onClose }) {
   );
 }
 
+/* ---------------------------------------------------------------- Contact strip */
+const socials = [
+  { label: 'LinkedIn', href: site.linkedinUrl, Icon: Linkedin },
+  { label: 'Instagram', href: site.instagramUrl, Icon: Instagram },
+  { label: 'Facebook', href: site.facebookUrl, Icon: Facebook },
+  { label: 'Twitter', href: site.twitterUrl, Icon: Twitter },
+];
+
+function ContactStrip() {
+  return (
+    <div className={styles.strip}>
+      <div className={`container ${styles.stripInner}`}>
+        <ul className={styles.stripList} role="list">
+          <li>
+            <a href={telHref}>
+              <Phone size={15} /> <span>{site.phone}</span>
+            </a>
+          </li>
+          <li className={styles.stripMail}>
+            <a href={`mailto:${site.email}`}>
+              <Mail size={15} /> <span>{site.email}</span>
+            </a>
+          </li>
+        </ul>
+        <div className={styles.stripEnd}>
+          <span className={styles.stripLoc}>
+            <Pin size={15} /> Dubai, UAE
+          </span>
+          <ul className={styles.stripList} role="list">
+            {socials.map(({ label, href, Icon }) => (
+              <li key={label}>
+                <a href={href || undefined} aria-label={label} target="_blank" rel="noopener noreferrer">
+                  <Icon size={15} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ---------------------------------------------------------------- Header */
 export default function Header() {
   const location = useLocation();
@@ -264,6 +323,7 @@ export default function Header() {
 
   return (
     <header ref={headerRef} className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+      <ContactStrip />
       <div className={`container ${styles.bar}`}>
         <Logo />
 

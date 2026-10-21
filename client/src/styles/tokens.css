@@ -47,7 +47,7 @@
   --container: 1200px;
   --gutter: 24px;
   --page-x: 32px;
-  --header-h: 77px;
+  --header-h: 113px; /* nav bar 77px + contact strip 36px */
 
   /* Shape */
   --radius-btn: 2px;
@@ -68,6 +68,6 @@
 @media (max-width: 819px) {
   :root {
     --page-x: 16px;
-    --header-h: 64px;
+    --header-h: 100px;
   }
 }

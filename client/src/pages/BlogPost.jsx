@@ -55,7 +55,7 @@ export default function BlogPost() {
     <>
       <header className={styles.hero}>
         <div className={styles.heroMedia} aria-hidden="true">
-          <span>Photo · {post?.categoryName || 'article'}</span>
+          {post?.coverImage ? <img src={post.coverImage} alt="" decoding="async" /> : <span>Photo · {post?.categoryName || 'article'}</span>}
         </div>
         <div className="container">
           <div className={styles.titleCard}>

@@ -19,7 +19,7 @@ export default function Footer({ note }) {
         <div className={styles.brand}>
           <Logo onInk />
           <p>{site.tagline}</p>
-          <p className={styles.offices}>Dubai, UAE &amp; Mumbai, India</p>
+          <p className={styles.offices}>Dubai, UAE</p>
         </div>
 
         <nav aria-labelledby="f-company">
@@ -28,7 +28,7 @@ export default function Footer({ note }) {
           </h2>
           <ul role="list">
             <li><Link to="/about">About</Link></li>
-            <li><Link to="/our-approach">Our approach</Link></li>
+            <li><Link to="/#approach">Our approach</Link></li>
             <li><Link to="/services">Services</Link></li>
             <li><Link to="/industries">Industries</Link></li>
             <li><Link to="/e-invoicing">UAE VAT &amp; E-invoicing</Link></li>
@@ -53,7 +53,7 @@ export default function Footer({ note }) {
         <div>
           <h2 className={styles.label}>Contact</h2>
           <ul role="list" className={styles.contact}>
-            <li>Dubai, UAE &amp; Mumbai, India</li>
+            <li>Dubai, UAE</li>
             <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
             <li><a href={telHref}>{site.phone}</a></li>
             <li><Link to="/contact">Book a free health checkup</Link></li>

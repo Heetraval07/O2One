@@ -188,3 +188,17 @@
     font-size: 22px;
   }
 }
+
+/* An uploaded cover fills the frame; without one the grey placeholder label shows as before. */
+.media {
+  position: relative;
+  overflow: hidden;
+}
+
+.media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

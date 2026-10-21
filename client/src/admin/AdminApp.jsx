@@ -18,10 +18,8 @@ const Account = lazy(() => import('./pages/Account'));
 
 const NAV = [
   { to: '/admin', label: 'Dashboard', end: true },
-  { to: '/admin/bookings', label: 'Bookings' },
   { to: '/admin/blog', label: 'Blog' },
   { to: '/admin/stories', label: 'Customer stories' },
-  { to: '/admin/newsletter', label: 'Newsletter' },
   { to: '/admin/account', label: 'Account' },
 ];
 

@@ -93,6 +93,15 @@ export const Linkedin = make(
     <path d="M8 10.5v6M8 7.5v.01M11.5 16.5v-6M11.5 13c0-1.6 1-2.5 2.3-2.5s2.2.9 2.2 2.5v3.5" />
   </>,
 );
+export const Instagram = make(
+  <>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+    <circle cx="12" cy="12" r="3.8" />
+    <path d="M17.2 6.8v.01" />
+  </>,
+);
+export const Facebook = make(<path d="M14 21v-8h2.7l.5-3.2H14V7.8c0-.9.4-1.6 1.7-1.6h1.6V3.4C16.9 3.3 16 3.2 15 3.2c-2.4 0-4 1.5-4 4.1v2.5H8.3V13H11v8z" />);
+export const Twitter = make(<path d="M4 4l6.8 9.2L4.2 20h1.9l5.6-5.9 4.3 5.9H20l-7.2-9.8L19.1 4h-1.9l-5.2 5.5L8 4z" />);
 
 // Value icons
 export const Award = make(

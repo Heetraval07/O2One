@@ -59,7 +59,7 @@ export function StoryCard({ story, headingLevel: H = 'h3' }) {
   return (
     <article className={`card-fx ${styles.storyCard}`}>
       <div className={`fx-zoom ${styles.storyMedia}`} aria-hidden="true">
-        <span>{story.industry}</span>
+        {story.coverImage ? <img src={story.coverImage} alt="" loading="lazy" decoding="async" /> : <span>{story.industry}</span>}
       </div>
       <div className={styles.storyBody}>
         <p className={styles.meta}>
@@ -95,7 +95,7 @@ export function PostRow({ post }) {
         <p className="muted small">{post.excerpt}</p>
       </div>
       <div className={styles.thumb} aria-hidden="true">
-        <span>{post.categoryName}</span>
+        {post.coverImage ? <img src={post.coverImage} alt="" loading="lazy" decoding="async" /> : <span>{post.categoryName}</span>}
       </div>
     </article>
   );

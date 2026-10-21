@@ -6,6 +6,7 @@ import { bookingsRouter } from './bookings.js';
 import { newsletterAdminRouter } from './newsletter.js';
 import { blogAdminRouter } from './blog.js';
 import { storiesAdminRouter } from './stories.js';
+import { mediaAdminRouter } from '../media.js';
 
 /**
  * Everything under /api/admin. Login and the email-link endpoints are public;
@@ -25,3 +26,4 @@ adminRouter.use('/bookings', bookingsRouter);
 adminRouter.use('/newsletter', newsletterAdminRouter);
 adminRouter.use('/blog', blogAdminRouter);
 adminRouter.use('/stories', storiesAdminRouter);
+adminRouter.use('/media', mediaAdminRouter);

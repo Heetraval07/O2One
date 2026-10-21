@@ -13,6 +13,7 @@
 .stat {
   display: flex;
   flex-direction: column-reverse; /* number visually above its label, label first for screen readers */
+  justify-content: flex-end; /* with column-reverse this pins the number to the top, so a wrapped label can't push it up */
   align-items: center;
   text-align: center;
   gap: 6px;
@@ -30,6 +31,13 @@
   font-size: 14px;
   line-height: 1.4;
   color: var(--line);
+}
+
+.trust .label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  text-wrap: balance;
 }
 
 .row {
@@ -92,7 +100,7 @@
 /* ---- Stat panel ---------------------------------------------------------- */
 .panel {
   display: grid;
-  grid-template-columns: 3fr minmax(0, 1fr);
+  grid-template-columns: var(--panel-cols, 3fr) minmax(0, 1fr);
   background: var(--white);
   border: 1px solid var(--line);
   opacity: 0;
@@ -109,7 +117,7 @@
 
 .panelStats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--stat-cols, 3), minmax(0, 1fr));
   margin: 0;
 }
 

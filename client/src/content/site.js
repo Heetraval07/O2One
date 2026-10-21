@@ -8,14 +8,16 @@ export const site = {
   name: 'O2One Consultants',
   tagline: 'Business systems that actually work. Official Odoo partner in the UAE.',
   partnerLabel: 'Odoo Registered Partner in UAE',
-  email: env.VITE_CONTACT_EMAIL || 'hello@example.com',
+  email: env.VITE_CONTACT_EMAIL || 'priyanka@o2one.ae',
   phone: env.VITE_CONTACT_PHONE || '+971 54 593 2700',
   whatsappNumber,
   whatsappUrl: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hi O2One, I would like to talk about my business systems.')}`,
   linkedinUrl: env.VITE_LINKEDIN_URL || '',
+  instagramUrl: env.VITE_INSTAGRAM_URL || '',
+  facebookUrl: env.VITE_FACEBOOK_URL || '',
+  twitterUrl: env.VITE_TWITTER_URL || '',
   offices: [
     { city: 'Dubai', country: 'UAE', address: env.VITE_DUBAI_ADDRESS || 'Meydan Grandstand, 6th floor, Meydan Road, Nad Al Sheba, Dubai, U.A.E.' },
-    { city: 'Mumbai', country: 'India', address: env.VITE_MUMBAI_ADDRESS || 'Mumbai, India' },
   ],
 };
 
@@ -29,7 +31,6 @@ export const nav = [
   { label: 'Services', to: '/services', mega: 'services' },
   { label: 'Industries', to: '/industries' },
   { label: 'E-Invoicing', to: '/e-invoicing' },
-  { label: 'Our approach', to: '/our-approach' },
   { label: 'About', to: '/about' },
   {
     label: 'Resources',

@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { query } from '../../db/pool.js';
 import { asyncHandler, HttpError } from '../../lib/http.js';
 import { intParam, likeEscape, validate } from '../../lib/validate.js';
+import { releaseMedia } from '../../lib/media.js';
 
 export const storiesAdminRouter = Router();
 
@@ -130,6 +131,7 @@ storiesAdminRouter.post('/', asyncHandler(async (req, res) => {
 
 storiesAdminRouter.put('/:id', asyncHandler(async (req, res) => {
   const d = clean(req.body);
+  const [before] = await query('SELECT cover_image AS coverImage FROM customer_stories WHERE id = ?', [Number(req.params.id) || 0]);
   try {
     const r = await query(
       `UPDATE customer_stories SET slug = ?, title = ?, client_name = ?, industry = ?, country = ?, service_slug = ?, apps = ?,
@@ -139,6 +141,7 @@ storiesAdminRouter.put('/:id', asyncHandler(async (req, res) => {
       [...columns(d), Number(req.params.id) || 0],
     );
     if (!r.affectedRows) throw new HttpError(404, 'Story not found.');
+    if (before?.coverImage && before.coverImage !== d.coverImage) await releaseMedia(before.coverImage);
     res.json({ ok: true });
   } catch (err) {
     dupSlug(err);
@@ -153,7 +156,9 @@ storiesAdminRouter.patch('/:id', asyncHandler(async (req, res) => {
 }));
 
 storiesAdminRouter.delete('/:id', asyncHandler(async (req, res) => {
+  const [before] = await query('SELECT cover_image AS coverImage FROM customer_stories WHERE id = ?', [Number(req.params.id) || 0]);
   const r = await query('DELETE FROM customer_stories WHERE id = ?', [Number(req.params.id) || 0]);
   if (!r.affectedRows) throw new HttpError(404, 'Story not found.');
+  await releaseMedia(before?.coverImage);
   res.json({ ok: true });
 }));

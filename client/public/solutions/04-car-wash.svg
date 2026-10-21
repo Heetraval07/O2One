@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="Car with a sponge and bubbles" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="400" fill="#f6f6f6"></rect>
+<path d="M220 280 V246 Q220 242 226 241 L252 238 L280 200 Q284 195 292 195 H350 Q358 195 362 200 L390 238 L414 241 Q420 242 420 246 V280 Z" fill="#9e9e9e"></path>
+<path d="M268 238 L292 208 H316 V238 Z" fill="#f6f6f6"></path>
+<path d="M328 238 V208 H350 L374 238 Z" fill="#f6f6f6"></path>
+<circle cx="265" cy="282" r="18" fill="#7a7a7a" stroke="#f6f6f6" stroke-width="6"></circle>
+<circle cx="375" cy="282" r="18" fill="#7a7a7a" stroke="#f6f6f6" stroke-width="6"></circle>
+<rect x="300" y="150" width="70" height="40" rx="10" fill="#ff7a3d" transform="rotate(-12 335 170)"></rect>
+<circle cx="268" cy="160" r="12" fill="#d6d6d6"></circle><circle cx="248" cy="140" r="8" fill="#d6d6d6"></circle><circle cx="392" cy="150" r="10" fill="#d6d6d6"></circle><circle cx="410" cy="130" r="6" fill="#d6d6d6"></circle>
+</svg>

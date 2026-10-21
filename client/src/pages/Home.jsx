@@ -2,23 +2,23 @@ import SplitText from '../components/ui/SplitText';
 import { Link } from 'react-router-dom';
 import { useMeta } from '../lib/hooks';
 import { site, CHECKUP_LABEL } from '../content/site';
-import { trustStats, problems, values, teamStats, originStory, originQuote } from '../content/company';
+import { trustStats, problems, values } from '../content/company';
 import Reveal from '../components/ui/Reveal';
 import PhotoSlot from '../components/ui/PhotoSlot';
-import { TrustBar, StatPanel } from '../components/ui/Stats';
-import { CheckupButton, TextLink } from '../components/ui/Buttons';
+import { TrustBar } from '../components/ui/Stats';
+import { CheckupButton } from '../components/ui/Buttons';
 import { ArrowRight } from '../components/ui/Icons';
 import CtaBand from '../components/ui/CtaBand';
 import { NumberedGrid, ValueGrid } from '../components/sections/Cards';
 import ApproachTabs from '../components/sections/ApproachTabs';
 import ServicesExplorer from '../components/sections/ServicesExplorer';
-import ChaosVisual from '../components/sections/ChaosVisual';
+import FlowVisual from '../components/sections/FlowVisual';
 import DarkBand from '../components/sections/DarkBand';
 import styles from './Home.module.css';
 
 export default function Home() {
   useMeta(
-    'O2One Consultants | Odoo Partner in Dubai & Mumbai',
+    'O2One Consultants | Odoo Partner in Dubai, UAE',
     'We build systems that actually work for your business. Official Odoo partner in the UAE. Book a free Business Health Checkup.',
   );
 
@@ -35,7 +35,6 @@ export default function Home() {
             </p>
             <div className={`btn-row ${styles.rise}`} style={{ '--d': '680ms' }}>
               <CheckupButton />
-              <TextLink to="/our-approach">How we work</TextLink>
             </div>
           </div>
           <div className={`${styles.heroMedia} ${styles.rise}`} style={{ '--d': '150ms' }}>
@@ -62,9 +61,9 @@ export default function Home() {
       <section className="section" aria-labelledby="chaos-title">
         <div className={`container ${styles.chaos}`}>
           <Reveal>
-            <ChaosVisual />
+            <FlowVisual />
           </Reveal>
-          <Reveal variant="right" delay={100} className={styles.chaosText}>
+          <Reveal delay={100} className={styles.chaosText}>
             <h2 id="chaos-title" className="h2">
               Running your business on Tally, Excel, and WhatsApp?
             </h2>
@@ -97,9 +96,6 @@ export default function Home() {
                 One partner, from first conversation to long after go-live.
               </h2>
             </div>
-            <Link to="/our-approach" className="btn btn--secondary btn--sm">
-              Full approach <ArrowRight size={16} />
-            </Link>
           </Reveal>
           <Reveal>
             <ApproachTabs />
@@ -127,28 +123,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About */}
-      <section className="section" id="about" aria-labelledby="about-title">
-        <div className={`container ${styles.about}`}>
-          <Reveal>
-            <PhotoSlot label="founder + father's shop (archival)" alt="The founder's father's shop" ratio="4 / 5" accent="about" />
-          </Reveal>
-          <Reveal variant="right" delay={100} className={styles.aboutText}>
-            <span className="eyebrow">About O2One · Where it all started</span>
-            <h2 id="about-title" className="h2">
-              A wholesale shop, a retail store, a factory — all run by hand.
-            </h2>
-            {originStory.map((p) => (
-              <p key={p.slice(0, 20)} className="muted">
-                {p}
-              </p>
-            ))}
-            <blockquote className={styles.pull}>{originQuote}</blockquote>
-            <TextLink to="/about">More about O2One</TextLink>
-          </Reveal>
-        </div>
-      </section>
-
       <section className={`section section--grey ${styles.values}`} aria-labelledby="values-title">
         <div className="container">
           <Reveal className={`section-head ${styles.valuesHead}`}>
@@ -158,11 +132,6 @@ export default function Home() {
             </h2>
           </Reveal>
           <ValueGrid items={values} />
-          <div className={styles.teamRow}>
-            <StatPanel stats={teamStats}>
-              <span className="badge badge--line">{site.partnerLabel}</span>
-            </StatPanel>
-          </div>
         </div>
       </section>
 

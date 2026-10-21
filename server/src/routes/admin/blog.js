@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { query } from '../../db/pool.js';
 import { asyncHandler, HttpError } from '../../lib/http.js';
 import { intParam, likeEscape, validate } from '../../lib/validate.js';
+import { releaseMedia } from '../../lib/media.js';
 
 export const blogAdminRouter = Router();
 
@@ -165,6 +166,7 @@ blogAdminRouter.post('/posts', asyncHandler(async (req, res) => {
 
 blogAdminRouter.put('/posts/:id', asyncHandler(async (req, res) => {
   const d = await cleanPost(req.body);
+  const [before] = await query('SELECT cover_image AS coverImage FROM blog_posts WHERE id = ?', [Number(req.params.id) || 0]);
   try {
     const r = await query(
       `UPDATE blog_posts SET slug = ?, title = ?, excerpt = ?, body = ?, category_id = ?, author_name = ?, author_role = ?,
@@ -174,6 +176,7 @@ blogAdminRouter.put('/posts/:id', asyncHandler(async (req, res) => {
         d.relatedService, d.relatedStoryId, d.isPublished ? 1 : 0, d.publishedAt, Number(req.params.id) || 0],
     );
     if (!r.affectedRows) throw new HttpError(404, 'Post not found.');
+    if (before?.coverImage && before.coverImage !== d.coverImage) await releaseMedia(before.coverImage);
     res.json({ ok: true });
   } catch (err) {
     dupSlug(err);
@@ -189,7 +192,9 @@ blogAdminRouter.patch('/posts/:id', asyncHandler(async (req, res) => {
 }));
 
 blogAdminRouter.delete('/posts/:id', asyncHandler(async (req, res) => {
+  const [before] = await query('SELECT cover_image AS coverImage FROM blog_posts WHERE id = ?', [Number(req.params.id) || 0]);
   const r = await query('DELETE FROM blog_posts WHERE id = ?', [Number(req.params.id) || 0]);
   if (!r.affectedRows) throw new HttpError(404, 'Post not found.');
+  await releaseMedia(before?.coverImage);
   res.json({ ok: true });
 }));

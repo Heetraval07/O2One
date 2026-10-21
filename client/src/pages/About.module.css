@@ -61,53 +61,101 @@
   line-height: 1.3;
 }
 
-.team {
+.teamHead {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--s6);
-  align-items: center;
+  align-items: end;
 }
 
-.team .lead {
-  margin-top: 20px;
+.teamHead .lead {
+  margin: 0;
+  max-width: 46ch;
 }
 
-.teamRight {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--s4);
+.teamStats {
+  margin-top: var(--s5);
 }
 
-.offices {
+/* One white card on the grey band: the place on the left, ways to reach us on the right */
+.location {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s3);
-  margin-top: var(--s6);
-}
-
-.office {
+  grid-template-columns: 1.1fr 0.9fr;
+  margin-top: var(--s5);
   background: var(--white);
   border: 1px solid var(--line);
 }
 
-.officeBody {
-  padding: var(--s3) var(--s4) var(--s4);
+.locationMain {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 16px;
+  padding: var(--s5);
 }
 
 .address {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 40ch;
   color: var(--grey);
 }
 
 .address svg {
+  margin-top: 3px;
   color: var(--orange);
   flex: none;
+}
+
+.contact {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  margin: 0;
+  border-left: 1px solid var(--line);
+}
+
+.contact > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: var(--s4) var(--s5);
+}
+
+.contact > div + div {
+  border-top: 1px solid var(--line);
+}
+
+.contact dt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.contact dt svg {
+  color: var(--orange);
+}
+
+.contact dd {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.contact a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.contact a:hover {
+  color: var(--orange);
 }
 
 .how {
@@ -165,13 +213,29 @@
 
 @media (max-width: 1079px) {
   .story,
-  .team,
+  .teamHead,
   .how {
     grid-template-columns: 1fr;
     gap: var(--s5);
   }
   .storyPhoto {
     max-width: 480px;
+  }
+  .teamHead {
+    align-items: start;
+  }
+  .location {
+    grid-template-columns: 1fr;
+  }
+  .contact {
+    grid-template-rows: none;
+    grid-template-columns: 1fr 1fr;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .contact > div + div {
+    border-top: 0;
+    border-left: 1px solid var(--line);
   }
 }
 
@@ -185,7 +249,17 @@
   .storyPhoto {
     padding: 12px 0 0 12px;
   }
-  .offices {
+  .locationMain {
+    padding: var(--s4) var(--s3);
+  }
+  .contact {
     grid-template-columns: 1fr;
+  }
+  .contact > div {
+    padding: var(--s3);
+  }
+  .contact > div + div {
+    border-left: 0;
+    border-top: 1px solid var(--line);
   }
 }

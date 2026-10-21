@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { industries } from '../../content/industries';
 import { admin } from '../api';
 import { DeleteButton, ErrorNote, Field, Loading, PageHead, fromLocalInput, slugify, toLocalInput, useToast } from '../ui';
+import ImageUpload from '../ImageUpload';
 
 const SERVICES = [
   ['business-consultation', 'Business Consultation'],
@@ -232,9 +233,7 @@ export default function StoryEditor() {
             <Field label="Web address" error={f.slug} hint={`/customer-stories/${form.slug || '…'}`}>
               {(p) => <input {...p} className="adm-input" value={form.slug} maxLength={160} onChange={(e) => { setSlugTouched(true); set({ slug: slugify(e.target.value) }); }} required />}
             </Field>
-            <Field label="Cover image address (optional)" error={f.coverImage}>
-              {(p) => <input {...p} className="adm-input" value={form.coverImage} maxLength={255} placeholder="https://…" onChange={(e) => set({ coverImage: e.target.value })} />}
-            </Field>
+            <ImageUpload label="Cover image (optional)" value={form.coverImage} error={f.coverImage} onChange={(url) => set({ coverImage: url })} />
           </section>
         </aside>
       </form>

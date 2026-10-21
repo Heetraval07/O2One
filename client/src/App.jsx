@@ -5,7 +5,6 @@ import Home from './pages/Home';
 
 // Every page except Home is split into its own chunk.
 const About = lazy(() => import('./pages/About'));
-const Approach = lazy(() => import('./pages/Approach'));
 const Services = lazy(() => import('./pages/Services'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const VatEInvoicing = lazy(() => import('./pages/VatEInvoicing'));
@@ -26,12 +25,13 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="our-approach" element={<Approach />} />
         <Route path="services" element={<Services />} />
         <Route path="services/:slug" element={<ServiceDetail />} />
         <Route path="e-invoicing" element={<VatEInvoicing />} />
         {/* Old address of the e-invoicing page: keep existing links and bookmarks working */}
         <Route path="odoo-uae-vat-e-invoicing" element={<Navigate to="/e-invoicing" replace />} />
+        {/* Short address for the custom industry solutions service page */}
+        <Route path="custom-industry-solutions" element={<Navigate to="/services/custom-industry-solutions" replace />} />
         <Route path="industries" element={<Industries />} />
         <Route path="customer-stories" element={<Stories />} />
         <Route path="customer-stories/:slug" element={<StoryDetail />} />

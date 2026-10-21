@@ -14,7 +14,7 @@ export default function NotFound() {
         <ul className={styles.links} role="list">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/services">Services</Link></li>
-          <li><Link to="/our-approach">Our approach</Link></li>
+          <li><Link to="/#approach">Our approach</Link></li>
           <li><Link to="/blog">Blog</Link></li>
         </ul>
         <CheckupButton />
