@@ -78,10 +78,51 @@
   transform: translateY(-2px);
 }
 
+/* Contact dock: phones only. It replaces the single WhatsApp button there. */
+.dock {
+  display: none;
+}
+
 @media (max-width: 819px) {
   .waFloat {
-    right: 16px;
-    bottom: 16px;
+    display: none;
+  }
+  .dock {
+    position: fixed;
+    right: max(10px, env(safe-area-inset-right));
+    bottom: calc(18px + env(safe-area-inset-bottom));
+    z-index: 45; /* under the header, so the open menu covers it */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .dockBtn {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    color: var(--white);
+    /* the thin white ring keeps the dark phone button visible over the dark footer */
+    box-shadow: 0 0 0 2px var(--white), 0 6px 16px rgba(26, 26, 26, 0.24);
+    transition: transform var(--t-fast) var(--ease), filter var(--t-fast) var(--ease);
+  }
+  .dockBtn:hover,
+  .dockBtn:focus-visible {
+    color: var(--white);
+    filter: brightness(1.08);
+  }
+  .dockBtn:active {
+    transform: scale(0.94);
+  }
+  .dockPhone {
+    background: var(--ink);
+  }
+  .dockMail {
+    background: var(--orange);
+  }
+  .dockWa {
+    background: #25d366; /* WhatsApp's own green */
   }
 }
 

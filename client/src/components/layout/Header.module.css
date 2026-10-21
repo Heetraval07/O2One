@@ -570,9 +570,9 @@
 }
 
 @media (max-width: 819px) {
-  .stripMail,
-  .stripLoc {
-    display: none;
+  .strip,
+  .ctaMobile {
+    display: none; /* phones: the contact details live in the floating dock, and the page has its own CTA */
   }
   .bar,
   .scrolled .bar {

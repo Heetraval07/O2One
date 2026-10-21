@@ -2,10 +2,10 @@ import { Suspense, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
-import { WhatsApp } from '../ui/Icons';
+import { Mail, Phone, WhatsApp } from '../ui/Icons';
 import { Loading } from '../ui/States';
 import CustomCursor from '../ui/CustomCursor';
-import { site, vatTopBar } from '../../content/site';
+import { site, telHref, vatTopBar } from '../../content/site';
 import styles from './Layout.module.css';
 
 const VAT_PATH = '/e-invoicing';
@@ -24,6 +24,29 @@ function ScrollManager() {
     return undefined;
   }, [pathname, hash]);
   return null;
+}
+
+/** Phones only: call, email and WhatsApp stacked down the right edge (the single WhatsApp button covers larger screens). */
+function ContactDock() {
+  return (
+    <nav className={styles.dock} aria-label="Contact us">
+      <a href={telHref} className={`${styles.dockBtn} ${styles.dockPhone}`} aria-label={`Call us on ${site.phone}`}>
+        <Phone size={22} />
+      </a>
+      <a href={`mailto:${site.email}`} className={`${styles.dockBtn} ${styles.dockMail}`} aria-label={`Email ${site.email}`}>
+        <Mail size={22} />
+      </a>
+      <a
+        href={site.whatsappUrl}
+        className={`${styles.dockBtn} ${styles.dockWa}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with O2One on WhatsApp (opens WhatsApp)"
+      >
+        <WhatsApp size={24} />
+      </a>
+    </nav>
+  );
 }
 
 function TopBar() {
@@ -70,6 +93,7 @@ export default function Layout() {
       >
         <WhatsApp size={30} />
       </a>
+      <ContactDock />
     </>
   );
 }
