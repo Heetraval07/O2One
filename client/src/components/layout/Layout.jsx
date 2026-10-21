@@ -46,7 +46,7 @@ function BackToTop() {
   );
 }
 
-/** Phones only: back-to-top above call, email and WhatsApp, stacked down the right edge (the single WhatsApp button covers larger screens). */
+/** Back to top above call, email and WhatsApp, stacked down the right edge on every screen size. */
 function ContactDock() {
   return (
     <div className={styles.dock}>
@@ -107,15 +107,6 @@ export default function Layout() {
         </div>
       </main>
       <Footer note={isVat ? 'A plain-language guide, not tax advice. Check with the FTA or your adviser.' : null} />
-      <a
-        href={site.whatsappUrl}
-        className={styles.waFloat}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat with O2One on WhatsApp (opens WhatsApp)"
-      >
-        <WhatsApp size={30} />
-      </a>
       <ContactDock />
     </>
   );
