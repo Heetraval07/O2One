@@ -12,6 +12,7 @@ import Reveal from '../components/ui/Reveal';
 import PageHero from '../components/sections/PageHero';
 import ServiceVisual from '../components/sections/ServiceVisual';
 import HeroReportCard from '../components/sections/HeroReportCard';
+import ServiceHeroArt, { hasServiceHeroArt } from '../components/sections/ServiceHeroArt';
 import { NumberedGrid, StoryCard } from '../components/sections/Cards';
 import CtaBand from '../components/ui/CtaBand';
 import { CheckupButton, TextLink } from '../components/ui/Buttons';
@@ -49,7 +50,13 @@ export default function ServiceDetail() {
         lead={svc.description}
         aside={
           <div className={styles.aside}>
-            {svc.slug === 'business-consultation' ? <HeroReportCard /> : <ServiceVisual service={svc} variant={index} />}
+            {svc.slug === 'business-consultation' ? (
+              <HeroReportCard />
+            ) : hasServiceHeroArt(svc.slug) ? (
+              <ServiceHeroArt slug={svc.slug} />
+            ) : (
+              <ServiceVisual service={svc} variant={index} />
+            )}
             {svc.partnerBadge && <span className="badge">{site.partnerLabel}</span>}
           </div>
         }

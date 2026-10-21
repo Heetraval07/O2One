@@ -37,6 +37,12 @@
   list-style: none;
 }
 
+.stripList li {
+  /* A flex item has no line box, so the icon is centred on the bar rather than riding up on the text baseline */
+  display: flex;
+  align-items: center;
+}
+
 .strip a,
 .stripLoc {
   display: inline-flex;

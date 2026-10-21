@@ -7,6 +7,8 @@ import { phases } from '../content/approach';
 import Reveal from '../components/ui/Reveal';
 import PageHero from '../components/sections/PageHero';
 import ServiceVisual from '../components/sections/ServiceVisual';
+import HeroReportCard from '../components/sections/HeroReportCard';
+import ServiceHeroArt, { hasServiceHeroArt } from '../components/sections/ServiceHeroArt';
 import CtaBand from '../components/ui/CtaBand';
 import { ArrowRight } from '../components/ui/Icons';
 import styles from './Services.module.css';
@@ -28,7 +30,13 @@ export default function Services() {
           {services.map((s, i) => (
             <article key={s.slug} className={`${styles.row} ${i % 2 ? styles.flip : ''}`} aria-labelledby={`svc-${s.slug}`}>
               <Reveal className={styles.media}>
-                <ServiceVisual service={s} variant={i} />
+                {s.slug === 'business-consultation' ? (
+                  <HeroReportCard />
+                ) : hasServiceHeroArt(s.slug) ? (
+                  <ServiceHeroArt slug={s.slug} />
+                ) : (
+                  <ServiceVisual service={s} variant={i} />
+                )}
               </Reveal>
               <Reveal delay={80} className={styles.text}>
                 <span className={`num ${styles.num}`}>{s.number}</span>

@@ -8,40 +8,9 @@ import {
 import Reveal from '../components/ui/Reveal';
 import Accordion from '../components/ui/Accordion';
 import CtaBand from '../components/ui/CtaBand';
+import ServiceHeroArt from '../components/sections/ServiceHeroArt';
 import { ArrowDown, ArrowRight, Check } from '../components/ui/Icons';
 import styles from './VatEInvoicing.module.css';
-
-function InvoiceCard() {
-  const inv = vatHero.invoice;
-  return (
-    <Reveal as="figure" delay={160} className={`card-fx ${styles.invoice}`} aria-label="Sample e-invoice tracked from Odoo to the FTA">
-      <div className={styles.invHead}>
-        <span className={styles.invNo}>{inv.number}</span>
-        <span className={styles.invStatus}>{inv.status}</span>
-      </div>
-      <dl className={`${styles.invRows} ${styles.invParty}`}>
-        <div><dt>Customer</dt><dd>{inv.customer}</dd></div>
-        <div className={styles.wide}><dt>Customer TRN</dt><dd>{inv.trn}</dd></div>
-      </dl>
-      <dl className={`${styles.invRows} ${styles.invTotals}`}>
-        <div className={styles.wide}><dt>Subtotal</dt><dd>{inv.subtotal}</dd></div>
-        <div className={styles.wide}><dt>VAT 5%</dt><dd>{inv.vat}</dd></div>
-        <div className={styles.invTotal}><dt>Total</dt><dd>{inv.total}</dd></div>
-      </dl>
-      <ol className={styles.tracker} role="list">
-        {inv.tracker.map((t, i) => (
-          <li key={t.title} style={{ '--i': i }}>
-            <span className={styles.trackDot} aria-hidden="true" />
-            <span className={styles.trackText}>
-              <strong>{t.title}</strong>
-              <span className={styles.trackSub}>{t.sub}</span>
-            </span>
-          </li>
-        ))}
-      </ol>
-    </Reveal>
-  );
-}
 
 export default function VatEInvoicing() {
   useMeta(vatMeta.title, vatMeta.description);
@@ -78,7 +47,9 @@ export default function VatEInvoicing() {
               ))}
             </dl>
           </Reveal>
-          <InvoiceCard />
+          <Reveal delay={160} className={styles.heroArt}>
+            <ServiceHeroArt slug="e-invoicing" />
+          </Reveal>
         </div>
       </section>
 

@@ -50,7 +50,9 @@
 }
 
 .stats dt {
-  font-size: var(--fs-small);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--grey);
 }
 
@@ -997,4 +999,9 @@
   .faqAccordion button svg {
     animation: none;
   }
+}
+
+/* Hero illustration (replaces the HTML invoice card) */
+.heroArt {
+  min-width: 0;
 }
