@@ -33,6 +33,43 @@
   margin-top: 8px;
 }
 
+/* Social icons: a quiet row under the location, left edge in line with the logo and text */
+.footer .social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 20px 0 0 -10px;
+}
+
+.social a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--on-ink-muted);
+  transition:
+    color var(--t-fast) var(--ease),
+    transform var(--t-med) var(--ease);
+}
+
+.footer .social a:hover {
+  color: var(--orange-bright);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.social a:focus-visible {
+  outline: 2px solid var(--orange-bright);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer .social a:hover {
+    transform: none;
+  }
+}
+
 .label {
   margin-bottom: 16px;
   font-size: 12px;

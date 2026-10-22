@@ -2,7 +2,16 @@ import { Link } from 'react-router-dom';
 import Logo from '../ui/Logo';
 import { site, telHref } from '../../content/site';
 import { services } from '../../content/services';
+import { Facebook, Instagram, Linkedin, Twitter } from '../ui/Icons';
 import styles from './Footer.module.css';
+
+// Profile links come from the VITE_*_URL settings (content/site.js); an icon without one is shown but not linked.
+const socials = [
+  { label: 'LinkedIn', href: site.linkedinUrl, Icon: Linkedin },
+  { label: 'Instagram', href: site.instagramUrl, Icon: Instagram },
+  { label: 'Facebook', href: site.facebookUrl, Icon: Facebook },
+  { label: 'X (Twitter)', href: site.twitterUrl, Icon: Twitter },
+];
 
 export default function Footer({ note }) {
   const year = new Date().getFullYear();
@@ -20,6 +29,15 @@ export default function Footer({ note }) {
           <Logo onInk />
           <p>{site.tagline}</p>
           <p className={styles.offices}>Dubai, UAE</p>
+          <ul className={styles.social} role="list">
+            {socials.map(({ label, href, Icon }) => (
+              <li key={label}>
+                <a href={href || undefined} aria-label={label} target="_blank" rel="noopener noreferrer">
+                  <Icon size={20} />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <nav aria-labelledby="f-company">
