@@ -16,6 +16,7 @@ import CtaBand from '../components/ui/CtaBand';
 import { CheckupButton, TextLink } from '../components/ui/Buttons';
 import { ArrowRight } from '../components/ui/Icons';
 import { DetailCard, DetailGrid } from '../components/ui/DetailCard';
+import ConsultationCards from '../components/sections/ConsultationCards';
 import DetailDrawer, { DrawerBlock, DrawerCta, DrawerList, DrawerTags } from '../components/sections/DetailDrawer';
 import NotFound from './NotFound';
 import styles from './ServiceDetail.module.css';
@@ -79,7 +80,7 @@ export default function ServiceDetail() {
         <CheckupButton label="Book free checkup" />
       </PageHero>
 
-      <section className="section" aria-labelledby="included-title">
+      <section className={`section ${svc.slug === 'business-consultation' ? 'section--grey' : ''}`} aria-labelledby="included-title">
         <div className="container">
           <Reveal className="section-head">
             <span className="eyebrow">What&rsquo;s included</span>
@@ -109,22 +110,7 @@ export default function ServiceDetail() {
               )}
             </DetailGrid>
           ) : items.every((it) => it.image) ? (
-            <DetailGrid columns={2}>
-              {items.map((it, i) => (
-                <DetailCard
-                  key={it.name}
-                  index={i}
-                  columns={2}
-                  image={it.image}
-                  step={String(i + 1).padStart(2, '0')}
-                  title={it.name}
-                  sub={it.text}
-                  text={it.detail}
-                  iconZoom="150%"
-                  accent
-                />
-              ))}
-            </DetailGrid>
+            <ConsultationCards items={items} />
           ) : (
             <ul className={`line-grid ${cols} ${styles.items} `} role="list">
               {items.map((it, i) => {
