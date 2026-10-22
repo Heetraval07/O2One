@@ -49,7 +49,7 @@ export default function Stories() {
           )}
 
           {featured && !filtering && (
-            <Reveal className={styles.featured}>
+            <Reveal className={`edge-hover ${styles.featured}`}>
               <div className={styles.featuredMedia} aria-hidden="true">
                 {featured.coverImage ? <img src={featured.coverImage} alt="" loading="lazy" decoding="async" /> : <span>Photo · {featured.clientName}</span>}
               </div>

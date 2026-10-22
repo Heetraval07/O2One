@@ -18,124 +18,6 @@
   padding: var(--s4);
 }
 
-.itemFlush {
-  padding: 0;
-}
-
-.itemButton {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.art {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: var(--grey-50);
-  border-bottom: 1px solid var(--line);
-}
-
-.art img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.itemRow {
-  --art-zoom: 1.12; /* the artwork has wide margins, so it is drawn a little larger than its panel */
-}
-
-.itemRow .art {
-  aspect-ratio: 2.2 / 1;
-}
-
-.itemRow .art {
-  position: relative;
-}
-
-/* Negative offsets draw the artwork larger than its panel, centred; the panel clips the empty margin */
-.itemRow .art img {
-  position: absolute;
-  top: calc((1 - var(--art-zoom)) * 50%);
-  left: calc((1 - var(--art-zoom)) * 50%);
-  width: calc(var(--art-zoom) * 100%);
-  height: calc(var(--art-zoom) * 100%);
-  max-width: none;
-  object-fit: contain;
-}
-
-.itemRow .itemBody {
-  gap: 6px;
-  padding: 20px;
-}
-
-.itemRow .itemTitle {
-  font-size: 24px;
-}
-
-/* On wide screens the image sits beside the text, which keeps each card short */
-@media (min-width: 1080px) {
-  .itemRow {
-    --art-zoom: 1.3;
-    display: grid;
-    grid-template-columns: 31% minmax(0, 1fr);
-  }
-  .itemRow .art {
-    aspect-ratio: auto;
-    height: 100%;
-    border-bottom: 0;
-    border-right: 1px solid var(--line);
-  }
-  .itemRow .itemBody {
-    justify-content: center;
-  }
-}
-
-.itemBody {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  width: 100%;
-  padding: 20px var(--s3) var(--s3);
-}
-
-.more {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: auto;
-  padding-top: 10px;
-  color: var(--orange);
-  font-size: var(--fs-small);
-  font-weight: 600;
-}
-
-.itemButton:hover .more {
-  color: var(--orange-hover);
-}
-
-.itemSub {
-  margin: 0;
-  color: var(--ink);
-  font-weight: 500;
-  line-height: 1.4;
-}
-
 .getGrid {
   display: grid;
   grid-template-columns: 1fr 1.3fr;
@@ -298,4 +180,14 @@
 
 .aside > :first-child {
   width: 100%;
+}
+
+/* Hero picture: the whole file, in its own 577:433 proportions, no cropping */
+.heroImage {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  margin-inline: auto;
+  object-fit: contain;
 }

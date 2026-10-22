@@ -3,9 +3,9 @@
    Add `card-fx` to any card. One set of timings, one easing, one behaviour:
 
      enter     fades up (24px, 0.985 scale) when scrolled into view, staggered
-     hover     lifts 4px, border darkens, soft shadow, orange rule draws across the top
+     hover     lifts 4px, soft shadow, orange rule draws across the top (the border itself is left alone)
      press     settles back down
-     focus     border darkens when anything inside is focused (the focus ring stays)
+     focus     orange edge when something inside has keyboard focus (the focus ring stays)
 
    Optional modifiers
      card-fx--dark    dark card: bright-orange rule and border, no shadow
@@ -22,6 +22,8 @@
 
 .card-fx.card-fx {
   position: relative;
+  border-radius: var(--radius-card);
+  overflow: hidden; /* keeps images, panels and the top highlight inside the rounded corners */
   transition:
     transform var(--card-dur) var(--ease),
     box-shadow var(--card-dur) var(--ease),
@@ -87,8 +89,7 @@
   .card-fx:hover {
     z-index: 2;
     transform: translate3d(0, var(--card-lift), 0);
-    border-color: var(--ink);
-    outline-color: var(--ink);
+    border-top-color: var(--orange); /* the top edge only: the other three edges never change colour */
     box-shadow: var(--card-shadow);
   }
 
@@ -97,8 +98,7 @@
   }
 
   .card-fx--dark:hover {
-    border-color: var(--orange-bright);
-    outline-color: var(--orange-bright);
+    border-top-color: var(--orange-bright);
     box-shadow: none;
   }
 
@@ -119,9 +119,11 @@
   }
 }
 
-.card-fx:focus-within {
-  border-color: var(--ink);
-  outline-color: var(--ink);
+/* Keyboard users only: a card whose link or button is focused with the keyboard gets an orange edge.
+   (focus-within also matched after a mouse click, which left a black border on the card.) */
+.card-fx:has(:focus-visible) {
+  border-color: var(--orange);
+  outline-color: var(--orange);
 }
 
 .card-fx:active {
@@ -145,5 +147,41 @@
   .card-fx:hover .fx-zoom > *,
   .card-fx:hover .icon-arrow {
     transform: none;
+  }
+}
+
+/* Edge highlight for cards that do not lift: the same top-edge-only orange line as `card-fx`, nothing else moves.
+   Add `edge-hover` to any bordered card-like block (map card, location card, stat panel, featured story). */
+.edge-hover {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  transition: border-top-color var(--t-med) var(--ease);
+}
+
+.edge-hover::after {
+  content: '';
+  position: absolute;
+  inset: -1px -1px auto -1px;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 550ms var(--ease);
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .edge-hover:hover {
+    border-top-color: var(--orange);
+  }
+  .edge-hover:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edge-hover::after {
+    display: none;
   }
 }

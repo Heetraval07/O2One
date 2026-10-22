@@ -1,4 +1,3 @@
-import { stagger } from '../lib/motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMeta } from '../lib/hooks';
@@ -7,12 +6,14 @@ import Reveal from '../components/ui/Reveal';
 import PageHero from '../components/sections/PageHero';
 import CtaBand from '../components/ui/CtaBand';
 import { CheckupButton } from '../components/ui/Buttons';
-import { ArrowRight, Plus } from '../components/ui/Icons';
+import { ArrowRight } from '../components/ui/Icons';
+import { DetailCard, DetailGrid } from '../components/ui/DetailCard';
 import DetailDrawer, { DrawerBlock, DrawerCta, DrawerLinks, DrawerList, DrawerText } from '../components/sections/DetailDrawer';
 import styles from './Industries.module.css';
 
 // Only the first six industries are shown; the rest stay in the content file but are not listed here.
 const SHOWN = 6;
+
 
 function IndustryDrawer({ industry, onClose }) {
   return (
@@ -77,24 +78,20 @@ export default function Industries() {
 
       <section className="section" aria-label="Industries">
         <div className="container">
-          <ul className={styles.grid} role="list">
+          <DetailGrid compact>
             {industries.slice(0, SHOWN).map((ind, i) => (
-              <Reveal as="li" key={ind.name} delay={stagger(i, 4)}>
-                <button type="button" className={`card-fx ${styles.card}`} onClick={() => setOpen(ind)} aria-haspopup="dialog">
-                  <span className={`fx-zoom ${styles.photo}`} aria-hidden="true">
-                    <img src={industryImages[ind.name]} alt="" width="640" height="400" loading="lazy" decoding="async" />
-                  </span>
-                  <span className={styles.body}>
-                    <span className={styles.name}>{ind.name}</span>
-                    <span className={styles.short}>{ind.short}</span>
-                    <span className={styles.more}>
-                      Details <Plus size={16} />
-                    </span>
-                  </span>
-                </button>
-              </Reveal>
+              <DetailCard
+                key={ind.name}
+                index={i}
+                columns={4}
+                image={industryImages[ind.name]}
+                title={ind.name}
+                text={ind.text}
+                short={ind.short}
+                onOpen={() => setOpen(ind)}
+              />
             ))}
-          </ul>
+          </DetailGrid>
         </div>
       </section>
 

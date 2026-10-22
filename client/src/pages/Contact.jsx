@@ -50,7 +50,7 @@ export default function Contact() {
             Other ways to reach us
           </h2>
           <ul className={styles.cards} role="list">
-            <Reveal as="li" className={styles.mapCard}>
+            <Reveal as="li" className={`edge-hover ${styles.mapCard}`}>
               <div className={styles.map}>
                 <iframe
                   title={`Map showing the O2One office in ${office.city}, ${office.country}`}

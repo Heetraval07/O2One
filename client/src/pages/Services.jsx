@@ -6,14 +6,19 @@ import { solutions, solutionShort } from '../content/industries';
 import { phases } from '../content/approach';
 import Reveal from '../components/ui/Reveal';
 import PageHero from '../components/sections/PageHero';
-import ServiceVisual from '../components/sections/ServiceVisual';
-import HeroReportCard from '../components/sections/HeroReportCard';
-import ServiceHeroArt, { hasServiceHeroArt } from '../components/sections/ServiceHeroArt';
 import CtaBand from '../components/ui/CtaBand';
 import { ArrowRight } from '../components/ui/Icons';
 import styles from './Services.module.css';
 
 const chips = (s) => (s.useSolutions ? solutions.slice(0, 6).map(solutionShort) : s.items.map((i) => i.name));
+
+// The supplied service pictures (transparent PNGs in /public/services), one per service.
+const IMAGES = {
+  'business-consultation': '/services/01-business-consultation-hero-removebg-preview.png',
+  'odoo-services': '/services/02-odoo-services-hero-removebg-preview.png',
+  'custom-industry-solutions': '/services/03-custom-industry-solutions-hero-removebg-preview.png',
+  'ai-automation': '/services/04-ai-automation-hero-removebg-preview.png',
+};
 
 export default function Services() {
   useMeta(
@@ -23,20 +28,22 @@ export default function Services() {
 
   return (
     <>
-      <PageHero crumbs={[{ label: 'Home', to: '/' }, { label: 'Services' }]} eyebrow="Services" title={servicesIntro} />
+      <PageHero crumbs={[{ label: 'Home', to: '/' }, { label: 'Services' }]} eyebrow="Services" title={servicesIntro.replace(/\. (?=We)/g, '.\n')} />
 
       <section className="section">
         <div className={`container ${styles.rows}`}>
           {services.map((s, i) => (
             <article key={s.slug} className={`${styles.row} ${i % 2 ? styles.flip : ''}`} aria-labelledby={`svc-${s.slug}`}>
               <Reveal className={styles.media}>
-                {s.slug === 'business-consultation' ? (
-                  <HeroReportCard />
-                ) : hasServiceHeroArt(s.slug) ? (
-                  <ServiceHeroArt slug={s.slug} />
-                ) : (
-                  <ServiceVisual service={s} variant={i} />
-                )}
+                <img
+                  src={IMAGES[s.slug]}
+                  alt=""
+                  className={styles.image}
+                  width="577"
+                  height="433"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
               </Reveal>
               <Reveal delay={80} className={styles.text}>
                 <span className={`num ${styles.num}`}>{s.number}</span>

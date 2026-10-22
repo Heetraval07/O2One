@@ -58,7 +58,7 @@ export function StatPanel({ stats, children }) {
   return (
     <div
       ref={ref}
-      className={styles.panel}
+      className={`edge-hover ${styles.panel}`}
       data-in={inView ? 'true' : 'false'}
       style={stats.length !== 3 ? { '--panel-cols': `${stats.length}fr`, '--stat-cols': stats.length } : undefined}
     >

@@ -1,13 +1,9 @@
 .hero {
-  position: relative;
-  isolation: isolate;
   padding-block: var(--s7) var(--s8);
   overflow: hidden;
 }
 
 .heroGrid {
-  position: relative;
-  z-index: 1; /* above the animated backdrop */
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: var(--s6);
@@ -50,7 +46,6 @@
 
 .chaos > :first-child {
   width: 100%;
-  max-width: 960px;
 }
 
 .chaosText {

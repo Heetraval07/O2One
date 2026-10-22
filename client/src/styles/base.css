@@ -374,12 +374,18 @@ a:hover {
 
 /* ---- Cards -------------------------------------------------------------- */
 
-/* Grid of white cards separated by 1px lines. Each card's outline falls into the 1px gap,
-   so neighbours share one line and an incomplete last row leaves no grey hole. */
+/* Grid of separate white cards (numbered problems, process phases, service items) with clear space between them.
+   Each card draws its own 1px outline. */
 .line-grid {
   display: grid;
-  gap: 1px;
+  gap: var(--s3);
   padding: 1px !important; /* room for the outer outlines; wins over list resets */
+}
+
+@media (max-width: 819px) {
+  .line-grid {
+    gap: var(--s2);
+  }
 }
 
 .line-grid > * {
@@ -615,6 +621,18 @@ select.input {
   display: inline-block;
   animation: split-rise 900ms var(--ease) backwards;
   animation-delay: calc(var(--base, 0ms) + var(--i, 0) * 55ms);
+}
+
+/* Headlines with explicit lines: one line each on desktop, running on (and wrapping) below that */
+@media (min-width: 1080px) {
+  .split-line {
+    display: block;
+    white-space: nowrap;
+  }
+  /* sized so the longest line fits its column with room to spare */
+  .h1:has(.split-line) {
+    font-size: clamp(40px, 5vw, 66px);
+  }
 }
 
 @keyframes split-rise {

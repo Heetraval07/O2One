@@ -15,13 +15,9 @@
   margin: -7px 0 -7px -10px;
 }
 
-/* Dark footer: the original on a white plate, as is (no recolouring) */
-.plate {
-  border-radius: 2px;
-  background: #ffffff;
-}
-
-.plate .img {
+/* Footer: the supplied white-lettering logo with a transparent background, untouched, sitting directly on the dark
+   footer. Its file has no margins, so there are no offsets: only the size is set and the proportions follow the file. */
+.footer .img {
   height: 56px;
   margin: 0;
 }
@@ -31,8 +27,8 @@
     height: 50px;
     margin: -6px 0 -6px -8px;
   }
-  .plate .img {
-    height: 50px;
+  .footer .img {
+    height: 48px;
     margin: 0;
   }
 }

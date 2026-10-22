@@ -4,22 +4,28 @@ import { Link, useParams } from 'react-router-dom';
 import { api } from '../lib/api';
 import { useApi, useMeta } from '../lib/hooks';
 import { services, serviceBySlug } from '../content/services';
-import { problems } from '../content/company';
-import { solutions } from '../content/industries';
-import { solutionDetails, solutionImages } from '../content/solutionDetails';
+import { solutionDetails, solutionImages, solutionOrder } from '../content/solutionDetails';
 import { site } from '../content/site';
 import Reveal from '../components/ui/Reveal';
 import PageHero from '../components/sections/PageHero';
 import ServiceVisual from '../components/sections/ServiceVisual';
 import HeroReportCard from '../components/sections/HeroReportCard';
 import ServiceHeroArt, { hasServiceHeroArt } from '../components/sections/ServiceHeroArt';
-import { NumberedGrid, StoryCard } from '../components/sections/Cards';
+import { StoryCard } from '../components/sections/Cards';
 import CtaBand from '../components/ui/CtaBand';
 import { CheckupButton, TextLink } from '../components/ui/Buttons';
-import { ArrowRight, Plus } from '../components/ui/Icons';
+import { ArrowRight } from '../components/ui/Icons';
+import { DetailCard, DetailGrid } from '../components/ui/DetailCard';
 import DetailDrawer, { DrawerBlock, DrawerCta, DrawerList, DrawerTags } from '../components/sections/DetailDrawer';
 import NotFound from './NotFound';
 import styles from './ServiceDetail.module.css';
+
+// Supplied hero pictures (transparent PNGs in /public/services) that replace the drawn hero on these detail pages.
+const HERO_IMAGES = {
+  'odoo-services': '/services/02-odoo-services-hero-removebg-preview.png',
+  'custom-industry-solutions': '/services/03-custom-industry-solutions-hero-removebg-preview.png',
+  'ai-automation': '/services/04-ai-automation-hero-removebg-preview.png',
+};
 
 export default function ServiceDetail() {
   const { slug } = useParams();
@@ -34,7 +40,7 @@ export default function ServiceDetail() {
 
   if (!svc) return <NotFound />;
 
-  const items = svc.useSolutions ? solutions.map((name) => ({ name })) : svc.items;
+  const items = svc.useSolutions ? solutionOrder.map((name) => ({ name })) : svc.items;
   // Four items sit best as 2 x 2; a 3 + 1 grid leaves a lone card on the second row.
   const colCount = svc.useSolutions ? 4 : items.length === 4 ? 2 : 3;
   const cols = `cols-${colCount}`;
@@ -52,6 +58,15 @@ export default function ServiceDetail() {
           <div className={styles.aside}>
             {svc.slug === 'business-consultation' ? (
               <HeroReportCard />
+            ) : HERO_IMAGES[svc.slug] ? (
+              <img
+                src={HERO_IMAGES[svc.slug]}
+                alt=""
+                className={styles.heroImage}
+                width="577"
+                height="433"
+                decoding="async"
+              />
             ) : hasServiceHeroArt(svc.slug) ? (
               <ServiceHeroArt slug={svc.slug} />
             ) : (
@@ -64,21 +79,7 @@ export default function ServiceDetail() {
         <CheckupButton label="Book free checkup" />
       </PageHero>
 
-      {svc.showProblems && (
-        <section className="section" aria-labelledby="problems-title">
-          <div className="container">
-            <Reveal className="section-head">
-              <span className="eyebrow">If this sounds like you…</span>
-              <h2 id="problems-title" className="h2">
-                …here&rsquo;s where we start.
-              </h2>
-            </Reveal>
-            <NumberedGrid items={problems} />
-          </div>
-        </section>
-      )}
-
-      <section className={`section ${svc.showProblems ? 'section--grey' : ''}`} aria-labelledby="included-title">
+      <section className="section" aria-labelledby="included-title">
         <div className="container">
           <Reveal className="section-head">
             <span className="eyebrow">What&rsquo;s included</span>
@@ -90,57 +91,59 @@ export default function ServiceDetail() {
             )}
           </Reveal>
 
-          <ul className={`line-grid ${cols} ${styles.items}`} role="list">
-            {items.map((it, i) => {
-              const num = String(i + 1).padStart(2, '0');
-              // Industry solutions open a detail drawer, like the cards on the Industries page
-              if (svc.useSolutions && solutionDetails[it.name]) {
+          {svc.useSolutions ? (
+            <DetailGrid>
+              {items.map((it, i) =>
+                solutionDetails[it.name] ? (
+                  <DetailCard
+                    key={it.name}
+                    index={i}
+                    columns={3}
+                    image={solutionImages[it.name]}
+                    iconZoom="185%"
+                    title={it.name}
+                    text={solutionDetails[it.name].description}
+                    onOpen={() => setOpenSolution({ ...it, num: String(i + 1).padStart(2, '0') })}
+                  />
+                ) : null,
+              )}
+            </DetailGrid>
+          ) : items.every((it) => it.image) ? (
+            <DetailGrid columns={2}>
+              {items.map((it, i) => (
+                <DetailCard
+                  key={it.name}
+                  index={i}
+                  columns={2}
+                  image={it.image}
+                  step={String(i + 1).padStart(2, '0')}
+                  title={it.name}
+                  sub={it.text}
+                  text={it.detail}
+                  iconZoom="150%"
+                  accent
+                />
+              ))}
+            </DetailGrid>
+          ) : (
+            <ul className={`line-grid ${cols} ${styles.items} `} role="list">
+              {items.map((it, i) => {
+                const num = String(i + 1).padStart(2, '0');
                 return (
-                  <Reveal as="li" key={it.name} delay={stagger(i, colCount)} className={`card-fx ${styles.item} ${styles.itemFlush}`}>
-                    <button type="button" className={styles.itemButton} onClick={() => setOpenSolution({ ...it, num })} aria-haspopup="dialog">
-                      <span className={`fx-zoom ${styles.art}`} aria-hidden="true">
-                        <img src={solutionImages[it.name]} alt="" width="640" height="400" loading="lazy" decoding="async" />
-                      </span>
-                      <span className={styles.itemBody}>
-                        <span className={`num fx-nudge ${styles.itemNum}`}>{num}</span>
-                        <span className={styles.itemTitle}>{it.name}</span>
-                        <span className={styles.more}>
-                          Details <Plus size={16} />
-                        </span>
-                      </span>
-                    </button>
+                  <Reveal as="li" key={it.name} delay={stagger(i, colCount)} className={`card-fx ${styles.item}`}>
+                    <span className={`num fx-nudge ${styles.itemNum}`}>{num}</span>
+                    <h3 className={styles.itemTitle}>{it.name}</h3>
+                    {it.text && <p className="muted">{it.text}</p>}
+                    {it.to && (
+                      <TextLink to={it.to} className={styles.itemLink}>
+                        See the page
+                      </TextLink>
+                    )}
                   </Reveal>
                 );
-              }
-              if (it.image) {
-                return (
-                  <Reveal as="li" key={it.name} delay={stagger(i, colCount)} className={`card-fx ${styles.item} ${styles.itemFlush} ${styles.itemRow}`}>
-                    <span className={`fx-zoom ${styles.art}`} aria-hidden="true">
-                      <img src={it.image} alt="" width="640" height="400" loading="lazy" decoding="async" />
-                    </span>
-                    <div className={styles.itemBody}>
-                      <span className={`num fx-nudge ${styles.itemNum}`}>{num}</span>
-                      <h3 className={styles.itemTitle}>{it.name}</h3>
-                      {it.text && <p className={styles.itemSub}>{it.text}</p>}
-                      {it.detail && <p className="muted">{it.detail}</p>}
-                    </div>
-                  </Reveal>
-                );
-              }
-              return (
-                <Reveal as="li" key={it.name} delay={stagger(i, colCount)} className={`card-fx ${styles.item}`}>
-                  <span className={`num fx-nudge ${styles.itemNum}`}>{num}</span>
-                  <h3 className={styles.itemTitle}>{it.name}</h3>
-                  {it.text && <p className="muted">{it.text}</p>}
-                  {it.to && (
-                    <TextLink to={it.to} className={styles.itemLink}>
-                      See the page
-                    </TextLink>
-                  )}
-                </Reveal>
-              );
-            })}
-          </ul>
+              })}
+            </ul>
+          )}
 
           {svc.useSolutions && (
             <p className={styles.note}>

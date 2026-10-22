@@ -45,27 +45,10 @@
   line-height: 1.6;
 }
 
-/* Image (when there is one) and link sit together at the bottom, so the links line up across cards */
-.foot {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  width: 100%;
+/* Learn more: pinned to the bottom so every card's link lines up; the whole card is clickable */
+.cta {
   margin-top: auto;
   padding-top: 8px;
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: auto; /* keeps the file's own 577:433 proportions */
-  aspect-ratio: 577 / 433;
-  object-fit: contain;
-}
-
-/* Learn more: the whole card is clickable */
-.cta {
   font-size: 15px;
 }
 

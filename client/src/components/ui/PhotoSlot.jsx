@@ -5,10 +5,11 @@ import styles from './PhotoSlot.module.css';
 /**
  * A photo, or — until real photography is supplied — a quiet placeholder that says what belongs there.
  * The design guide asks for real photos of people and places, never stock or AI imagery.
+ * `position` sets which part of a real photo stays in view when it is cropped.
  * The image wipes in on first view, drifts slightly as you scroll, and zooms gently on hover;
  * the decorative blocks move at a different speed for depth.
  */
-export default function PhotoSlot({ src, alt, label, ratio = '4 / 3', accent, className = '', priority = false }) {
+export default function PhotoSlot({ src, alt, label, ratio = '4 / 3', accent, className = '', priority = false, position }) {
   const frameRef = useRef(null);
   const [viewRef, inView] = useInView({ threshold: 0.2 });
   useParallax(frameRef);
@@ -25,7 +26,14 @@ export default function PhotoSlot({ src, alt, label, ratio = '4 / 3', accent, cl
       <div className={`${styles.media} ${priority || inView ? styles.revealed : ''}`}>
         {src ? (
           <div className={styles.zoom}>
-            <img src={src} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" className={styles.img} />
+            <img
+              src={src}
+              alt={alt}
+              loading={priority ? 'eager' : 'lazy'}
+              decoding="async"
+              className={styles.img}
+              style={position ? { objectPosition: position } : undefined}
+            />
           </div>
         ) : (
           <div className={styles.placeholder} role="img" aria-label={alt || label}>

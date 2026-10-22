@@ -17,6 +17,23 @@ export const solutionImages = {
   'Tours and Travel Management': '/solutions/12-tours-travel.svg',
 };
 
+// The order the Custom Industry Solutions page lists its cards in (this also sets their numbers, 01 to 12).
+// Kept here so the site-wide `solutions` list (menu, chips) keeps its own order.
+export const solutionOrder = [
+  'Property Management',
+  'Restaurant Management',
+  'Gym Management',
+  'Car Wash Management',
+  'Visa Management',
+  'Labour Outsourcing Management',
+  'Fleet Management',
+  'Optical Store Management',
+  'Salon & Spa Management',
+  'Education Management',
+  'Hotel Management',
+  'Tours and Travel Management',
+];
+
 export const solutionDetails = {
   'Property Management': {
     headline: 'Every lease, rent cheque and repair, in one place.',

@@ -49,7 +49,6 @@ export const services = [
       'Change and training plan',
       'Findings session with your leadership team',
     ],
-    showProblems: true,
     faqs: [
       {
         q: 'Do I have to buy Odoo after the consultation?',

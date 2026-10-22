@@ -21,28 +21,11 @@ export default function About() {
 
   return (
     <>
-      <section className={styles.hero}>
-        <div className="container">
-          <Reveal className={styles.heroText}>
-            <span className="eyebrow">About O2One</span>
-            <h1 className="h1">Built by people who watched the problem up close.</h1>
-            <ul className={styles.facts} role="list">
-              <li>Dubai</li>
-              <li>GCC &amp; MENA</li>
-              <li>Official Odoo partner</li>
-            </ul>
-          </Reveal>
-          <Reveal delay={120} className={styles.heroPhoto}>
-            <PhotoSlot label="the O2One team" alt="The O2One team" ratio="21 / 9" priority />
-          </Reveal>
-        </div>
-      </section>
-
       <section className="section">
         <div className="container split">
           <Reveal>
             <span className="eyebrow">Who we are</span>
-            <h2 className="h2">One technology partner. Complete accountability.</h2>
+            <h1 className="h2">One technology partner. Complete accountability.</h1>
           </Reveal>
           <Reveal delay={100}>
             <p className="lead">{aboutIntro}</p>
@@ -53,7 +36,14 @@ export default function About() {
       <section className="section section--grey" aria-labelledby="story-title">
         <div className={`container ${styles.story}`}>
           <Reveal variant="left" className={styles.storyPhoto}>
-            <PhotoSlot label="founder + father's shop (archival)" alt="The founder's father's shop in Sudan" ratio="4 / 5" accent="about" />
+            <PhotoSlot
+              src="/about/founder-shop.jpeg"
+              position="50% 50%"
+              label="founder + father's shop (archival)"
+              alt="The founder's father's shop in Sudan"
+              ratio="4 / 5"
+              accent="about"
+            />
           </Reveal>
           <Reveal variant="right" delay={100} className={styles.storyText}>
             <span className="eyebrow">Where it all started</span>
@@ -101,7 +91,7 @@ export default function About() {
             </StatPanel>
           </Reveal>
 
-          <Reveal as="section" delay={150} className={styles.location} aria-labelledby="location-title">
+          <Reveal as="section" delay={150} className={`edge-hover ${styles.location}`} aria-labelledby="location-title">
             <div className={styles.locationMain}>
               <span className="eyebrow">Our location</span>
               <h3 id="location-title" className="h2">

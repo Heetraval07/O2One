@@ -52,6 +52,7 @@
   /* Shape */
   --radius-btn: 2px;
   --radius-pill: 999px;
+  --radius-card: 24px; /* every card: soft rounded corners, the same radius as the approved industry card */
 
   /* Cards: one set of values for every card on the site (see styles/cards.css).
      Set --card-shadow to none to switch the hover depth off everywhere. */

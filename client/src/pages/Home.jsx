@@ -14,7 +14,6 @@ import ApproachTabs from '../components/sections/ApproachTabs';
 import ServiceCards from '../components/sections/ServiceCards';
 import FlowVisual from '../components/sections/FlowVisual';
 import DarkBand from '../components/sections/DarkBand';
-import HeroBackdrop from '../components/sections/HeroBackdrop';
 import styles from './Home.module.css';
 
 export default function Home() {
@@ -27,7 +26,6 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className={styles.hero}>
-        <HeroBackdrop />
         <div className={`container ${styles.heroGrid}`}>
           <div className={styles.heroText}>
             <span className={`badge ${styles.rise}`}>{site.partnerLabel}</span>

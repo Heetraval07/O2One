@@ -1,0 +1,202 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid > li {
+  display: flex;
+}
+
+/* ---- Card: white, softly rounded, light shadow, small icon tile ------------------------------------------- */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  padding: 40px 36px 32px;
+  border: 1px solid #e6e6e6;
+  border-radius: var(--radius-card); /* 24px */
+  background: var(--white);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 14px 32px -16px rgba(26, 26, 26, 0.22);
+  transition:
+    transform var(--card-dur) var(--ease),
+    box-shadow var(--card-dur) var(--ease);
+}
+
+.card:hover {
+  transform: translate3d(0, -4px, 0);
+  box-shadow: 0 20px 40px -16px rgba(26, 26, 26, 0.28);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--grey-50);
+}
+
+/* The artwork sits small inside its 640 x 400 file, so the file is drawn larger and the tile crops the empty edge */
+.icon img {
+  display: block;
+  flex: none;
+  width: var(--icon-zoom, 175%);
+  max-width: none;
+  height: auto;
+}
+
+.title {
+  /* the site's own serif card-title style */
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.text {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--grey);
+}
+
+.short {
+  display: none;
+}
+
+/* Step number and supporting line (consultation steps) */
+.step {
+  margin-bottom: -6px;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--orange);
+}
+
+.sub {
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+/* A card that is only content: no pointer, no lift */
+.plain {
+  cursor: default;
+}
+
+.plain:hover {
+  transform: none;
+}
+
+/* Top edge only: the top border turns orange and a thin orange line draws across just inside it (about 3px in
+   all). The other three edges never change colour. */
+.accent {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--card-dur) var(--ease),
+    box-shadow var(--card-dur) var(--ease),
+    border-top-color var(--t-med) var(--ease);
+}
+
+.accent::after {
+  content: '';
+  position: absolute;
+  inset: -1px -1px auto -1px;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 550ms var(--ease);
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .accent:hover {
+    border-top-color: var(--orange);
+  }
+  .accent:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accent::after {
+    display: none;
+  }
+}
+
+/* Two-column grid (consultation steps) */
+.grid[data-cols='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s3);
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 6px;
+  color: var(--orange);
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.card:hover .more {
+  color: var(--orange-hover);
+}
+
+/* ---- Phones --------------------------------------------------------------------------------------------- */
+@media (max-width: 819px) {
+  /* one column, full text */
+  .grid,
+  .grid[data-cols='2'] {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .card {
+    gap: 10px;
+    padding: 28px 24px 24px;
+    border-radius: 20px;
+  }
+  .title {
+    font-size: 24px;
+  }
+
+  /* compact: two columns with the one-line text */
+  .grid[data-compact='true'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid[data-compact='true'] .card {
+    gap: 8px;
+    padding: 20px 14px 14px;
+    border-radius: 18px;
+  }
+  .grid[data-compact='true'] .title {
+    font-size: 20px;
+  }
+  .grid[data-compact='true'] .icon {
+    margin-bottom: 4px;
+  }
+  .grid[data-compact='true'] .long[data-has-short='true'] {
+    display: none;
+  }
+  .grid[data-compact='true'] .short {
+    display: block;
+    font-size: var(--fs-small);
+  }
+}
