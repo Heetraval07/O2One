@@ -53,8 +53,23 @@
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  max-width: 760px;
+  width: 100%;
   text-align: center;
+}
+
+.chaosText > p,
+.chaosText > blockquote {
+  max-width: 760px;
+}
+
+/* The headline runs on one line on tablets and desktops, sized to the screen so it always fits the page width */
+@media (min-width: 900px) {
+  .chaosTitle {
+    max-width: none;
+    white-space: nowrap;
+    text-wrap: nowrap;
+    font-size: clamp(30px, 3.4vw, 48px);
+  }
 }
 
 .pull {

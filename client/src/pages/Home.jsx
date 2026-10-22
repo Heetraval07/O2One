@@ -64,7 +64,7 @@ export default function Home() {
             <FlowVisual />
           </Reveal>
           <Reveal delay={100} className={styles.chaosText}>
-            <h2 id="chaos-title" className="h2">
+            <h2 id="chaos-title" className={`h2 ${styles.chaosTitle}`}>
               Running your business on Tally, Excel, and WhatsApp?
             </h2>
             <p className="lead">

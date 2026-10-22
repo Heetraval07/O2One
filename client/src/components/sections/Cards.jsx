@@ -23,7 +23,7 @@ export function NumberedGrid({ items, cols = 3 }) {
   );
 }
 
-/** Values: four across, numbered, each with a line icon. The card fills with soft orange on hover. */
+/** Values: four across, numbered, each with a line icon. The card keeps its white background on hover. */
 export function ValueGrid({ items }) {
   return (
     <ul className={styles.values} role="list">

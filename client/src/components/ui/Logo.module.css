@@ -3,32 +3,44 @@
   align-items: center;
   text-decoration: none;
   line-height: 0;
+  margin: -7px 0 -7px -10px;
 }
 
 /* The supplied file has white margins around the artwork. It is drawn larger than the old tight crop and the
-   margins are pulled back with negative offsets, so the lettering keeps its size and lines up with the page edge
-   and the header keeps its height. */
+   margins are pulled back with negative offsets on the link (not on the image: a negative margin on a flex item
+   narrows it and squashes the artwork), so the lettering keeps its size and lines up with the page edge and the
+   header keeps its height. Height sets the size; the width always follows the file's own proportions. */
 .img {
   display: block;
+  flex: none;
   height: 60px;
   width: auto;
-  margin: -7px 0 -7px -10px;
+  max-width: none;
+  aspect-ratio: 4800 / 1640;
 }
 
 /* Footer: the supplied white-lettering logo with a transparent background, untouched, sitting directly on the dark
    footer. Its file has no margins, so there are no offsets: only the size is set and the proportions follow the file. */
-.footer .img {
-  height: 56px;
+.footer {
   margin: 0;
 }
 
+.footer .img {
+  height: 56px;
+  aspect-ratio: 855 / 292;
+}
+
 @media (max-width: 819px) {
+  .logo {
+    margin: -6px 0 -6px -8px;
+  }
+  .footer {
+    margin: 0;
+  }
   .img {
     height: 50px;
-    margin: -6px 0 -6px -8px;
   }
   .footer .img {
     height: 48px;
-    margin: 0;
   }
 }

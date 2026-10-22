@@ -228,3 +228,13 @@
     border-top: 1px solid var(--line);
   }
 }
+
+/* Opening headline: one line on tablets and desktops, sized to the screen so it always fits; wraps on phones */
+@media (min-width: 900px) {
+  .whoTitle {
+    max-width: none;
+    white-space: nowrap;
+    text-wrap: nowrap;
+    font-size: clamp(30px, 3.8vw, 52px);
+  }
+}

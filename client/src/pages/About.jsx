@@ -1,6 +1,6 @@
 import { useMeta } from '../lib/hooks';
 import { site, telHref } from '../content/site';
-import { aboutIntro, originStory, originQuote, values, teamStats } from '../content/company';
+import { originStory, originQuote, values, teamStats } from '../content/company';
 import { phases } from '../content/approach';
 import Reveal from '../components/ui/Reveal';
 import PhotoSlot from '../components/ui/PhotoSlot';
@@ -22,13 +22,9 @@ export default function About() {
   return (
     <>
       <section className="section">
-        <div className="container split">
+        <div className="container">
           <Reveal>
-            <span className="eyebrow">Who we are</span>
-            <h1 className="h2">One technology partner. Complete accountability.</h1>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="lead">{aboutIntro}</p>
+            <h1 className={`h2 ${styles.whoTitle}`}>One Technology Partner. Complete Accountability.</h1>
           </Reveal>
         </div>
       </section>
