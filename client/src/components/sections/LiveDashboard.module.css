@@ -1,0 +1,512 @@
+/* Live dashboard animation (supplied artwork). Everything is scoped to this module; the stage is a fixed
+   1600 x 1000 canvas that the component scales to fit (the hero section clips anything beyond its own width). */
+
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: transparent; /* no box: the window's shadow fades out into the page instead of being cut at the edge */
+  color: var(--ink);
+  font-family: var(--font-sans);
+  pointer-events: none;
+  user-select: none;
+}
+
+.stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
+.stage,
+.stage * {
+  box-sizing: content-box;
+}
+
+.paused,
+.paused * {
+  animation-play-state: paused !important;
+}
+
+/* --- App window --- */
+
+.window {
+  position: absolute;
+  left: 72px;
+  top: 80px;
+  width: 1200px;
+  height: 840px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--grey-50);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 50px 100px rgba(26, 26, 26, 0.14), 0 12px 24px rgba(26, 26, 26, 0.06);
+}
+
+.topbar {
+  box-sizing: border-box !important;
+  height: 76px;
+  flex-shrink: 0;
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mark {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.brandName {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+  height: 76px;
+  font-size: 16px;
+  color: var(--grey);
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tabOn {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--orange);
+}
+
+.live {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--grey);
+}
+
+.live strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--orange-bright);
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+.main {
+  box-sizing: border-box !important;
+  flex: 1;
+  min-height: 0;
+  padding: 32px 36px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 46px;
+  line-height: 50px;
+  font-weight: 500;
+}
+
+.currency {
+  font-size: 16px;
+  color: var(--grey);
+}
+
+/* --- KPI tiles --- */
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.kpi {
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.kpiDark {
+  background: var(--ink);
+  border: 0;
+  color: var(--white);
+}
+
+.kpiLabel {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.kpiDark .kpiLabel,
+.kpiDark .kpiNote {
+  color: #cfcfcf;
+}
+
+.kpiNote {
+  font-size: 17px;
+  color: var(--grey);
+}
+
+.up {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+/* Odometer: each digit is a strip of 0-9 parked on its final number */
+.num {
+  display: inline-flex;
+  align-items: flex-start;
+  height: 72px;
+  overflow: hidden;
+  font-family: var(--font-serif);
+  font-size: 72px;
+  font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.kpiDark .num {
+  color: var(--orange-bright);
+}
+
+.dg {
+  display: inline-block;
+  height: 72px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(transparent, #000 9%, #000 91%, transparent);
+}
+
+.strip {
+  display: block;
+  white-space: pre-line;
+  line-height: 72px;
+  text-align: center;
+  transform: translateY(calc(var(--d) * -72px));
+}
+
+.ch {
+  display: inline-block;
+  line-height: 72px;
+}
+
+/* --- Chart and customers --- */
+
+.panels {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  gap: 20px;
+}
+
+.panel {
+  min-height: 0;
+  padding: 26px 28px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.customers {
+  padding: 26px 28px;
+  gap: 22px;
+}
+
+.panelHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.panelTitle {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  line-height: 34px;
+  font-weight: 600;
+}
+
+.record {
+  padding: 6px 14px;
+  background: var(--ink);
+  color: var(--orange-bright);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.chart {
+  flex: 1;
+  min-height: 0;
+  display: block;
+}
+
+.tick {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: tick 9s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.sweep {
+  animation: sweep 9s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.custList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cust {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.custRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.track {
+  height: 8px;
+  background: var(--grey-50);
+}
+
+.fill {
+  height: 8px;
+  background: var(--orange-bright);
+}
+
+/* --- Floating notifications: one every 3 seconds --- */
+
+.notices {
+  position: absolute;
+  left: 961px;
+  top: 159px;
+  width: 390px;
+  height: 90px;
+}
+
+.notice {
+  box-sizing: border-box !important;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 30px 60px rgba(26, 26, 26, 0.14);
+  animation: cycle 9s cubic-bezier(0.2, 0.8, 0.2, 1) infinite both;
+}
+
+.noticeIcon {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--orange-bright);
+  animation: pulse 2s ease-out infinite;
+}
+
+.noticeDisc {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--orange-soft);
+  color: var(--orange);
+  border-radius: 999px;
+}
+
+.noticeText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.noticeTitle {
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.noticeSub {
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--grey);
+}
+
+/* --- Floating outcome card --- */
+
+.outcome {
+  position: absolute;
+  left: 948px;
+  top: 783px;
+  width: 360px;
+}
+
+.outcomeCard {
+  box-sizing: border-box !important;
+  padding: 32px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 30px 60px rgba(26, 26, 26, 0.22);
+  animation: bob 6s ease-in-out -3s infinite;
+}
+
+.outcomeLabel {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #cfcfcf;
+}
+
+.outcomeValue {
+  font-family: var(--font-serif);
+  font-size: 80px;
+  line-height: 72px;
+  font-weight: 600;
+  color: var(--orange-bright);
+}
+
+.outcomeNote {
+  font-size: 18px;
+  line-height: 24px;
+  color: #cfcfcf;
+}
+
+/* --- Motion --- */
+
+@keyframes cycle {
+  0% { opacity: 0; transform: translateY(18px); }
+  5% { opacity: 1; transform: none; }
+  30% { opacity: 1; transform: none; }
+  35% { opacity: 0; transform: translateY(-18px); }
+  100% { opacity: 0; transform: translateY(-18px); }
+}
+
+@keyframes tick {
+  0% { transform: scaleY(0.93); }
+  7% { transform: scaleY(1); }
+  92% { transform: scaleY(1); }
+  100% { transform: scaleY(0.93); }
+}
+
+@keyframes sweep {
+  0% { transform: translateX(0); }
+  40% { transform: translateX(880px); }
+  100% { transform: translateX(880px); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+/* Still: the dashboard stays as it rests, with just the first notification showing */
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .tick,
+  .sweep,
+  .notice,
+  .ping,
+  .outcomeCard {
+    animation: none;
+  }
+  .sweep {
+    display: none;
+  }
+  .notice:not(:first-child) {
+    display: none;
+  }
+}

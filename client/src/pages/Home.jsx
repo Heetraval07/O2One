@@ -4,7 +4,6 @@ import { useMeta } from '../lib/hooks';
 import { site, CHECKUP_LABEL } from '../content/site';
 import { trustStats, problems, values } from '../content/company';
 import Reveal from '../components/ui/Reveal';
-import PhotoSlot from '../components/ui/PhotoSlot';
 import { TrustBar } from '../components/ui/Stats';
 import { CheckupButton } from '../components/ui/Buttons';
 import { ArrowRight } from '../components/ui/Icons';
@@ -12,6 +11,7 @@ import CtaBand from '../components/ui/CtaBand';
 import { NumberedGrid, ValueGrid } from '../components/sections/Cards';
 import ApproachTabs from '../components/sections/ApproachTabs';
 import ServiceCards from '../components/sections/ServiceCards';
+import LiveDashboard from '../components/sections/LiveDashboard';
 import FlowVisual from '../components/sections/FlowVisual';
 import DarkBand from '../components/sections/DarkBand';
 import styles from './Home.module.css';
@@ -38,7 +38,7 @@ export default function Home() {
             </div>
           </div>
           <div className={`${styles.heroMedia} ${styles.rise}`} style={{ '--d': '150ms' }}>
-            <PhotoSlot label="team / founder at work" alt="The O2One team working with a client" ratio="5 / 4" accent="hero" priority />
+            <LiveDashboard />
           </div>
         </div>
       </section>

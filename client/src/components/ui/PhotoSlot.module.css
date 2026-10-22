@@ -63,33 +63,12 @@
   letter-spacing: 0.02em;
 }
 
-/* Decorative blocks allowed in the hero and the About photo panel */
-.accent-hero::before,
+/* Decorative block allowed on the About photo panel */
 .accent-about::before {
   content: '';
   position: absolute;
   z-index: 0;
   background: var(--orange-bright);
-}
-
-.accent-hero::before {
-  right: -24px;
-  bottom: -24px;
-  width: 46%;
-  height: 58%;
-  transform: translate3d(0, calc(var(--p, 0) * -28px), 0);
-}
-
-.accent-hero::after {
-  content: '';
-  position: absolute;
-  z-index: 2;
-  left: -24px;
-  top: 32px;
-  width: 64px;
-  height: 64px;
-  background: var(--ink);
-  transform: translate3d(0, calc(var(--p, 0) * 20px), 0);
 }
 
 .accent-about::before {
@@ -101,15 +80,6 @@
 }
 
 @media (max-width: 819px) {
-  .accent-hero::before {
-    right: -12px;
-    bottom: -12px;
-  }
-  .accent-hero::after {
-    left: -12px;
-    width: 40px;
-    height: 40px;
-  }
   .accent-about::before {
     left: -12px;
     top: -12px;
