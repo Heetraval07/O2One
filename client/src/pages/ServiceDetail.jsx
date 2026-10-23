@@ -9,7 +9,6 @@ import { site } from '../content/site';
 import Reveal from '../components/ui/Reveal';
 import PageHero from '../components/sections/PageHero';
 import ServiceVisual from '../components/sections/ServiceVisual';
-import HeroReportCard from '../components/sections/HeroReportCard';
 import ServiceHeroArt, { hasServiceHeroArt } from '../components/sections/ServiceHeroArt';
 import { StoryCard } from '../components/sections/Cards';
 import CtaBand from '../components/ui/CtaBand';
@@ -21,11 +20,12 @@ import DetailDrawer, { DrawerBlock, DrawerCta, DrawerList, DrawerTags } from '..
 import NotFound from './NotFound';
 import styles from './ServiceDetail.module.css';
 
-// Supplied hero pictures (transparent PNGs in /public/services) that replace the drawn hero on these detail pages.
+// Supplied hero pictures (transparent PNGs, 2304 x 1824, in /public/services) shown in the hero of each service detail page.
 const HERO_IMAGES = {
-  'odoo-services': '/services/02-odoo-services-hero-removebg-preview.png',
-  'custom-industry-solutions': '/services/03-custom-industry-solutions-hero-removebg-preview.png',
-  'ai-automation': '/services/04-ai-automation-hero-removebg-preview.png',
+  'business-consultation': '/services/01-business-consultation-hero.png',
+  'odoo-services': '/services/02-odoo-services-hero.png',
+  'custom-industry-solutions': '/services/03-custom-industry-solutions-hero.png',
+  'ai-automation': '/services/04-ai-automation-hero.png',
 };
 
 export default function ServiceDetail() {
@@ -57,15 +57,13 @@ export default function ServiceDetail() {
         lead={svc.description}
         aside={
           <div className={styles.aside}>
-            {svc.slug === 'business-consultation' ? (
-              <HeroReportCard />
-            ) : HERO_IMAGES[svc.slug] ? (
+            {HERO_IMAGES[svc.slug] ? (
               <img
                 src={HERO_IMAGES[svc.slug]}
                 alt=""
                 className={styles.heroImage}
-                width="577"
-                height="433"
+                width="2304"
+                height="1824"
                 decoding="async"
               />
             ) : hasServiceHeroArt(svc.slug) ? (
