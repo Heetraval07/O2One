@@ -28,13 +28,10 @@ export const config = {
   // Public address of the site; used in the links emailed to the admin (password reset, email change).
   publicUrl: str('PUBLIC_URL', 'http://localhost:5173').replace(/\/+$/, ''),
 
+  // The database is a single SQLite file. A relative DB_FILE is read from the project root.
+  // (On Vercel the only writable place is /tmp, which is wiped between runs: use a real server for the database.)
   db: {
-    host: str('DB_HOST', '127.0.0.1'),
-    port: int('DB_PORT', 3306),
-    user: str('DB_USER', 'o2one'),
-    password: str('DB_PASSWORD', ''),
-    database: str('DB_NAME', 'o2one_website'),
-    connectionLimit: int('DB_POOL_SIZE', 10),
+    file: ((f) => (f === ':memory:' ? f : path.resolve(ROOT_DIR, f)))(str('DB_FILE', process.env.VERCEL ? '/tmp/o2one.sqlite' : 'data/o2one.sqlite')),
   },
 
   // Time zone shown in enquiry emails and the admin booking list. Dubai has no daylight saving, so a fixed offset is exact.

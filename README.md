@@ -1,6 +1,6 @@
 # O2One Consultants — website
 
-React (Vite) frontend, Node.js + Express API, MariaDB database. Built from the approved wireframes
+React (Vite) frontend, Node.js + Express API, SQLite database (a single file). Built from the approved wireframes
 ("O2One Wireframes – Selected"), the final copy documents and the O2One Website Design Guide.
 
 ```
@@ -21,14 +21,14 @@ o2one-website/
 │   │   └── app.js          security headers, rate limits, static hosting of the React build
 │   ├── scripts/            db-init.js (schema + optional seed), seed-data.js
 │   └── test/               unit tests (node --test)
-├── database/schema.sql     MariaDB schema
+├── database/schema.sql     SQLite schema
 └── .env.example            every setting, no real credentials
 ```
 
 ## Requirements
 
 - Node.js 20+
-- MariaDB 10.6+ (tested on 10.11)
+- Nothing else: the database is one SQLite file (`data/o2one.sqlite`), created by the setup step below
 
 ## Setup
 
@@ -36,15 +36,10 @@ o2one-website/
 # 1. Install dependencies
 npm run setup
 
-# 2. Create a database user (once), e.g. in the MariaDB shell:
-#    CREATE DATABASE o2one_website CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-#    CREATE USER 'o2one'@'localhost' IDENTIFIED BY 'a-strong-password';
-#    GRANT ALL ON o2one_website.* TO 'o2one'@'localhost';
+# 2. Configure
+cp .env.example .env        # then set the contact details and the SMTP settings for the contact form
 
-# 3. Configure
-cp .env.example .env        # then set DB_PASSWORD, contact details, SMTP (optional)
-
-# 4. Create the tables (and load the starter blog posts + sample stories)
+# 3. Create the database file and its tables (and load the starter blog posts + sample stories)
 npm run db:seed             # or `npm run db:init` for empty tables
 ```
 
@@ -74,7 +69,7 @@ client-side routing fallback, long-cache hashed assets and gzip. Behind Nginx or
 npm test            # slot generation + validation unit tests
 ```
 
-## What's dynamic (and stored in MariaDB)
+## What's dynamic (and stored in SQLite)
 
 | Feature | Endpoint | Table |
 | --- | --- | --- |
@@ -121,7 +116,7 @@ npm run admin:reset  -- you@company.com    # emergency reset from the terminal
 
 ## Managing content without the admin
 
-You can still edit blog posts and stories directly in MariaDB (e.g. with HeidiSQL, DBeaver or phpMyAdmin):
+You can still edit blog posts and stories directly in the SQLite file (e.g. with DB Browser for SQLite or DBeaver):
 
 - `blog_posts.body` uses simple Markdown: `## Heading`, blank-line paragraphs, `- ` lists, `**bold**`.
 - Set `is_published = 0` to hide a post or story; future `published_at` dates schedule them.
@@ -139,3 +134,21 @@ You can still edit blog posts and stories directly in MariaDB (e.g. with HeidiSQ
 - [ ] UAE VAT page: confirm the 30 Oct 2026 date and all penalties against the MoF/FTA. After 30 Oct 2026 update `vatTopBar` in `client/src/content/site.js` (instructions are in the file).
 - [ ] SMTP settings and `ENQUIRY_NOTIFY_EMAIL` so contact-form enquiries reach the team (set as environment variables, never in code).
 - [ ] Problem-card descriptions on Home (`client/src/content/company.js`) are supporting lines added for the build; replace if the client has its own.
+
+## Database: one SQLite file
+
+All data (blog, stories, subscribers, admin account, uploaded images, old bookings) lives in `data/o2one.sqlite`
+(change the place with `DB_FILE` in `.env`). It is created by `npm run db:init` / `npm run db:seed`, which are safe
+to run again. The file is not in git.
+
+- **Backups:** copy the file. For a copy while the site is running, use `sqlite3 data/o2one.sqlite ".backup backup.sqlite"`
+  (or stop the app first). The files ending `-wal` and `-shm` next to it are part of the live database; leave them.
+- **One server only:** SQLite needs a disk that stays between runs and one machine to run on, which suits a VPS. It does
+  not suit serverless hosts such as Vercel, where the file would vanish: the contact form works there (it needs no
+  database), but the blog, stories and admin need a VPS.
+- **Moving old MariaDB data in (one time):**
+  ```bash
+  npm install --prefix server --no-save mysql2   # the old driver, only for this step
+  npm run db:init
+  npm run db:import-mariadb                      # reads MARIADB_* or the old DB_* settings; only reads MariaDB, never changes it
+  ```

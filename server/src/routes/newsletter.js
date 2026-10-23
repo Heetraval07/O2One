@@ -14,7 +14,7 @@ newsletterRouter.post('/', asyncHandler(async (req, res) => {
     // Re-subscribing is fine and never reveals whether the address was already on the list.
     await query(
       `INSERT INTO newsletter_subscribers (email, status, source) VALUES (?, 'subscribed', 'blog')
-       ON DUPLICATE KEY UPDATE status = 'subscribed'`,
+       ON CONFLICT (email) DO UPDATE SET status = 'subscribed'`,
       [data.email],
     );
   }

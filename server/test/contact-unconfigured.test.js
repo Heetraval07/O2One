@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
+// the app opens its database when it loads; use a throw-away one
+process.env.DB_FILE = ':memory:';
+
 // No SMTP settings at all: the visitor must be told, never shown a false "sent".
 for (const k of ['SMTP_HOST', 'ENQUIRY_NOTIFY_EMAIL', 'BOOKING_NOTIFY_EMAIL']) process.env[k] = '';
 const { createApp } = await import('../src/app.js');

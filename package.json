@@ -1,11 +1,12 @@
 {
   "name": "o2one-website",
   "private": true,
-  "description": "O2One Consultants website: React (Vite) frontend, Express API, MariaDB.",
+  "description": "O2One Consultants website: React (Vite) frontend, Express API, SQLite.",
   "scripts": {
     "setup": "npm --prefix server install && npm --prefix client install",
     "db:init": "npm --prefix server run db:init",
     "db:seed": "npm --prefix server run db:seed",
+    "db:import-mariadb": "npm --prefix server run db:import-mariadb",
     "admin:create": "npm --prefix server run admin:create --",
     "admin:reset": "npm --prefix server run admin:reset --",
     "dev:api": "npm --prefix server run dev",

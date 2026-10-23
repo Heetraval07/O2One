@@ -26,7 +26,7 @@ dashboardRouter.get('/', asyncHandler(async (_req, res) => {
               SUM(is_published = 0) AS draft, SUM(is_sample = 1) AS samples FROM customer_stories`,
     ),
     query(
-      `SELECT COUNT(*) AS n FROM checkup_bookings WHERE created_at >= UTC_TIMESTAMP() - INTERVAL 7 DAY`,
+      `SELECT COUNT(*) AS n FROM checkup_bookings WHERE created_at >= utc_shift(-7 * 86400)`,
     ),
   ]);
   const by = (rows, key) => Object.fromEntries(rows.map((r) => [r[key], Number(r.n)]));

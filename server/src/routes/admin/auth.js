@@ -29,7 +29,7 @@ async function createLink(adminId, kind, newEmail = null) {
   const token = newToken();
   await query('DELETE FROM admin_tokens WHERE admin_id = ? AND kind = ?', [adminId, kind]);
   await query(
-    'INSERT INTO admin_tokens (token_hash, admin_id, kind, new_email, expires_at) VALUES (?, ?, ?, ?, UTC_TIMESTAMP() + INTERVAL ? MINUTE)',
+    'INSERT INTO admin_tokens (token_hash, admin_id, kind, new_email, expires_at) VALUES (?, ?, ?, ?, utc_shift(? * 60))',
     [sha256(token), adminId, kind, newEmail, LINK_MINUTES],
   );
   return token;

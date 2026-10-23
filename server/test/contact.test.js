@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { startSmtpSink } from './smtp-sink.js';
 
+// the app opens its database when it loads; use a throw-away one
+process.env.DB_FILE = ':memory:';
+
 const sink = await startSmtpSink();
 // Settings must be in place before the app is loaded, because the server reads them once at start-up.
 Object.assign(process.env, {
