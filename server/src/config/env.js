@@ -23,7 +23,8 @@ export const config = {
   env: nodeEnv,
   isProd: nodeEnv === 'production',
   port: int('PORT', 4000),
-  trustProxy: int('TRUST_PROXY', 0), // number of proxy hops in front of the app (e.g. 1 behind Nginx)
+  // number of proxy hops in front of the app (e.g. 1 behind Nginx). Vercel always puts one in front, so that is the default there.
+  trustProxy: int('TRUST_PROXY', process.env.VERCEL ? 1 : 0),
   // Public address of the site; used in the links emailed to the admin (password reset, email change).
   publicUrl: str('PUBLIC_URL', 'http://localhost:5173').replace(/\/+$/, ''),
 

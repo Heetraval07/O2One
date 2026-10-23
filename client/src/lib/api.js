@@ -27,7 +27,9 @@ async function request(path, { method = 'GET', body, signal } = {}) {
     /* empty or non-JSON body */
   }
   if (!res.ok) {
-    throw new ApiError(data?.error || 'Something went wrong. Please try again.', res.status, data?.fields);
+    // Our API sends { error: 'text' }. A hosting error can send { error: { code, message } }, which must never reach a visitor as-is.
+    const message = typeof data?.error === 'string' && data.error ? data.error : 'Something went wrong. Please try again.';
+    throw new ApiError(message, res.status, data?.fields);
   }
   return data;
 }

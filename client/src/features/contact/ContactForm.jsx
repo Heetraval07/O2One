@@ -45,6 +45,8 @@ function Field({ id, label, error, optional, hint, children }) {
   );
 }
 
+const SEND_FAILED = "We couldn't send your enquiry just now. Your details are still here, so please try again in a moment.";
+
 // One id per form on screen. The server uses it to recognise a double click or a retry and email the team only once.
 const newSubmissionId = () =>
   globalThis.crypto?.randomUUID ? globalThis.crypto.randomUUID() : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
@@ -102,6 +104,8 @@ export default function ContactForm({ source = 'checkup', readinessItems = [] })
       if (err instanceof ApiError && Object.keys(err.fields || {}).length) {
         setErrors(err.fields);
         setFormError(err.message);
+      } else if (err instanceof ApiError && err.status >= 500) {
+        setFormError(SEND_FAILED);
       } else {
         setFormError(err.message || 'Something went wrong. Please try again.');
       }

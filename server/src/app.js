@@ -86,3 +86,7 @@ export function createApp() {
   app.use(errorHandler);
   return app;
 }
+
+// Vercel's Express builder uses the first of app, index, server, src/app, src/index, src/server that imports express, which is
+// this file, and it needs the app as the default export. Running on your own machine or server (src/index.js) uses it too.
+export default createApp();

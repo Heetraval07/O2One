@@ -1,9 +1,7 @@
-import { createApp } from './app.js';
+import app from './app.js';
 import { config } from './config/env.js';
 import { pool, ping } from './db/pool.js';
 import { mailEnabled } from './services/mailer.js';
-
-const app = createApp();
 
 // On Vercel the platform runs the app itself (it just needs the exported app below), so we only
 // open a port ourselves when running on a normal machine or server.
