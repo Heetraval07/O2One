@@ -672,6 +672,21 @@
   .check {
     gap: var(--s2);
   }
+  /* Checklist rows on phones: smaller labels and boxes; row height and the text's left edge stay as they were */
+  .checkRow {
+    grid-template-columns: 20px 1fr;
+    gap: 18px;
+    font-size: 14px;
+  }
+  .checkRow input,
+  .box {
+    width: 20px;
+    height: 20px;
+  }
+  .box svg {
+    width: 14px;
+    height: 14px;
+  }
   .checkCard {
     padding: 0;
     background: none;
