@@ -45,7 +45,7 @@ blogRouter.get('/posts', asyncHandler(async (req, res) => {
     `SELECT COUNT(*) AS total FROM blog_posts p JOIN blog_categories c ON c.id = p.category_id WHERE ${whereSql}`,
     params,
   );
-  // LIMIT/OFFSET are validated integers, so they are safe to inline (prepared LIMIT ? is unreliable in mysql2).
+  // LIMIT/OFFSET are validated integers, so they are safe to inline.
   const posts = await query(
     `SELECT ${LIST_COLUMNS}
        FROM blog_posts p JOIN blog_categories c ON c.id = p.category_id

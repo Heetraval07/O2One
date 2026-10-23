@@ -18,8 +18,8 @@ const idFromUrl = (url) => {
   return /^[a-f0-9]{32}$/.test(m) ? m : null;
 };
 
-const UNUSED = `NOT EXISTS (SELECT 1 FROM blog_posts WHERE cover_image = CONCAT('${MEDIA_PREFIX}', media.id))
-            AND NOT EXISTS (SELECT 1 FROM customer_stories WHERE cover_image = CONCAT('${MEDIA_PREFIX}', media.id))`;
+const UNUSED = `NOT EXISTS (SELECT 1 FROM blog_posts WHERE cover_image = '${MEDIA_PREFIX}' || media.id)
+            AND NOT EXISTS (SELECT 1 FROM customer_stories WHERE cover_image = '${MEDIA_PREFIX}' || media.id)`;
 
 /** After a cover is replaced, removed, or its post deleted: drop the old upload if nothing uses it any more. */
 export async function releaseMedia(url) {
@@ -29,5 +29,5 @@ export async function releaseMedia(url) {
 
 /** Uploads that were never saved onto a post or story (the form was abandoned) are cleared after a day. */
 export async function purgeAbandonedMedia() {
-  await query(`DELETE FROM media WHERE created_at < NOW() - INTERVAL 1 DAY AND ${UNUSED}`);
+  await query(`DELETE FROM media WHERE created_at < utc_shift(-86400) AND ${UNUSED}`);
 }

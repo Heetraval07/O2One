@@ -18,7 +18,7 @@ const cookieOptions = (maxAgeMs) => ({
 export async function startSession(res, adminId) {
   const token = newToken();
   await query(
-    'INSERT INTO admin_sessions (id, admin_id, expires_at) VALUES (?, ?, UTC_TIMESTAMP() + INTERVAL ? HOUR)',
+    'INSERT INTO admin_sessions (id, admin_id, expires_at) VALUES (?, ?, utc_shift(? * 3600))',
     [sha256(token), adminId, IDLE_HOURS],
   );
   res.cookie(COOKIE, token, cookieOptions(IDLE_HOURS * 3_600_000));
@@ -43,12 +43,12 @@ export async function requireAdmin(req, _res, next) {
     const [row] = await query(
       `SELECT s.id AS sessionId, a.id, a.email
          FROM admin_sessions s JOIN admin_users a ON a.id = s.admin_id
-        WHERE s.id = ? AND s.expires_at > UTC_TIMESTAMP() AND s.created_at > UTC_TIMESTAMP() - INTERVAL ? DAY`,
+        WHERE s.id = ? AND s.expires_at > UTC_TIMESTAMP() AND s.created_at > utc_shift(-? * 86400)`,
       [sha256(token), MAX_DAYS],
     );
     if (!row) throw new HttpError(401, 'Your session has ended. Please sign in again.');
 
-    await query('UPDATE admin_sessions SET expires_at = UTC_TIMESTAMP() + INTERVAL ? HOUR WHERE id = ?', [IDLE_HOURS, row.sessionId]);
+    await query('UPDATE admin_sessions SET expires_at = utc_shift(? * 3600) WHERE id = ?', [IDLE_HOURS, row.sessionId]);
     req.admin = { id: row.id, email: row.email, sessionId: row.sessionId };
     next();
   } catch (err) {

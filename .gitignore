@@ -3,3 +3,9 @@ client/dist/
 .env
 *.log
 .DS_Store
+
+# SQLite database files (the live data: back these up, never commit them)
+data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
