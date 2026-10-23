@@ -687,10 +687,12 @@
     width: 14px;
     height: 14px;
   }
-  .checkCard {
+  /* The card is invisible here, but .card-fx still clips to its rounded corners, which cut into the first checkbox */
+  .checkCard.checkCard {
     padding: 0;
     background: none;
     border: 0;
+    border-radius: 0;
   }
   .counterRow {
     flex-direction: column;
