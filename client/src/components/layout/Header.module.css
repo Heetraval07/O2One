@@ -570,9 +570,29 @@
 }
 
 @media (max-width: 819px) {
-  .strip,
   .ctaMobile {
-    display: none; /* phones: the contact details live in the floating dock, and the page has its own CTA */
+    display: none; /* phones: the page has its own CTA */
+  }
+  /* Phones keep the dark contact strip, slimmer, with only the phone number and the email address */
+  .strip {
+    height: 32px;
+    font-size: 12px;
+  }
+  .stripEnd {
+    display: none; /* location and social icons are desktop and tablet only */
+  }
+  .stripList {
+    flex: 1;
+    justify-content: space-between; /* phone on the left edge, email on the right, in line with the logo and menu button */
+    gap: var(--s2);
+  }
+  .strip svg {
+    width: 13px;
+    height: 13px;
+  }
+  .strip a {
+    gap: 5px;
+    white-space: nowrap;
   }
   .bar,
   .scrolled .bar {
@@ -589,6 +609,12 @@
 @media (max-width: 359px) {
   .ctaMobile {
     display: none;
+  }
+  .strip {
+    font-size: 11px;
+  }
+  .strip a {
+    gap: 4px;
   }
 }
 

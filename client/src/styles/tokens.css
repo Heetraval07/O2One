@@ -69,6 +69,6 @@
 @media (max-width: 819px) {
   :root {
     --page-x: 16px;
-    --header-h: 64px;
+    --header-h: 96px; /* nav bar 64px + the 32px contact strip */
   }
 }
