@@ -12,12 +12,12 @@ import styles from './Services.module.css';
 
 const chips = (s) => (s.useSolutions ? solutions.slice(0, 6).map(solutionShort) : s.items.map((i) => i.name));
 
-// The supplied service pictures (transparent PNGs in /public/services), one per service.
+// The supplied service pictures (transparent PNGs, 2304 x 1824, in /public/services), one per service; the same files the service pages use.
 const IMAGES = {
-  'business-consultation': '/services/01-business-consultation-hero-removebg-preview.png',
-  'odoo-services': '/services/02-odoo-services-hero-removebg-preview.png',
-  'custom-industry-solutions': '/services/03-custom-industry-solutions-hero-removebg-preview.png',
-  'ai-automation': '/services/04-ai-automation-hero-removebg-preview.png',
+  'business-consultation': '/services/01-business-consultation-hero.png',
+  'odoo-services': '/services/02-odoo-services-hero.png',
+  'custom-industry-solutions': '/services/03-custom-industry-solutions-hero.png',
+  'ai-automation': '/services/04-ai-automation-hero.png',
 };
 
 export default function Services() {
@@ -39,8 +39,8 @@ export default function Services() {
                   src={IMAGES[s.slug]}
                   alt=""
                   className={styles.image}
-                  width="577"
-                  height="433"
+                  width="2304"
+                  height="1824"
                   loading={i === 0 ? 'eager' : 'lazy'}
                   decoding="async"
                 />

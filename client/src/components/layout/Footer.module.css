@@ -97,6 +97,14 @@
   text-decoration: underline;
 }
 
+/* Every link and contact detail in the three columns is semibold (600, the heaviest Inter weight the site loads) */
+.footer nav li,
+.footer nav a,
+.contact li,
+.contact a {
+  font-weight: 600;
+}
+
 .minor a {
   color: var(--on-ink-muted);
   font-size: var(--fs-small);

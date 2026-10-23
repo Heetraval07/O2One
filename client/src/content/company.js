@@ -27,12 +27,12 @@ export const values = [
 ];
 
 export const teamStats = [
-  { value: 20, suffix: '+', label: 'consultants & developers' },
+  { value: 10, suffix: '+', label: 'consultants & developers' },
   { value: 5, suffix: '+', label: 'Odoo-certified experts' },
 ];
 
 export const aboutIntro =
-  "O2One is a digital transformation company based in Dubai, UAE, serving businesses across the GCC and MENA. We're an official Odoo partner, led by the founder and delivered with a network of 20+ consultants and developers, including Odoo-certified experts.";
+  "O2One is a digital transformation company based in Dubai, UAE, serving businesses across the GCC and MENA. We're an official Odoo partner, led by the founder and delivered with a network of 10+ consultants and developers, including Odoo-certified experts.";
 
 export const originStory = [
   'O2One began with a simple observation: business owners spend their days fixing problems instead of growing.',

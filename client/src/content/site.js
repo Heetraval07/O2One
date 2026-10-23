@@ -12,7 +12,7 @@ export const site = {
   phone: env.VITE_CONTACT_PHONE || '+971 54 593 2700',
   whatsappNumber,
   whatsappUrl: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hi O2One, I would like to talk about my business systems.')}`,
-  linkedinUrl: env.VITE_LINKEDIN_URL || '',
+  linkedinUrl: env.VITE_LINKEDIN_URL || 'https://www.linkedin.com/company/o2one-ae/',
   instagramUrl: env.VITE_INSTAGRAM_URL || '',
   facebookUrl: env.VITE_FACEBOOK_URL || '',
   twitterUrl: env.VITE_TWITTER_URL || '',

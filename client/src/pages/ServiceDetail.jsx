@@ -58,20 +58,23 @@ export default function ServiceDetail() {
         aside={
           <div className={styles.aside}>
             {HERO_IMAGES[svc.slug] ? (
-              <img
-                src={HERO_IMAGES[svc.slug]}
-                alt=""
-                className={styles.heroImage}
-                width="2304"
-                height="1824"
-                decoding="async"
-              />
+              <div className={styles.heroFigure}>
+                <img
+                  src={HERO_IMAGES[svc.slug]}
+                  alt=""
+                  className={styles.heroImage}
+                  width="2304"
+                  height="1824"
+                  decoding="async"
+                />
+                {svc.partnerBadge && <span className={`badge ${styles.heroBadge}`}>{site.partnerLabel}</span>}
+              </div>
             ) : hasServiceHeroArt(svc.slug) ? (
               <ServiceHeroArt slug={svc.slug} />
             ) : (
               <ServiceVisual service={svc} variant={index} />
             )}
-            {svc.partnerBadge && <span className="badge">{site.partnerLabel}</span>}
+            {svc.partnerBadge && !HERO_IMAGES[svc.slug] && <span className="badge">{site.partnerLabel}</span>}
           </div>
         }
       >

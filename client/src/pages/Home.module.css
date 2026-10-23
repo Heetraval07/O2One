@@ -18,7 +18,17 @@
 }
 
 .heroMedia {
-  aspect-ratio: 1340 / 960; /* the dashboard artwork's own proportions */
+  /* The dashboard artwork has a 5% margin of stage around its window; pulling it out by that much puts the window itself
+     on the column's edges, which makes it as large as the column allows. */
+  margin-inline: -5%;
+}
+
+/* On wide screens the dashboard takes the spare room beside the container, so it reads larger */
+@media (min-width: 1080px) {
+  .heroMedia {
+    margin-left: calc(-5% - clamp(0px, (100vw - 1080px) / 5, 40px));
+    margin-right: calc(-5% - max(0px, (100vw - var(--container)) / 2 - 56px));
+  }
 }
 
 /* Hero entrance: a short, staggered rise on first paint */
@@ -84,10 +94,9 @@
   color: var(--ink);
 }
 
-.bandLine {
-  color: var(--on-ink);
-  font-weight: 500;
-  margin-bottom: 16px;
+.approach {
+  /* sits directly under the white "Tally, Excel, WhatsApp" section, whose bottom padding already gives the gap */
+  padding-top: 0;
 }
 
 .headRow {

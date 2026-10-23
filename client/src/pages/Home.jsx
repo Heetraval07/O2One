@@ -1,7 +1,7 @@
 import SplitText from '../components/ui/SplitText';
 import { Link } from 'react-router-dom';
 import { useMeta } from '../lib/hooks';
-import { site, CHECKUP_LABEL } from '../content/site';
+import { site } from '../content/site';
 import { trustStats, problems, values } from '../content/company';
 import Reveal from '../components/ui/Reveal';
 import { TrustBar } from '../components/ui/Stats';
@@ -11,9 +11,8 @@ import CtaBand from '../components/ui/CtaBand';
 import { NumberedGrid, ValueGrid } from '../components/sections/Cards';
 import ApproachTabs from '../components/sections/ApproachTabs';
 import ServiceCards from '../components/sections/ServiceCards';
-import LiveDashboard from '../components/sections/LiveDashboard';
+import HeroDashboard from '../components/sections/HeroDashboard';
 import FlowVisual from '../components/sections/FlowVisual';
-import DarkBand from '../components/sections/DarkBand';
 import styles from './Home.module.css';
 
 export default function Home() {
@@ -38,7 +37,7 @@ export default function Home() {
             </div>
           </div>
           <div className={`${styles.heroMedia} ${styles.rise}`} style={{ '--d': '150ms' }}>
-            <LiveDashboard />
+            <HeroDashboard />
           </div>
         </div>
       </section>
@@ -78,16 +77,8 @@ export default function Home() {
         </div>
       </section>
 
-      <DarkBand
-        title="One Technology Partner. Complete Accountability."
-        text="You focus on your business. We'll manage the software."
-      >
-        <p className={styles.bandLine}>See what your business is missing.</p>
-        <CheckupButton label={CHECKUP_LABEL} arrow />
-      </DarkBand>
-
       {/* Approach */}
-      <section className="section" id="approach" aria-labelledby="approach-title">
+      <section className={`section ${styles.approach}`} id="approach" aria-labelledby="approach-title">
         <div className="container">
           <Reveal className={styles.headRow}>
             <div>

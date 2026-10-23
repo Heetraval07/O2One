@@ -191,3 +191,25 @@
   margin-inline: auto;
   object-fit: contain;
 }
+
+/* The picture and the partner badge, which floats over the empty strip above the dashboard, aligned with its right edge
+   (the dashboard card ends 14.8% in from the picture's right side, and the strip above it is about 15% of the height) */
+.heroFigure {
+  position: relative;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.heroBadge {
+  position: absolute;
+  top: 3%;
+  right: 14.8%;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(26, 26, 26, 0.08);
+}
+
+@media (max-width: 479px) {
+  .heroBadge {
+    padding-block: 4px;
+  }
+}

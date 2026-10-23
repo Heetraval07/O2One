@@ -78,7 +78,7 @@ export default function About() {
               </h2>
             </div>
             <p className="lead">
-              A network of 20+ consultants and developers, including Odoo-certified experts, working together as one team.
+              A network of 10+ consultants and developers, including Odoo-certified experts, working together as one team.
             </p>
           </Reveal>
           <Reveal delay={100} className={styles.teamStats}>
