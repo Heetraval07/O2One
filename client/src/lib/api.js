@@ -33,8 +33,7 @@ async function request(path, { method = 'GET', body, signal } = {}) {
 }
 
 export const api = {
-  slots: (opts) => request('/checkup/slots', opts),
-  book: (body) => request('/checkup/bookings', { method: 'POST', body }),
+  contact: (body) => request('/contact', { method: 'POST', body }),
   subscribe: (email, website = '') => request('/newsletter', { method: 'POST', body: { email, website } }),
   categories: (opts) => request('/blog/categories', opts),
   posts: (params, opts) => request(`/blog/posts?${new URLSearchParams(params)}`, opts),

@@ -9,15 +9,15 @@ o2one-website/
 │   └── src/
 │       ├── content/        All site copy and settings (services, industries, approach, VAT page…)
 │       ├── components/     layout/ (header, footer), ui/ (buttons, cards…), sections/ (page blocks)
-│       ├── features/booking/  3-step Health Checkup booking form
+│       ├── features/contact/  Contact / Health Checkup enquiry form (one step, sent by email)
 │       ├── pages/          One file per route
 │       ├── lib/            API client, hooks, formatting
 │       └── styles/         Design tokens + global primitives
 ├── server/                 Express API
 │   ├── src/
-│   │   ├── routes/         checkup (slots + bookings), newsletter, blog, stories
-│   │   ├── lib/            validation, slot generation, errors
-│   │   ├── services/       optional booking emails (SMTP)
+│   │   ├── routes/         contact (enquiry email), newsletter, blog, stories
+│   │   ├── lib/            validation, errors
+│   │   ├── services/       enquiry email (SMTP)
 │   │   └── app.js          security headers, rate limits, static hosting of the React build
 │   ├── scripts/            db-init.js (schema + optional seed), seed-data.js
 │   └── test/               unit tests (node --test)
@@ -78,8 +78,8 @@ npm test            # slot generation + validation unit tests
 
 | Feature | Endpoint | Table |
 | --- | --- | --- |
-| Health Checkup booking (Contact page, every "Book" button) | `GET /api/checkup/slots`, `POST /api/checkup/bookings` | `checkup_bookings` |
-| VAT page "Book a free readiness check" (carries the self-check ticks) | same, `source = vat_readiness` | `checkup_bookings.readiness_items` |
+| Contact form / free Health Checkup enquiry (Contact page, every "Book" button) | `POST /api/contact` | — (emailed to the team, not stored) |
+| VAT page "Book a free readiness check" (carries the self-check ticks) | same, `source = vat_readiness` | — |
 | Newsletter (blog sidebar) | `POST /api/newsletter` | `newsletter_subscribers` |
 | Blog listing, search, categories, load more, post pages | `GET /api/blog/categories`, `/api/blog/posts`, `/api/blog/posts/:slug` | `blog_posts`, `blog_categories` |
 | Customer stories (list, filters, detail, teasers on Home and services) | `GET /api/stories`, `/api/stories/:slug` | `customer_stories` |
@@ -88,13 +88,12 @@ npm test            # slot generation + validation unit tests
 Services, industries, approach steps and page copy are static content in `client/src/content/` —
 they change rarely and don't need a database.
 
-**Booking slots** are generated from `BOOKING_*` settings (working days, start times, lead time,
-window, blocked dates). Each checkup is two hours. A unique index on active bookings makes
-double-booking impossible, even with two people clicking at once; cancelling a booking
-(`UPDATE checkup_bookings SET status='cancelled' …`) frees the slot.
-
-**Emails** are optional: set `SMTP_*` and `BOOKING_NOTIFY_EMAIL` to send the team a notification and
-the visitor a confirmation. Bookings are saved whether or not email is configured.
+**Enquiries** from the contact form are validated on the server and emailed to the team (subject
+"New Website Enquiry – O2One Consultants", reply-to set to the visitor). Nothing is stored. The form
+needs `SMTP_HOST` and `ENQUIRY_NOTIFY_EMAIL` (plus `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM` for most
+providers). Without them the visitor sees a friendly "couldn't send, try again" message and the
+reason is written to the server log. There is no calendar or booking step any more; the
+`checkup_bookings` table and the admin Bookings page remain only for bookings made before this change.
 
 **Security**: parameterised queries only, server-side validation of every field, honeypot spam
 traps, rate limits on form posts (10 per 15 min per IP), 20 KB body limit, Helmet security headers
@@ -138,6 +137,5 @@ You can still edit blog posts and stories directly in MariaDB (e.g. with HeidiSQ
 - [ ] Logo file: `client/src/components/ui/Logo.jsx` currently renders the text wordmark from the design guide.
 - [ ] Odoo partner badge artwork, if O2One wants the official badge image instead of the text badge.
 - [ ] UAE VAT page: confirm the 30 Oct 2026 date and all penalties against the MoF/FTA. After 30 Oct 2026 update `vatTopBar` in `client/src/content/site.js` (instructions are in the file).
-- [ ] Booking hours (`BOOKING_*`) and public holidays (`BOOKING_BLOCKED_DATES`).
-- [ ] SMTP settings for booking emails.
+- [ ] SMTP settings and `ENQUIRY_NOTIFY_EMAIL` so contact-form enquiries reach the team (set as environment variables, never in code).
 - [ ] Problem-card descriptions on Home (`client/src/content/company.js`) are supporting lines added for the build; replace if the client has its own.

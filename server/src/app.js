@@ -7,7 +7,7 @@ import { rateLimit } from 'express-rate-limit';
 import { config, ROOT_DIR } from './config/env.js';
 import { ping } from './db/pool.js';
 import { asyncHandler, errorHandler, notFound } from './lib/http.js';
-import { checkupRouter } from './routes/checkup.js';
+import { contactRouter } from './routes/contact.js';
 import { newsletterRouter } from './routes/newsletter.js';
 import { blogRouter } from './routes/blog.js';
 import { storiesRouter } from './routes/stories.js';
@@ -60,9 +60,9 @@ export function createApp() {
     res.json({ ok: true, db: 'up' });
   }));
 
-  api.post('/checkup/bookings', writeLimiter);
+  api.post('/contact', writeLimiter);
   api.post('/newsletter', writeLimiter);
-  api.use('/checkup', checkupRouter);
+  api.use('/contact', contactRouter);
   api.use('/newsletter', newsletterRouter);
   api.use('/blog', blogRouter);
   api.use('/stories', storiesRouter);

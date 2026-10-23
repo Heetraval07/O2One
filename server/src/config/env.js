@@ -16,10 +16,6 @@ function int(name, fallback) {
   const v = Number.parseInt(process.env[name] ?? '', 10);
   return Number.isFinite(v) ? v : fallback;
 }
-function list(name, fallback) {
-  const v = str(name, '');
-  return v ? v.split(',').map((s) => s.trim()).filter(Boolean) : fallback;
-}
 
 const nodeEnv = str('NODE_ENV', 'development');
 
@@ -40,17 +36,10 @@ export const config = {
     connectionLimit: int('DB_POOL_SIZE', 10),
   },
 
+  // Time zone shown in enquiry emails and the admin booking list. Dubai has no daylight saving, so a fixed offset is exact.
   booking: {
-    // Dubai has no daylight saving, so a fixed offset is exact.
     utcOffsetMinutes: int('BOOKING_UTC_OFFSET_MINUTES', 240),
     timezoneLabel: str('BOOKING_TIMEZONE_LABEL', 'Dubai time (GST)'),
-    // ISO weekdays: 1 = Monday … 7 = Sunday
-    days: list('BOOKING_DAYS', ['1', '2', '3', '4', '5']).map(Number),
-    // Session start times, local; each health checkup is two hours.
-    startTimes: list('BOOKING_START_TIMES', ['10:00', '14:00', '16:00']),
-    leadDays: int('BOOKING_LEAD_DAYS', 1),
-    windowDays: int('BOOKING_WINDOW_DAYS', 21),
-    blockedDates: list('BOOKING_BLOCKED_DATES', []), // YYYY-MM-DD, local
   },
 
   mail: {
@@ -60,6 +49,7 @@ export const config = {
     user: str('SMTP_USER', ''),
     password: str('SMTP_PASSWORD', ''),
     from: str('MAIL_FROM', 'O2One Consultants <no-reply@example.com>'),
-    notify: str('BOOKING_NOTIFY_EMAIL', ''),
+    // Who receives website enquiries (BOOKING_NOTIFY_EMAIL is the older name for the same setting)
+    notify: str('ENQUIRY_NOTIFY_EMAIL', str('BOOKING_NOTIFY_EMAIL', '')),
   },
 };

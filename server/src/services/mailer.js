@@ -8,6 +8,10 @@ if (config.mail.host) {
     port: config.mail.port,
     secure: config.mail.secure,
     auth: config.mail.user ? { user: config.mail.user, pass: config.mail.password } : undefined,
+    // fail fast, so a visitor is told something went wrong instead of waiting on a stuck connection
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 20_000,
   });
 }
 
@@ -30,67 +34,66 @@ ${text}
   return { sent: true };
 }
 
-function formatSlot(date) {
-  const local = new Date(date.getTime() + config.booking.utcOffsetMinutes * 60_000);
-  return `${local.toLocaleDateString('en-GB', {
-    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
-  })}, ${local.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })} ${config.booking.timezoneLabel}`;
-}
+const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+/** Thrown when an enquiry cannot be emailed because no SMTP server or recipient is set up. */
+export class MailNotConfiguredError extends Error {}
+
+/** True when enquiries can be emailed: an SMTP server and a recipient are both configured. */
+export const enquiryMailReady = () => Boolean(transport && config.mail.notify);
 
 /**
- * Tell the O2One team about a new booking and confirm it to the visitor.
- * Never throws: a mail failure must not lose a booking that is already saved.
+ * Email a website enquiry (contact form) to the O2One team. Replying to the email answers the visitor.
+ * Unlike the notification helpers above, this throws when the message could not be sent, so the visitor can be told.
  */
-export async function sendBookingEmails(booking) {
-  if (!transport) return;
-  const when = formatSlot(booking.slotStart);
-  const mode = booking.meetingMode === 'in_person' ? 'In person' : 'Online';
-  const jobs = [];
+export async function sendEnquiryEmail(enquiry) {
+  if (!enquiryMailReady()) throw new MailNotConfiguredError('SMTP_HOST and ENQUIRY_NOTIFY_EMAIL are not both set');
 
-  if (config.mail.notify) {
-    jobs.push(transport.sendMail({
-      from: config.mail.from,
-      to: config.mail.notify,
-      replyTo: booking.email,
-      subject: `New health checkup ${booking.reference}: ${booking.company}`,
-      text: [
-        `Reference: ${booking.reference}`,
-        `When: ${when} (${mode})`,
-        `Source: ${booking.source === 'vat_readiness' ? 'UAE VAT readiness check' : 'Health checkup'}`,
-        '',
-        `Name: ${booking.fullName}`,
-        `Company: ${booking.company}`,
-        `Email: ${booking.email}`,
-        `Phone / WhatsApp: ${booking.phone}`,
-        `Industry: ${booking.industry}`,
-        `Country: ${booking.country || '—'}`,
-        booking.readinessItems?.length ? `Ready today: ${booking.readinessItems.join('; ')}` : '',
-        '',
-        booking.message ? `What's slowing them down:\n${booking.message}` : '',
-      ].filter((l) => l !== null).join('\n'),
-    }));
+  const mode = enquiry.meetingMode === 'in_person' ? 'In person' : 'Online';
+  const source = enquiry.source === 'vat_readiness' ? 'UAE VAT & e-invoicing readiness check' : 'Free Business Health Checkup';
+  const dubai = new Date(Date.now() + config.booking.utcOffsetMinutes * 60_000)
+    .toISOString().replace('T', ' ').slice(0, 16);
+  const rows = [
+    ['Name', enquiry.fullName],
+    ['Company', enquiry.company],
+    ['Email', enquiry.email],
+    ['Phone / WhatsApp', enquiry.phone],
+    ['Industry', enquiry.industry],
+    ['Country', enquiry.country || '—'],
+    ['Preferred meeting', mode],
+    ['Form', source],
+  ];
+  if (enquiry.readinessItems?.length) {
+    rows.push(['Ready today', `${enquiry.readinessItems.length} of 5: ${enquiry.readinessItems.join('; ')}`]);
   }
+  rows.push(['Received', `${dubai} ${config.booking.timezoneLabel}`]);
+  const message = enquiry.message || '—';
 
-  jobs.push(transport.sendMail({
+  const text = [
+    'A new enquiry came in through the O2One website contact form.',
+    '',
+    ...rows.map(([k, v]) => `${k}: ${v}`),
+    '',
+    'Message:',
+    message,
+  ].join('\n');
+
+  const html = `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#1a1a1a;line-height:1.5">
+<p>A new enquiry came in through the O2One website contact form.</p>
+<table cellpadding="6" cellspacing="0" style="border-collapse:collapse">
+${rows.map(([k, v]) => `<tr><td style="color:#5f5f5f;vertical-align:top;white-space:nowrap">${esc(k)}</td><td><strong>${esc(v)}</strong></td></tr>`).join('\n')}
+</table>
+<p style="margin:16px 0 4px;color:#5f5f5f">Message</p>
+<p style="margin:0;white-space:pre-wrap">${esc(message)}</p>
+<p style="margin-top:20px;color:#5f5f5f">Reply to this email to answer ${esc(enquiry.fullName)} directly.</p>
+</div>`;
+
+  await transport.sendMail({
     from: config.mail.from,
-    to: booking.email,
-    subject: `Your free health checkup is booked (${booking.reference})`,
-    text: [
-      `Hi ${booking.fullName.split(' ')[0]},`,
-      '',
-      `Thanks for booking a free Business Health Checkup with O2One.`,
-      `When: ${when}`,
-      `Format: ${mode}`,
-      `Reference: ${booking.reference}`,
-      '',
-      'We will confirm the details with you before the session. If the time no longer works, just reply to this email.',
-      '',
-      'O2One Consultants',
-    ].join('\n'),
-  }));
-
-  const results = await Promise.allSettled(jobs);
-  for (const r of results) {
-    if (r.status === 'rejected') console.error('[mail] booking email failed:', r.reason?.message);
-  }
+    to: config.mail.notify,
+    replyTo: { name: enquiry.fullName.replace(/[\r\n"<>]/g, ' '), address: enquiry.email },
+    subject: 'New Website Enquiry – O2One Consultants',
+    text,
+    html,
+  });
 }

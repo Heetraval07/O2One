@@ -3,7 +3,7 @@ import { useMeta } from '../lib/hooks';
 import { site, telHref } from '../content/site';
 import { checkupBenefits } from '../content/company';
 import Reveal from '../components/ui/Reveal';
-import BookingForm from '../features/booking/BookingForm';
+import ContactForm from '../features/contact/ContactForm';
 import { ArrowRight, Chat, Check, Mail, Phone, Pin, WhatsApp } from '../components/ui/Icons';
 import styles from './Contact.module.css';
 
@@ -39,7 +39,7 @@ export default function Contact() {
             <p className={styles.terms}>No obligation · in person or online</p>
           </Reveal>
           <Reveal delay={100}>
-            <BookingForm source={source} readinessItems={readinessItems} />
+            <ContactForm source={source} readinessItems={readinessItems} />
           </Reveal>
         </div>
       </section>
