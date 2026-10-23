@@ -12,7 +12,7 @@ import { NumberedGrid, ValueGrid } from '../components/sections/Cards';
 import ApproachTabs from '../components/sections/ApproachTabs';
 import ServiceCards from '../components/sections/ServiceCards';
 import HeroDashboard from '../components/sections/HeroDashboard';
-import FlowVisual from '../components/sections/FlowVisual';
+import ChaosVisual from '../components/sections/ChaosVisual';
 import styles from './Home.module.css';
 
 export default function Home() {
@@ -60,7 +60,7 @@ export default function Home() {
       <section className="section" aria-labelledby="chaos-title">
         <div className={`container ${styles.chaos}`}>
           <Reveal>
-            <FlowVisual />
+            <ChaosVisual />
           </Reveal>
           <Reveal delay={100} className={styles.chaosText}>
             <h2 id="chaos-title" className={`h2 ${styles.chaosTitle}`}>
